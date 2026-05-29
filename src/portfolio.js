@@ -26,5 +26,3 @@ const portfolio = [
 ];
 
 export default portfolio;
-
-export default portfolio;
