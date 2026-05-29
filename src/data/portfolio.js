@@ -1,18 +1,27 @@
 const portfolio = [
   {
-    title: "Custom Gym Wear",
-    image:
-      "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=1200&auto=format&fit=crop",
+    title: "Event Printing",
+    image: "/images/event1.jpg",
   },
   {
-    title: "Branded Workwear",
-    image:
-      "https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=1200&auto=format&fit=crop",
+    title: "Custom Event Apparel",
+    image: "/images/event2.jpg",
   },
   {
-    title: "Printed Hoodies",
-    image:
-      "https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?q=80&w=1200&auto=format&fit=crop",
+    title: "Branded Event Wear",
+    image: "/images/event3.jpg",
+  },
+  {
+    title: "Professional Workwear",
+    image: "/images/work1.jpg",
+  },
+  {
+    title: "Printed Uniforms",
+    image: "/images/work2.jpg",
+  },
+  {
+    title: "Custom Business Clothing",
+    image: "/images/work3.jpg",
   },
 ];
 

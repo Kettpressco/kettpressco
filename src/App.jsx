@@ -277,58 +277,58 @@ export default function App() {
       {/* PORTFOLIO */}
 
       <section
-        id="portfolio"
+  id="portfolio"
+  style={{
+    background: "#111",
+    color: "white",
+    padding: "90px 20px",
+  }}
+>
+  <h2
+    style={{
+      textAlign: "center",
+      fontSize: "clamp(32px,5vw,50px)",
+      marginBottom: "60px",
+    }}
+  >
+    Recent Work
+  </h2>
+
+  <div
+    style={{
+      display: "grid",
+      gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))",
+      gap: "20px",
+      maxWidth: "1300px",
+      margin: "auto",
+    }}
+  >
+    {portfolio.map((item, index) => (
+      <div
+        key={index}
         style={{
-          background: "#111",
-          color: "white",
-          padding: "90px 20px",
+          background: "#222",
+          borderRadius: "20px",
+          overflow: "hidden",
         }}
       >
-        <h2
+        <img
+          src={item.image}
+          alt={item.title}
           style={{
-            textAlign: "center",
-            fontSize: "clamp(32px,5vw,50px)",
-            marginBottom: "60px",
+            width: "100%",
+            height: "320px",
+            objectFit: "cover",
           }}
-        >
-          Recent Work
-        </h2>
+        />
 
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))",
-            gap: "20px",
-            maxWidth: "1300px",
-            margin: "auto",
-          }}
-        >
-          {portfolio.map((item, index) => (
-            <div
-              key={index}
-              style={{
-                background: "#222",
-                borderRadius: "20px",
-                overflow: "hidden",
-              }}
-            >
-              <img
-                src={item.image}
-                alt={item.title}
-                style={{
-                  width: "100%",
-                  height: "320px",
-                  objectFit: "cover",
-                }}
-              />
-
-              <div style={{ padding: "20px" }}>
-                <h3>{item.title}</h3>
-              </div>
-            </div>
-          ))}
+        <div style={{ padding: "20px" }}>
+          <h3>{item.title}</h3>
         </div>
-      </section>
+      </div>
+    ))}
+  </div>
+</section>
 
       {/* QUOTE */}
 
