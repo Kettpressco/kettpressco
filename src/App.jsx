@@ -145,7 +145,7 @@ export default function App() {
           }}
         >
           <h1>
-  T-Shirt Printing & Workwear Printing in 
+  T-Shirt & Workwear Printing in 
   Kettering, Northamptonshire
 </h1>
         </h1>
