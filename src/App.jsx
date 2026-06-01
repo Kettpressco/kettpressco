@@ -272,63 +272,332 @@ export default function App() {
             </div>
           ))}
         </div>
-      </section>
-
-      {/* PORTFOLIO */}
-
-      <section
-  id="portfolio"
+      </section> 
+{/* WHY CHOOSE US */}
+<section
   style={{
-    background: "#111",
-    color: "white",
+    padding: "80px 20px",
+    background: "white",
+    textAlign: "center",
+  }}
+>
+  <h2
+    style={{
+      fontSize: "clamp(32px,5vw,50px)",
+      marginBottom: "25px",
+    }}
+  >
+    Why Choose Kett Press Co?
+  </h2>
+
+  <p
+    style={{
+      maxWidth: "900px",
+      margin: "0 auto 50px",
+      color: "#555",
+      lineHeight: 1.8,
+      fontSize: "18px",
+    }}
+  >
+    Kett Press Co provides professional T-shirt printing,
+    branded workwear, logo printing and custom apparel for
+    businesses, gyms, events and organisations across
+    Kettering, Northampton, Corby, Wellingborough and
+    Northamptonshire. We focus on premium print quality,
+    reliable service and fast turnaround times.
+  </p>
+
+  <div
+    style={{
+      display: "grid",
+      gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))",
+      gap: "20px",
+      maxWidth: "1100px",
+      margin: "auto",
+    }}
+  >
+    {[
+      "Fast Turnaround",
+      "Premium Print Quality",
+      "Bulk Order Discounts",
+      "Business & Event Specialists",
+      "Custom Branding Solutions",
+      "Local Northamptonshire Service",
+    ].map((item, index) => (
+      <div
+        key={index}
+        style={{
+          background: "#F8F9FA",
+          padding: "25px",
+          borderRadius: "15px",
+          boxShadow: "0 5px 15px rgba(0,0,0,0.08)",
+        }}
+      >
+        <h3 style={{ color: "#D62828" }}>✓ {item}</h3>
+      </div>
+    ))}
+  </div>
+</section>
+{/* TESTIMONIALS */}
+
+<section
+  style={{
     padding: "90px 20px",
+    background: "#F8F9FA",
+    textAlign: "center",
+  }}
+>
+  <h2
+    style={{
+      fontSize: "clamp(32px,5vw,50px)",
+      marginBottom: "50px",
+    }}
+  >
+    What Our Customers Say
+  </h2>
+
+  <div
+    style={{
+      display: "grid",
+      gridTemplateColumns: "repeat(auto-fit,minmax(300px,1fr))",
+      gap: "25px",
+      maxWidth: "1200px",
+      margin: "auto",
+    }}
+  >
+    {[
+      {
+        name: "Ian",
+        company: "Local Gym",
+        review:
+          "Fantastic quality workwear and excellent service from start to finish.",
+      },
+      {
+        name: "Sarah",
+        company: "Event Organiser",
+        review:
+          "Quick turnaround and brilliant print quality. Highly recommended.",
+      },
+      {
+        name: "Itai",
+        company: "Construction Company",
+        review:
+          "Professional branded uniforms delivered on time and exactly as requested.",
+      },
+    ].map((review, index) => (
+      <div
+        key={index}
+        style={{
+          background: "white",
+          padding: "30px",
+          borderRadius: "20px",
+          boxShadow: "0 10px 25px rgba(0,0,0,0.08)",
+        }}
+      >
+        <p
+          style={{
+            color: "#555",
+            lineHeight: 1.8,
+            marginBottom: "20px",
+          }}
+        >
+          "{review.review}"
+        </p>
+
+        <h3 style={{ color: "#D62828", margin: 0 }}>
+          {review.name}
+        </h3>
+
+        <small>{review.company}</small>
+      </div>
+    ))}
+  </div>
+  {/* FAQ */}
+
+<section
+  style={{
+    padding: "90px 20px",
+    background: "white",
+    maxWidth: "1000px",
+    margin: "auto",
   }}
 >
   <h2
     style={{
       textAlign: "center",
       fontSize: "clamp(32px,5vw,50px)",
-      marginBottom: "60px",
+      marginBottom: "50px",
     }}
   >
-    Recent Work
+    Frequently Asked Questions
   </h2>
+
+  <div style={{ display: "grid", gap: "25px" }}>
+    <div>
+      <h3>Do you offer workwear printing in Northampton?</h3>
+      <p>
+        Yes. We provide branded workwear, uniforms and logo printing
+        for businesses across Northampton, Kettering, Corby,
+        Wellingborough and Northamptonshire.
+      </p>
+    </div>
+
+    <div>
+      <h3>What is the minimum order quantity?</h3>
+      <p>
+        We can accommodate both small and large orders depending on
+        the garment and printing requirements.
+      </p>
+    </div>
+
+    <div>
+      <h3>Can you print company logos on clothing?</h3>
+      <p>
+        Absolutely. We specialise in logo printing for T-shirts,
+        hoodies, workwear, uniforms and promotional apparel.
+      </p>
+    </div>
+
+    <div>
+      <h3>How long does printing take?</h3>
+      <p>
+        Turnaround times vary depending on order size, but we always
+        aim to deliver quickly while maintaining premium quality.
+      </p>
+    </div>
+
+    <div>
+      <h3>Do you provide printing services throughout Northamptonshire?</h3>
+      <p>
+        Yes. We serve customers in Kettering, Northampton, Corby,
+        Wellingborough and surrounding areas across Northamptonshire.
+      </p>
+    </div>
+  </div>
+</section>
+{/* AREAS WE COVER */}
+
+<section
+  style={{
+    padding: "90px 20px",
+    background: "#F8F9FA",
+    textAlign: "center",
+  }}
+>
+  <h2
+    style={{
+      fontSize: "clamp(32px,5vw,50px)",
+      marginBottom: "30px",
+    }}
+  >
+    Areas We Cover
+  </h2>
+
+  <p
+    style={{
+      maxWidth: "900px",
+      margin: "0 auto 40px",
+      lineHeight: 1.8,
+      color: "#555",
+      fontSize: "18px",
+    }}
+  >
+    Kett Press Co provides T-shirt printing, workwear printing,
+    logo printing and custom branded clothing throughout
+    Northamptonshire.
+  </p>
 
   <div
     style={{
       display: "grid",
-      gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))",
+      gridTemplateColumns: "repeat(auto-fit,minmax(180px,1fr))",
       gap: "20px",
-      maxWidth: "1300px",
+      maxWidth: "1000px",
       margin: "auto",
     }}
   >
-    {portfolio.map((item, index) => (
+    {[
+      "Kettering",
+      "Northampton",
+      "Corby",
+      "Wellingborough",
+      "Rushden",
+      "Burton Latimer",
+      "Rothwell",
+      "Desborough",
+      "Northamptonshire",
+    ].map((area, index) => (
       <div
         key={index}
         style={{
-          background: "#222",
-          borderRadius: "20px",
-          overflow: "hidden",
+          background: "white",
+          padding: "20px",
+          borderRadius: "12px",
+          boxShadow: "0 5px 15px rgba(0,0,0,0.08)",
+          fontWeight: "bold",
         }}
       >
-        <img
-          src={item.image}
-          alt={item.title}
-          style={{
-            width: "100%",
-            height: "320px",
-            objectFit: "cover",
-          }}
-        />
-
-        <div style={{ padding: "20px" }}>
-          <h3>{item.title}</h3>
-        </div>
+        {area}
       </div>
     ))}
   </div>
 </section>
+</section>
+      {/* PORTFOLIO */}
+
+      <section
+        id="portfolio"
+        style={{
+          background: "#111",
+          color: "white",
+          padding: "90px 20px",
+        }}
+      >
+        <h2
+          style={{
+            textAlign: "center",
+            fontSize: "clamp(32px,5vw,50px)",
+            marginBottom: "60px",
+          }}
+        >
+          Recent Work
+        </h2>
+
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))",
+            gap: "20px",
+            maxWidth: "1300px",
+            margin: "auto",
+          }}
+        >
+          {portfolio.map((item, index) => (
+            <div
+              key={index}
+              style={{
+                background: "#222",
+                borderRadius: "20px",
+                overflow: "hidden",
+              }}
+            >
+              <img
+                src={item.image}
+                alt={item.title}
+                style={{
+                  width: "100%",
+                  height: "320px",
+                  objectFit: "cover",
+                }}
+              />
+
+              <div style={{ padding: "20px" }}>
+                <h3>{item.title}</h3>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
 
       {/* QUOTE */}
 
