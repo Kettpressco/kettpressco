@@ -145,7 +145,8 @@ export default function App() {
           }}
         >
           <h1>
-  T-Shirt Printing & Workwear Printing in Kettering, Northamptonshire
+  T-Shirt Printing & Workwear Printing in 
+  Kettering, Northamptonshire
 </h1>
         </h1>
 
@@ -423,7 +424,7 @@ export default function App() {
       marginBottom: "50px",
     }}
   >
-    Frequently Asked Questions
+
   </h2>
 <h2
   style={{
