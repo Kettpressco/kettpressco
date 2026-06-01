@@ -151,8 +151,8 @@ export default function App() {
 
         <p
           style={{
-            fontSize: "clamp(32px,5vw,58px)",
-            lineHeight: "1.35",
+            fontSize: "clamp(42px,5vw,58px)",
+            lineHeight: "1.6",
             maxWidth: "850px",
             margin: "0 auto 20px auto",
             textAlign: "center",
