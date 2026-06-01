@@ -54,22 +54,16 @@ export default function App() {
             gap: "12px",
           }}
         >
-          <div
-            style={{
-              width: "55px",
-              height: "55px",
-              borderRadius: "50%",
-              background: "#D62828",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              fontWeight: "bold",
-              fontSize: "22px",
-            }}
-          >
-            KP
-          </div>
-
+          <img
+  src="/images/logo.jpg"
+  alt="Kett Press Co Logo"
+  style={{
+    width: "60px",
+    height: "60px",
+    objectFit: "cover",
+    borderRadius: "50%",
+  }}
+/>
           <div>
             <h2 style={{ margin: 0 }}>Kett Press Co</h2>
 
@@ -280,11 +274,12 @@ export default function App() {
   }}
 >
   <h2
-    style={{
-      fontSize: "clamp(32px,5vw,50px)",
-      marginBottom: "25px",
-    }}
-  >
+  style={{
+    fontSize: "clamp(32px,5vw,50px)",
+    marginBottom: "25px",
+    color: "#D62828",
+  }}
+>
     Why Choose Kett Press Co?
   </h2>
 
@@ -345,14 +340,15 @@ export default function App() {
     textAlign: "center",
   }}
 >
-  <h2
-    style={{
-      fontSize: "clamp(32px,5vw,50px)",
-      marginBottom: "50px",
-    }}
-  >
-    What Our Customers Say
-  </h2>
+ <h2
+  style={{
+    fontSize: "clamp(32px,5vw,50px)",
+    marginBottom: "50px",
+    color: "#D62828",
+  }}
+>
+  What Our Customers Say
+</h2>
 
   <div
     style={{
@@ -431,6 +427,7 @@ export default function App() {
   </h2>
 
   <div style={{ display: "grid", gap: "25px" }}>
+    color: "#D62828",
     <div>
       <h3>Do you offer workwear printing in Northampton?</h3>
       <p>
@@ -486,6 +483,7 @@ export default function App() {
     style={{
       fontSize: "clamp(32px,5vw,50px)",
       marginBottom: "30px",
+      color: "#D62828",
     }}
   >
     Areas We Cover
