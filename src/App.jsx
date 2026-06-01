@@ -151,12 +151,14 @@ export default function App() {
 
         <p
           style={{
-            fontSize: "clamp(18px,3vw,28px)",
-            color: "#ddd",
-            maxWidth: "700px",
-            margin: "0 auto 20px",
+            fontSize: "clamp(32px,5vw,58px)",
+            lineHeight: "1.35",
+            maxWidth: "850px",
+            margin: "0 auto 20px auto",
             textAlign: "center",
-            padding: "0 20px"
+            padding: "0 20px",
+            wordBreak: "break-word",
+            color: "#ddd",
         
           }}
         >
