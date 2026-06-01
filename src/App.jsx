@@ -425,9 +425,19 @@ export default function App() {
   >
     Frequently Asked Questions
   </h2>
-
-  <div style={{ display: "grid", gap: "25px" }}>
+<h2
+  style={{
+    textAlign: "center",
+    fontSize: "clamp(32px,5vw,50px)",
+    marginBottom: "50px",
     color: "#D62828",
+  }}
+>
+  Frequently Asked Questions
+</h2>
+
+<div style={{ display: "grid", gap: "25px" }}>
+  
     <div>
       <h3>Do you offer workwear printing in Northampton?</h3>
       <p>
