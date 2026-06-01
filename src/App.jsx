@@ -140,25 +140,27 @@ export default function App() {
       >
         <h1
           style={{
-            fontSize: "clamp(40px,7vw,72px)",
+            fontSize: "clamp(42px,5vw,58px)",
+            lineHeight: "1.3",
+            textAlign: "center",
             marginBottom: "20px",
+            color: "#fff",
           }}
         >
 
   T-Shirt Printing & Workwear Printing in 
- 
+  <br />
   Kettering, Northamptonshire
         </h1>
 
         <p
           style={{
-            fontSize: "clamp(42px,5vw,58px)",
-            lineHeight: "1.6",
+            fontSize: "clamp(18px,2vw,24px)",
+            lineHeight: "1.8",
             maxWidth: "850px",
             margin: "0 auto 20px auto",
             textAlign: "center",
             padding: "0 20px",
-            wordBreak: "break-word",
             color: "#ddd",
         
           }}
