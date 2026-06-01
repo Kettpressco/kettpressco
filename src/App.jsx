@@ -6,31 +6,27 @@ const services = [
     icon: "👕",
     title: "T-Shirt Printing",
     text: "High-quality custom tees for businesses, gyms, brands and events.",
-    image:
-      "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=1200&auto=format&fit=crop",
+    image: "/images/tshirt.jpg",
   },
   {
     icon: "🦺",
     title: "Workwear Printing",
     text: "Professional branded uniforms and durable workwear solutions.",
-    image:
-      "https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1200&auto=format&fit=crop",
+    image: "/images/workwear.jpg",
   },
   {
     icon: "🎨",
     title: "Logo Printing",
     text: "Sharp logo printing and custom branding for workwear, hoodies and uniforms.",
-    image:
-      "https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=1200&auto=format&fit=crop",
+    image: "/images/logo.jpg",
   },
 ];
-
 export default function App() {
   return (
     <div
       style={{
         fontFamily: "Arial, sans-serif",
-        background: "#F8F9FA",
+        background: "#253b52ff",
         color: "#111",
       }}
     >
@@ -77,7 +73,7 @@ export default function App() {
           <div>
             <h2 style={{ margin: 0 }}>Kett Press Co</h2>
 
-            <small style={{ color: "#bbb" }}>
+            <small style={{ color: "#6f1d1dff" }}>
               Custom Printing & Workwear
             </small>
           </div>
@@ -154,7 +150,9 @@ export default function App() {
             marginBottom: "20px",
           }}
         >
-          Premium Custom Printing
+          <h1>
+  T-Shirt Printing & Workwear Printing in Kettering, Northamptonshire
+</h1>
         </h1>
 
         <p
@@ -242,7 +240,7 @@ export default function App() {
             >
               <img
                 src={service.image}
-                alt={service.title}
+               alt={`${service.title} in Kettering Northamptonshire`}
                 style={{
                   width: "100%",
                   height: "220px",
@@ -492,7 +490,9 @@ export default function App() {
   >
     Areas We Cover
   </h2>
-
+<a href="/t-shirt-printing-kettering">
+  T-Shirt Printing Kettering
+</a>
   <p
     style={{
       maxWidth: "900px",
@@ -530,7 +530,7 @@ export default function App() {
       <div
         key={index}
         style={{
-          background: "white",
+          background: "Gold",
           padding: "20px",
           borderRadius: "12px",
           boxShadow: "0 5px 15px rgba(0,0,0,0.08)",
@@ -583,7 +583,7 @@ export default function App() {
             >
               <img
                 src={item.image}
-                alt={item.title}
+               alt={`${item.title} - Kett Press Co`}
                 style={{
                   width: "100%",
                   height: "320px",
@@ -688,7 +688,31 @@ export default function App() {
           </form>
         </div>
       </section>
+<section
+  style={{
+    padding: "80px 20px",
+    maxWidth: "1100px",
+    margin: "auto",
+    textAlign: "center",
+  }}
+>
+  <h2>Custom Printing Across Northamptonshire</h2>
 
+  <p
+    style={{
+      lineHeight: 1.9,
+      color: "#555",
+      fontSize: "18px",
+    }}
+  >
+    Kett Press Co provides professional T-shirt printing,
+    workwear printing, logo printing, custom hoodies,
+    branded uniforms and promotional clothing throughout
+    Kettering, Northampton, Corby, Wellingborough,
+    Rushden, Rothwell, Burton Latimer and the wider
+    Northamptonshire area.
+  </p>
+</section>
       {/* CONTACT */}
 
       <section
