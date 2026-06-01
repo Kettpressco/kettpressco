@@ -144,10 +144,9 @@ export default function App() {
             marginBottom: "20px",
           }}
         >
-          <h1>
-  T-Shirt & Workwear Printing in 
+
+  T-Shirt Printing & Workwear Printing in 
   Kettering, Northamptonshire
-</h1>
         </h1>
 
         <p
@@ -155,6 +154,10 @@ export default function App() {
             fontSize: "clamp(18px,3vw,28px)",
             color: "#ddd",
             maxWidth: "700px",
+            margin: "0 auto 20px",
+            textAlign: "center",
+            padding: "0 20px"
+        
           }}
         >
           T-Shirts • Workwear • Hoodies • Business Branding
