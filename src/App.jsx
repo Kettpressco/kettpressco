@@ -273,6 +273,184 @@ export default function App() {
             </div>
           ))}
         </div>
+        
+        
+        {/* POPULAR PACKAGES */}
+
+<section
+  style={{
+    padding: "90px 20px",
+    background: "#111",
+    color: "white",
+    textAlign: "center",
+  }}
+>
+  <h2
+    style={{
+      fontSize: "clamp(32px,5vw,50px)",
+      marginBottom: "15px",
+      color: "#D62828",
+    }}
+  >
+    Popular Packages
+  </h2>
+
+  <p
+    style={{
+      color: "#ccc",
+      marginBottom: "50px",
+      fontSize: "18px",
+    }}
+  >
+    Professional branded workwear packages with logo printing included.
+  </p>
+
+  <div
+    style={{
+      display: "grid",
+      gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))",
+      gap: "25px",
+      maxWidth: "1300px",
+      margin: "auto",
+    }}
+  >
+    {[
+      {
+        title: "Get Started Package",
+        price: "£58",
+        image: "/images/tshirt.jpg",
+        items: [
+          "4 T-Shirts",
+          "1 Hoodie or Sweatshirt",
+          "Logo Printing Included",
+        ],
+      },
+      {
+        title: "Smart Workwear Deal",
+        price: "£70",
+        image: "/images/workwear.jpg",
+        items: [
+          "3 T-Shirts",
+          "2 Hoodies or Sweatshirts",
+          "Logo Printing Included",
+        ],
+      },
+      {
+        title: "Business Starter Pack",
+        price: "£75",
+        image: "/images/logo.jpg",
+        items: [
+          "4 T-Shirts",
+          "1 Hoodie or Sweatshirt",
+          "1 Polo Shirt",
+          "Logo Printing Included",
+        ],
+      },
+      {
+        title: "Best Value Workwear Bundle",
+        price: "£105",
+        image: "/images/workwear4.jpg",
+        popular: true,
+        items: [
+          "6 T-Shirts",
+          "3 Hoodies or Sweatshirts",
+          "1 Polo Shirt",
+          "Logo Printing Included",
+        ],
+      },
+    ].map((pkg, index) => (
+      <div
+        key={index}
+        style={{
+          background: pkg.popular ? "#D62828" : "#222",
+          borderRadius: "20px",
+          overflow: "hidden",
+          position: "relative",
+          padding: pkg.popular ? "45px 25px" : "25px",
+          transform: pkg.popular ? "scale(1.03)" : "scale(1)",
+          boxShadow: "0 10px 25px rgba(0,0,0,0.25)",
+        }}
+      >
+        {pkg.popular && (
+          <div
+            style={{
+              position: "absolute",
+              top: "15px",
+              right: "15px",
+              background: "#FFD700",
+              color: "#111",
+              padding: "8px 14px",
+              borderRadius: "20px",
+              fontWeight: "bold",
+              fontSize: "14px",
+            }}
+          >
+            MOST POPULAR
+          </div>
+        )}
+
+        <img
+          src={pkg.image}
+          alt={`${pkg.title} - Custom Workwear Printing Northamptonshire`}
+          style={{
+            width: "100%",
+            height: pkg.popular ? "260px" : "220px",
+            objectFit: "cover",
+            borderRadius: "12px",
+            marginBottom: "20px",
+          }}
+        />
+
+        <h3
+          style={{
+            fontSize: "24px",
+            marginBottom: "15px",
+          }}
+        >
+          {pkg.title}
+        </h3>
+
+        <h2
+          style={{
+            fontSize: "42px",
+            margin: "20px 0",
+          }}
+        >
+          {pkg.price}
+        </h2>
+
+        <ul
+          style={{
+            listStyle: "none",
+            padding: 0,
+            lineHeight: 2,
+            marginBottom: "25px",
+          }}
+        >
+          {pkg.items.map((item, i) => (
+            <li key={i}>✓ {item}</li>
+          ))}
+        </ul>
+
+        <a href="#quote">
+          <button
+            style={{
+              background: "white",
+              color: "#111",
+              border: "none",
+              padding: "14px 24px",
+              borderRadius: "10px",
+              cursor: "pointer",
+              fontWeight: "bold",
+            }}
+          >
+            Get Quote
+          </button>
+        </a>
+      </div>
+    ))}
+  </div>
+</section>
       </section> 
 {/* WHY CHOOSE US */}
 <section
