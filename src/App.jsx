@@ -645,48 +645,75 @@ export default function App() {
             Request A Quote
           </h2>
 
-          <form
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "20px",
-            }}
-          >
-            <input
-              type="text"
-              placeholder="Full Name"
-              style={inputStyle}
-            />
+<form
+  action="https://formsubmit.co/info@kettpressco.com"
+  method="POST"
+  style={{
+    display: "flex",
+    flexDirection: "column",
+    gap: "20px",
+  }}
 
-            <input
-              type="email"
-              placeholder="Email Address"
-              style={inputStyle}
-            />
+>
+  <input
+    type="hidden"
+    name="_subject"
+    value="New Quote Request - Kett Press Co"
+  />
 
-            <input
-              type="tel"
-              placeholder="Phone Number"
-              style={inputStyle}
-            />
+  <input
+    type="hidden"
+    name="_captcha"
+    value="false"
+  />
 
-            <select style={inputStyle}>
-              <option>T-Shirts</option>
-              <option>Hoodies</option>
-              <option>Workwear</option>
-            </select>
+  <input
+    type="hidden"
+    name="_next"
+    value="https://www.kettpressco.com"
+  />
+           <input
+  type="text"
+  name="name"
+  placeholder="Full Name"
+  style={inputStyle}
+  required
+/>
+<input
+  type="email"
+  name="email"
+  placeholder="Email Address"
+  style={inputStyle}
+  required
+/>
+<input
+  type="tel"
+  name="phone"
+  placeholder="Phone Number"
+  style={inputStyle}
+/>
+<select
+  name="product"
+  style={inputStyle}
+>
+  <option>T-Shirts</option>
+  <option>Hoodies</option>
+  <option>Workwear</option>
+</select>
 
-            <input
-              type="number"
-              placeholder="Quantity Needed"
-              style={inputStyle}
-            />
-
-            <textarea
-              rows="5"
-              placeholder="Tell us about your order..."
-              style={inputStyle}
-            />
+<input
+  type="number"
+  name="quantity"
+  placeholder="Quantity Needed"
+  style={inputStyle}
+/>
+<textarea
+  name="message"
+  rows="5"
+  placeholder="Tell us about your order..."
+  style={inputStyle}
+  required
+/>
 
             <button
               style={{
