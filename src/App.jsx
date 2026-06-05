@@ -1197,6 +1197,22 @@ export default function App() {
           padding: "25px",
         }}
       >
+<a href="/t-shirt-printing-kettering">
+  T-Shirt Printing Kettering
+</a>
+
+<a href="/workwear-printing-kettering">
+  Workwear Printing Kettering
+</a>
+
+<a href="/hoodie-printing-northampton">
+  Hoodie Printing Northampton
+</a>
+
+<a href="/dtf-printing-northamptonshire">
+  DTF Printing Northamptonshire
+</a>
+
         © 2026 Kett Press Co | Custom Printing | Workwear
       </footer>
     </div>
