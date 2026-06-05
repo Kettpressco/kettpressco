@@ -198,8 +198,8 @@ export default function App() {
             rel="noreferrer"
           >
             <button style={whatsappButton}>
-              WhatsApp Us
-            </button>
+  WhatsApp for a Quick Quote
+</button>
           </a>
         </div>
       </section>
