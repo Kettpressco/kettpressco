@@ -203,6 +203,221 @@ export default function App() {
           </a>
         </div>
       </section>
+<div
+  style={{
+    marginTop: "20px",
+    textAlign: "center",
+  }}
+>
+  <a
+    href="PASTE_YOUR_GOOGLE_PROFILE_LINK_HERE"
+    target="_blank"
+    rel="noreferrer"
+    style={{
+      color: "#fff",
+      textDecoration: "none",
+      fontWeight: "600",
+    }}
+  >
+    ⭐ Read Our Google Reviews
+  </a>
+</div>
+
+{/* HOW IT WORKS */}
+
+<section
+  style={{
+    padding: "100px 20px",
+    background: "#fff",
+    textAlign: "center",
+  }}
+>
+  <h2
+    style={{
+      fontSize: "clamp(32px,4vw,42px)",
+      marginBottom: "15px",
+      color: "#111",
+    }}
+  >
+    How It Works
+  </h2>
+
+  <p
+    style={{
+      maxWidth: "700px",
+      margin: "0 auto 60px auto",
+      color: "#666",
+      fontSize: "18px",
+      lineHeight: "1.7",
+    }}
+  >
+    Ordering custom printed clothing is simple. From your first enquiry to
+    final delivery, we make the process quick and hassle-free.
+  </p>
+
+  <div
+    style={{
+      display: "grid",
+      gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+      gap: "30px",
+      maxWidth: "1200px",
+      margin: "0 auto",
+    }}
+  >
+    {/* Step 1 */}
+
+    <div
+      style={{
+        padding: "40px 30px",
+        borderRadius: "16px",
+        background: "#f8f8f8",
+      }}
+    >
+      <div
+        style={{
+          width: "60px",
+          height: "60px",
+          margin: "0 auto 20px",
+          borderRadius: "50%",
+          background: "#f97316",
+          color: "#fff",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          fontWeight: "bold",
+          fontSize: "24px",
+        }}
+      >
+        1
+      </div>
+
+      <h3
+        style={{
+          marginBottom: "15px",
+          color: "#111",
+        }}
+      >
+        Request a Quote
+      </h3>
+
+      <p
+        style={{
+          color: "#666",
+          lineHeight: "1.7",
+        }}
+      >
+        Tell us what you need. Send your garment requirements, quantities,
+        logo, or artwork through our quote form or WhatsApp.
+      </p>
+    </div>
+
+    {/* Step 2 */}
+
+    <div
+      style={{
+        padding: "40px 30px",
+        borderRadius: "16px",
+        background: "#f8f8f8",
+      }}
+    >
+      <div
+        style={{
+          width: "60px",
+          height: "60px",
+          margin: "0 auto 20px",
+          borderRadius: "50%",
+          background: "#f97316",
+          color: "#fff",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          fontWeight: "bold",
+          fontSize: "24px",
+        }}
+      >
+        2
+      </div>
+
+      <h3
+        style={{
+          marginBottom: "15px",
+          color: "#111",
+        }}
+      >
+        Approve Your Design
+      </h3>
+
+      <p
+        style={{
+          color: "#666",
+          lineHeight: "1.7",
+        }}
+      >
+        We'll review your artwork, confirm the details, and ensure everything
+        is ready before production begins.
+      </p>
+    </div>
+
+    {/* Step 3 */}
+
+    <div
+      style={{
+        padding: "40px 30px",
+        borderRadius: "16px",
+        background: "#f8f8f8",
+      }}
+    >
+      <div
+        style={{
+          width: "60px",
+          height: "60px",
+          margin: "0 auto 20px",
+          borderRadius: "50%",
+          background: "#f97316",
+          color: "#fff",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          fontWeight: "bold",
+          fontSize: "24px",
+        }}
+      >
+        3
+      </div>
+
+      <h3
+        style={{
+          marginBottom: "15px",
+          color: "#111",
+        }}
+      >
+        Print & Deliver
+      </h3>
+
+      <p
+        style={{
+          color: "#666",
+          lineHeight: "1.7",
+        }}
+      >
+        We professionally print your order and prepare it for collection or
+        delivery, ensuring high-quality results every time.
+      </p>
+    </div>
+  </div>
+
+  <div
+    style={{
+      marginTop: "50px",
+    }}
+  >
+    <a href="#quote">
+      <button style={heroButton}>
+        Get Your Quote Today
+      </button>
+    </a>
+  </div>
+</section>
 
       {/* SERVICES */}
 
