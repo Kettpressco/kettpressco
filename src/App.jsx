@@ -30,8 +30,32 @@ export default function App() {
         color: "#111",
       }}
     >
+{/* ANNOUNCEMENT BAR */}
+
+<div
+  style={{
+    background: "#f97316",
+    color: "#fff",
+    textAlign: "center",
+    padding: "10px 15px",
+    fontWeight: "600",
+    fontSize: "14px",
+    letterSpacing: "0.3px",
+  }}
+>
+  <a
+    href="#quote"
+    style={{
+      color: "#fff",
+      textDecoration: "none",
+    }}
+  >
+    🔥 Bulk Order Discounts Available | Fast Turnaround Across Northamptonshire
+  </a>
+</div>
+
       {/* NAVBAR */}
-      <img src="/images/logo.png" alt="Logo" />
+      
 
       <nav
         style={{
