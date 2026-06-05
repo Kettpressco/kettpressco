@@ -1211,34 +1211,59 @@ export default function App() {
         </a>
       </section>
 
-      {/* FOOTER */}
+{/* FOOTER */}
 
-      <footer
-        style={{
-          background: "black",
-          color: "#bbb",
-          textAlign: "center",
-          padding: "25px",
-        }}
-      >
-<a href="/t-shirt-printing-kettering">
-  T-Shirt Printing Kettering
-</a>
+<footer
+  style={{
+    background: "black",
+    color: "#bbb",
+    textAlign: "center",
+    padding: "40px 20px",
+  }}
+>
+  <h3
+    style={{
+      color: "#fff",
+      marginBottom: "15px",
+    }}
+  >
+    Popular Services
+  </h3>
 
-<a href="/workwear-printing-kettering">
-  Workwear Printing Kettering
-</a>
+  <div
+    style={{
+      display: "flex",
+      justifyContent: "center",
+      gap: "20px",
+      flexWrap: "wrap",
+      marginBottom: "25px",
+    }}
+  >
+    <a
+      href="/t-shirt-printing-kettering"
+      style={{ color: "#fff", textDecoration: "none" }}
+    >
+      T-Shirt Printing Kettering
+    </a>
+    <a
+      href="/workwear-printing-kettering"
+      style={{ color: "#fff", textDecoration: "none" }}
+    >
+      Workwear Printing Kettering
+    </a>
 
-<a href="/hoodie-printing-northampton">
-  Hoodie Printing Northampton
-</a>
+    <a
+      href="/dtf-printing-northamptonshire"
+      style={{ color: "#fff", textDecoration: "none" }}
+    >
+      DTF Printing Northamptonshire
+    </a>
+  </div>
 
-<a href="/dtf-printing-northamptonshire">
-  DTF Printing Northamptonshire
-</a>
-
-        © 2026 Kett Press Co | Custom Printing | Workwear
-      </footer>
+  <p>
+    © 2026 Kett Press Co | Custom Printing | Workwear
+  </p>
+</footer>
     </div>
   );
 }
