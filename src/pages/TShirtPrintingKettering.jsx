@@ -1,4 +1,21 @@
-export default function TShirtPrintingKettering() {
+import { useEffect } from "react";
+
+export default function TshirtPrintingKettering() {
+useEffect(() => {
+  document.title =
+    "T-Shirt Printing Kettering | Custom Printed T-Shirts | Kett Press Co";
+
+  const meta = document.createElement("meta");
+  meta.name = "description";
+  meta.content =
+    "Professional T-Shirt Printing in Kettering. Custom printed T-shirts for businesses, events, gyms and organisations across Northamptonshire.";
+  document.head.appendChild(meta);
+
+  return () => {
+    document.head.removeChild(meta);
+  };
+}, []);
+
   return (
     <div style={{ maxWidth: "1000px", margin: "auto", padding: "40px 20px" }}>
       <h1>T-Shirt Printing in Kettering</h1>
