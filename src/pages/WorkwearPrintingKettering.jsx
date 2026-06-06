@@ -186,7 +186,7 @@ export default function WorkwearPrintingKettering() {
 
       <section
         style={{
-          background: "#f8f8f8",
+          background: "#b11b1bff",
           padding: "40px",
           borderRadius: "16px",
           textAlign: "center",
@@ -207,7 +207,7 @@ export default function WorkwearPrintingKettering() {
               marginTop: "20px",
               padding: "14px 32px",
               background: "#f97316",
-              color: "#fff",
+              color: "#06180bff",
               border: "none",
               borderRadius: "8px",
               cursor: "pointer",
