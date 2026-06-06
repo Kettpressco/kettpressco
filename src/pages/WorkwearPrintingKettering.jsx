@@ -8,49 +8,76 @@ export default function WorkwearPrintingKettering() {
     backgroundPosition: "center",
     color: "white",
     textAlign: "center",
-    padding: "120px 20px",
+    padding: "140px 20px 120px",
     borderRadius: "20px",
     marginBottom: "60px",
   }}
 >
-  <h1
+ <h1
+  style={{
+    fontSize: "clamp(40px,5vw,60px)",
+    lineHeight: "1.2",
+    marginBottom: "25px",
+    marginTop: "0",
+  }}
+>
+  Workwear Printing in Kettering
+</h1>
+
+  <p
+  style={{
+    maxWidth: "750px",
+    margin: "0 auto 50px auto",
+    fontSize: "20px",
+    lineHeight: "1.8",
+    textAlign: "center",
+  }}
+>
+  Professional branded workwear for businesses across
+  Kettering and Northamptonshire. From hi-vis clothing,
+  polo shirts and hoodies to jackets and complete staff
+  uniforms.
+</p>
+
+
+
+<section
+  style={{
+    marginTop: "40px",
+    marginBottom: "60px",
+  }}
+>
+  <h2
     style={{
-      fontSize: "clamp(40px,5vw,60px)",
-      marginBottom: "20px",
+      textAlign: "center",
+      marginBottom: "25px",
+      fontSize: "32px",
     }}
   >
-    Workwear Printing in Kettering
-  </h1>
+    Professional Workwear Printing
+  </h2>
 
   <p
     style={{
-      maxWidth: "750px",
-      margin: "0 auto",
-      fontSize: "20px",
+      lineHeight: "1.8",
+      marginBottom: "20px",
+    }}
+  >
+    Branded workwear helps your business stand out and builds trust with
+    customers. Whether you need uniforms for your staff, branded clothing
+    for events, or durable garments for everyday work, we provide reliable
+    printing with excellent attention to detail.
+  </p>
+
+  <p
+    style={{
       lineHeight: "1.8",
     }}
   >
-    Professional branded workwear for businesses across
-    Kettering and Northamptonshire. From hi-vis clothing
-    and polo shirts to hoodies, jackets and uniforms.
+    We work with businesses throughout Kettering, Northampton,
+    Wellingborough, Corby and the wider Northamptonshire area.
   </p>
-
-
-      <section style={{ marginBottom: "60px" }}>
-        <h2>Professional Workwear Printing</h2>
-
-        <p>
-          Branded workwear helps your business stand out and builds trust with
-          customers. Whether you need uniforms for your staff, branded clothing
-          for events, or durable garments for everyday work, we provide reliable
-          printing with excellent attention to detail.
-        </p>
-
-        <p>
-          We work with businesses throughout Kettering, Northampton,
-          Wellingborough, Corby, and the wider Northamptonshire area.
-        </p>
-      </section>
+</section>
 
       <h2
   style={{
