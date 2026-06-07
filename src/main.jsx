@@ -10,6 +10,7 @@ import WorkwearPrintingKettering from "./pages/WorkwearPrintingKettering.jsx";
 import HoodiePrintingNorthampton from "./pages/HoodiePrintingNorthampton.jsx";
 import DtfPrintingNorthamptonshire from "./pages/dtfprintingnorthamptonshire.jsx";
 import DtfPrintingNorthampton from "./pages/DtfPrintingNorthampton.jsx";
+import TshirtPrintingNorthampton from "./pages/TshirtPrintingNorthampton.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -36,6 +37,10 @@ createRoot(document.getElementById("root")).render(
 <Route
   path="/dtf-printing-northamptonshire"
   element={<DtfPrintingNorthamptonshire />}
+/>
+<Route
+  path="/t-shirt-printing-northampton"
+  element={<TshirtPrintingNorthampton />}
 />
 </Routes>
       
