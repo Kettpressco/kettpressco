@@ -1243,11 +1243,12 @@ export default function App() {
       href="/t-shirt-printing-kettering"
       style={{ color: "#fff", textDecoration: "none" }}
     >
+       T-Shirt Printing Wellingborough
       <a
       href="/t-shirt-printing-Wellingborough"
       style={{ color: "#fff", textDecoration: "none" }}
     ></a>
-      T-Shirt Printing Kettering
+      T-Shirt Printing Wellingborough
     </a>
     <a
       href="/workwear-printing-kettering"
