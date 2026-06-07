@@ -7,16 +7,16 @@ const serviceCard = {
   boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
 };
 
-export default function TshirtPrintingNorthampton() {
+export default function TshirtPrintingWellingborough() {
 
   useEffect(() => {
     document.title =
-      "T-Shirt Printing Kettering | Custom Printed T-Shirts | Kett Press Co";
+      "T-Shirt Printing Wellingborough | Custom Printed T-Shirts | Kett Press Co";
 
     const meta = document.createElement("meta");
     meta.name = "description";
     meta.content =
-      "Professional T-Shirt Printing in Kettering. Custom printed T-shirts for businesses, events, gyms and organisations across Northamptonshire.";
+      "Professional T-Shirt Printing in Wellingborough. Custom printed T-shirts for businesses, events, gyms and organisations across Northamptonshire.";
     document.head.appendChild(meta);
 
     return () => {
@@ -48,7 +48,7 @@ export default function TshirtPrintingNorthampton() {
           marginBottom: "20px",
         }}
       >
-        T-Shirt Printing in Kettering
+        T-Shirt Printing in Wellingborough
       </h1>
 
       <p
@@ -112,7 +112,7 @@ export default function TshirtPrintingNorthampton() {
     {/* PAGE CONTENT */}
 
     <p>
-      Kett Press Co provides professional T-shirt printing in Northampton
+      Kett Press Co provides professional T-shirt printing in Wellingborough
       for businesses, gyms, events, schools and organisations.
       We offer high-quality garment printing with fast turnaround
       times across Northamptonshire.
@@ -223,7 +223,7 @@ export default function TshirtPrintingNorthampton() {
       lineHeight: "1.8",
     }}
   >
-    Looking for professional T-shirt printing in Northampton?
+    Looking for professional T-shirt printing in Wellingborough?
     Contact Kett Press Co today for a fast, no-obligation quote.
   </p>
   <a href="tel:07770118148">
