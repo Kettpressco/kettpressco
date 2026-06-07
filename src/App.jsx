@@ -1230,48 +1230,64 @@ export default function App() {
     Popular Services
   </h3>
 
-  <div
+ <div
   style={{
     display: "flex",
     flexWrap: "wrap",
+    justifyContent: "center",
     gap: "20px",
+    marginBottom: "20px",
   }}
 >
-    <a
-      href="/t-shirt-printing-kettering"
-      style={{ color: "#fff", textDecoration: "none" }}
-    >
-       T-Shirt Printing Kettering
+  <a
+    href="/t-shirt-printing-kettering"
+    style={{ color: "#fff", textDecoration: "none" }}
+  >
+    T-Shirt Printing Kettering
+  </a>
 
-      <a
-      href="/t-shirt-printing-Wellingborough"
-      style={{ color: "#fff", textDecoration: "none" }}
-    ></a>
+  <a
+    href="/t-shirt-printing-wellingborough"
+    style={{ color: "#fff", textDecoration: "none" }}
+  >
+    T-Shirt Printing Wellingborough
+  </a>
 
+  <a
+    href="/workwear-printing-kettering"
+    style={{ color: "#fff", textDecoration: "none" }}
+  >
+    Workwear Printing Kettering
+  </a>
 
-      T-Shirt Printing Wellingborough
-    </a>
-    <a
-      href="/workwear-printing-kettering"
-      style={{ color: "#fff", textDecoration: "none" }}
-    >
-      Workwear Printing Kettering
-    </a>
+  <a
+    href="/hoodie-printing-northampton"
+    style={{ color: "#fff", textDecoration: "none" }}
+  >
+    Hoodie Printing Northampton
+  </a>
 
-    <a href="/hoodie-printing-northampton">
-  Hoodie Printing Northampton
-</a>
+  <a
+    href="/dtf-printing-northamptonshire"
+    style={{ color: "#fff", textDecoration: "none" }}
+  >
+    DTF Printing Northamptonshire
+  </a>
 
-<a href="/dtf-printing-northamptonshire">
-  DTF Printing Northamptonshire
-</a>
-<a href="/t-shirt-printing-northampton">
-  T-Shirt Printing Northampton
-</a>
-<a href="/t-shirt-printing-corby">
-  T-Shirt Printing Corby
-</a>
-  </div>
+  <a
+    href="/t-shirt-printing-northampton"
+    style={{ color: "#fff", textDecoration: "none" }}
+  >
+    T-Shirt Printing Northampton
+  </a>
+
+  <a
+    href="/t-shirt-printing-corby"
+    style={{ color: "#fff", textDecoration: "none" }}
+  >
+    T-Shirt Printing Corby
+  </a>
+</div>
 
   <p>
     © 2026 Kett Press Co | Custom Printing | Workwear
