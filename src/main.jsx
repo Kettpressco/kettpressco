@@ -7,6 +7,7 @@ import App from "./App.jsx";
 
 import TshirtPrintingKettering from "./pages/TShirtPrintingKettering.jsx";
 import WorkwearPrintingKettering from "./pages/WorkwearPrintingKettering.jsx";
+import HoodiePrintingNorthampton from "./pages/HoodiePrintingNorthampton.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -23,7 +24,12 @@ createRoot(document.getElementById("root")).render(
           path="/workwear-printing-kettering"
           element={<WorkwearPrintingKettering />}
         />
-      </Routes>
+      <Route
+  path="/hoodie-printing-northampton"
+  element={<HoodiePrintingNorthampton />}
+/>
+</Routes>
+      
     </BrowserRouter>
   </StrictMode>
 );
