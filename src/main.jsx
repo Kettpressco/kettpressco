@@ -29,7 +29,7 @@ createRoot(document.getElementById("root")).render(
   element={<DtfPrintingNorthampton />}
 />
 <Route
-  path="/tshirt-printing-wellingborough"
+  path="/t-shirt-printing-wellingborough"
   element={<TshirtprintingWellingborough />}
 />
 <Route
