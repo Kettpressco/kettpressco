@@ -1231,14 +1231,12 @@ export default function App() {
   </h3>
 
   <div
-    style={{
-      display: "flex",
-      justifyContent: "center",
-      gap: "20px",
-      flexWrap: "wrap",
-      marginBottom: "25px",
-    }}
-  >
+  style={{
+    display: "flex",
+    flexWrap: "wrap",
+    gap: "20px",
+  }}
+>
     <a
       href="/t-shirt-printing-kettering"
       style={{ color: "#fff", textDecoration: "none" }}
@@ -1250,7 +1248,7 @@ export default function App() {
       style={{ color: "#fff", textDecoration: "none" }}
     ></a>
 
-    
+
       T-Shirt Printing Wellingborough
     </a>
     <a
