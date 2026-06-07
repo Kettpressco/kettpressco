@@ -3,7 +3,7 @@ export default function WorkwearPrintingKettering() {
    <div
   style={{
     backgroundImage:
-      "linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('/images/work1.jpg')",
+      "linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('/images/work3.jpg')",
     backgroundSize: "cover",
     backgroundPosition: "center",
     color: "white",
@@ -97,7 +97,7 @@ export default function WorkwearPrintingKettering() {
   }}
 >
   <img
-    src="/images/work1.jpg"
+    src="/images/work4.jpg"
     alt="Printed Workwear"
     style={{
       width: "100%",

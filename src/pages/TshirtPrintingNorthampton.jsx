@@ -32,7 +32,7 @@ export default function TshirtPrintingNorthampton() {
     <div
       style={{
         backgroundImage:
-          "linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('/images/event1.jpg')",
+          "linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('/images/tshirt4.jpg')",
         backgroundSize: "cover",
         backgroundPosition: "center",
         color: "white",

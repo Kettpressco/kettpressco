@@ -6,7 +6,7 @@ const services = [
     icon: "👕",
     title: "T-Shirt Printing",
     text: "High-quality custom tees for businesses, gyms, brands and events.",
-    image: "/images/tshirt.jpg",
+    image: "/images/tshirt4.jpg",
   },
   {
     icon: "🦺",
@@ -18,7 +18,7 @@ const services = [
     icon: "🎨",
     title: "Logo Printing",
     text: "Sharp logo printing and custom branding for workwear, hoodies and uniforms.",
-    image: "/images/logo.jpg",
+    image: "/images/tshirt3.jpg",
   },
 ];
 export default function App() {

@@ -53,7 +53,7 @@ export default function HoodiePrintingNorthampton() {
       <div
         style={{
           backgroundImage:
-            "linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('/images/work2.jpg')",
+            "linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('/images/hoodie.jpg')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           color: "white",
@@ -182,7 +182,7 @@ export default function HoodiePrintingNorthampton() {
         }}
       >
         <img
-          src="/images/work1.jpg"
+          src="/images/work3.jpg"
           alt="Custom Hoodie Printing"
           style={{
             width: "100%",

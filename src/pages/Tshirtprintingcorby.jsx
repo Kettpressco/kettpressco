@@ -56,7 +56,7 @@ export default function TshirtPrintingCorby() {
       <div
         style={{
           backgroundImage:
-            "linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('/images/event1.jpg')",
+            "linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('/images/tshirt4.jpg')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           color: "white",
@@ -210,7 +210,7 @@ export default function TshirtPrintingCorby() {
           }}
         >
           <img
-            src="/images/event1.jpg"
+            src="/images/tshirt3.jpg"
             alt="Custom T-Shirt Printing"
             style={{
               width: "100%",
@@ -219,7 +219,7 @@ export default function TshirtPrintingCorby() {
           />
 
           <img
-            src="/images/event2.jpg"
+            src="/images/tshirt.jpg"
             alt="Printed Clothing"
             style={{
               width: "100%",
@@ -228,7 +228,7 @@ export default function TshirtPrintingCorby() {
           />
 
           <img
-            src="/images/event3.jpg"
+            src="/images/tshirt2.jpg"
             alt="Branded Apparel"
             style={{
               width: "100%",
