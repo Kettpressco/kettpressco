@@ -1252,12 +1252,13 @@ export default function App() {
       Workwear Printing Kettering
     </a>
 
-    <a
-      href="/dtf-printing-northamptonshire"
-      style={{ color: "#fff", textDecoration: "none" }}
-    >
-      DTF Printing Northamptonshire
-    </a>
+    <a href="/hoodie-printing-northampton">
+  Hoodie Printing Northampton
+</a>
+
+<a href="/dtf-printing-northamptonshire">
+  DTF Printing Northamptonshire
+</a>
   </div>
 
   <p>
