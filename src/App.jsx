@@ -1351,6 +1351,12 @@ export default function App() {
     T-Shirt Printing Wellingborough
   </a>
 
+<a
+  href="/workwear-printing-wellingborough"
+  style={{ color: "#fff", textDecoration: "none" }}
+>
+  Workwear Printing Wellingborough
+</a>
   <a
     href="/workwear-printing-kettering"
     style={{ color: "#fff", textDecoration: "none" }}
@@ -1385,6 +1391,7 @@ export default function App() {
   >
     T-Shirt Printing Corby
   </a>
+  
 </div>
 
   <p>
