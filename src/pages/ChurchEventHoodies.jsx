@@ -52,28 +52,31 @@ export default function ChurchEventHoodies() {
             margin: "0 auto",
           }}
         >
-          <h1
-            style={{
-              fontSize: "clamp(2.5rem,5vw,4rem)",
-              marginBottom: "20px",
-            }}
-          >
-            Custom Hoodies For A Local Church Event
-          </h1>
+         <h1
+  style={{
+    fontSize: "clamp(2rem, 5vw, 4rem)",
+    lineHeight: "1.2",
+    marginBottom: "24px",
+    fontWeight: "700",
+  }}
+>
+  Custom Hoodies For A Local Church Event
+</h1>
 
-          <p
-            style={{
-              maxWidth: "800px",
-              margin: "0 auto",
-              lineHeight: "1.8",
-              fontSize: "18px",
-            }}
-          >
-            Premium custom hoodie printing completed for a local church
-            event in Northamptonshire. High-quality garments, durable
-            printing and a professional finish for volunteers,
-            organisers and attendees.
-          </p>
+<p
+  style={{
+    maxWidth: "800px",
+    margin: "0 auto",
+    lineHeight: "1.8",
+    fontSize: "18px",
+    padding: "0 15px",
+  }}
+>
+  Premium custom hoodie printing completed for a local church
+  event in Northamptonshire. High-quality garments, durable
+  printing and a professional finish for volunteers,
+  organisers and attendees.
+</p>
         </div>
       </section>
 
