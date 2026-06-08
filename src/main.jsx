@@ -14,6 +14,7 @@ import TshirtPrintingNorthampton from "./pages/TshirtPrintingNorthampton.jsx";
 import Tshirtprintingcorby from "./pages/Tshirtprintingcorby.jsx";
 import TshirtprintingWellingborough from "./pages/TshirtprintingWellingborough.jsx";
 import WorkwearPrintingWellingborough from "./pages/WorkwearPrintingWellingborough.jsx";
+import WorkwearPrintingCorby from "./pages/WorkwearPrintingCorby.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -40,6 +41,10 @@ createRoot(document.getElementById("root")).render(
 <Route
   path="/t-shirt-printing-corby"
   element={<Tshirtprintingcorby />}
+/>
+<Route
+  path="/workwear-printing-corby"
+  element={<WorkwearPrintingCorby />}
 />
         <Route
           path="/workwear-printing-kettering"
