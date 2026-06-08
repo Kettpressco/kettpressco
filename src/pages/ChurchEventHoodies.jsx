@@ -1,4 +1,3 @@
-```jsx
 import { useEffect } from "react";
 
 export default function ChurchEventHoodies() {
@@ -105,13 +104,7 @@ export default function ChurchEventHoodies() {
           margin: "0 auto",
         }}
       >
-        <h2
-          style={{
-            marginBottom: "20px",
-          }}
-        >
-          Project Overview
-        </h2>
+        <h2>Project Overview</h2>
 
         <p
           style={{
@@ -120,10 +113,10 @@ export default function ChurchEventHoodies() {
           }}
         >
           Kett Press Co recently produced custom printed hoodies for a
-          local church event in Northamptonshire. The goal was to
-          provide a professional and consistent look for volunteers and
-          attendees while creating memorable event apparel that could
-          be worn long after the event finished.
+          local church event in Northamptonshire. The goal was to provide
+          a professional and consistent look for volunteers and attendees
+          while creating memorable event apparel that could be worn long
+          after the event finished.
         </p>
 
         <p
@@ -163,36 +156,26 @@ export default function ChurchEventHoodies() {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns:
-                "repeat(auto-fit,minmax(300px,1fr))",
+              gridTemplateColumns: "repeat(auto-fit,minmax(300px,1fr))",
               gap: "25px",
             }}
           >
             <img
               src="/images/event1.jpg"
               alt="Church Event Hoodie Printing"
-              style={{
-                width: "100%",
-                borderRadius: "16px",
-              }}
+              style={{ width: "100%", borderRadius: "16px" }}
             />
 
             <img
               src="/images/event2.jpg"
               alt="Custom Event Hoodies"
-              style={{
-                width: "100%",
-                borderRadius: "16px",
-              }}
+              style={{ width: "100%", borderRadius: "16px" }}
             />
 
             <img
               src="/images/event3.jpg"
               alt="Printed Hoodies Northamptonshire"
-              style={{
-                width: "100%",
-                borderRadius: "16px",
-              }}
+              style={{ width: "100%", borderRadius: "16px" }}
             />
           </div>
         </div>
@@ -218,8 +201,7 @@ export default function ChurchEventHoodies() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns:
-              "repeat(auto-fit,minmax(250px,1fr))",
+            gridTemplateColumns: "repeat(auto-fit,minmax(250px,1fr))",
             gap: "20px",
           }}
         >
@@ -264,11 +246,7 @@ export default function ChurchEventHoodies() {
               ★★★★★
             </div>
 
-            <p
-              style={{
-                lineHeight: "1.8",
-              }}
-            >
+            <p style={{ lineHeight: "1.8" }}>
               "Amazing customer service, great quality and beautiful
               personalised designs."
             </p>
@@ -289,23 +267,22 @@ export default function ChurchEventHoodies() {
         <h2>Church Event Hoodie Printing Northamptonshire</h2>
 
         <p>
-          Kett Press Co provides professional hoodie printing for
-          churches, youth groups, charities, community organisations
-          and local events throughout Northamptonshire.
+          Kett Press Co provides professional hoodie printing for churches,
+          youth groups, charities, community organisations and local events
+          throughout Northamptonshire.
         </p>
 
         <p>
           Our custom hoodie printing service is ideal for volunteers,
-          organisers, leadership teams and attendees who want
-          high-quality personalised clothing that promotes their event
-          and creates a professional appearance.
+          organisers, leadership teams and attendees who want high-quality
+          personalised clothing that promotes their event and creates a
+          professional appearance.
         </p>
 
         <p>
           We proudly serve customers across Kettering, Wellingborough,
-          Corby, Northampton and the surrounding areas with premium
-          custom printing on hoodies, T-shirts, workwear and branded
-          apparel.
+          Corby, Northampton and the surrounding areas with premium custom
+          printing on hoodies, T-shirts, workwear and branded apparel.
         </p>
       </section>
 
@@ -318,13 +295,7 @@ export default function ChurchEventHoodies() {
           padding: "100px 20px",
         }}
       >
-        <h2
-          style={{
-            marginBottom: "20px",
-          }}
-        >
-          Need Custom Hoodies For Your Event?
-        </h2>
+        <h2>Need Custom Hoodies For Your Event?</h2>
 
         <p
           style={{
@@ -351,4 +322,3 @@ export default function ChurchEventHoodies() {
     </>
   );
 }
-```
