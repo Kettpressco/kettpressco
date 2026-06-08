@@ -7,17 +7,17 @@ const serviceCard = {
   boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
 };
 
-export default function TshirtPrintingCorby() {
+export default function WorkwearPrintingCorby() {
     
 
   useEffect(() => {
     document.title =
-      "T-Shirt Printing Corby | Custom Printed T-Shirts | Kett Press Co";
+      "Workwear Printing Corby | Custom Printed Workwear | Kett Press Co";
 
     const meta = document.createElement("meta");
     meta.name = "description";
     meta.content =
-      "Professional T-Shirt Printing in Corby. Custom printed T-shirts for businesses, events, gyms and organisations across Northamptonshire.";
+      "Professional Workwear Printing in Corby. Custom printed workwear for businesses, events, gyms and organisations across Northamptonshire.";
     document.head.appendChild(meta);
 
     return () => {
@@ -49,7 +49,7 @@ export default function TshirtPrintingCorby() {
           marginBottom: "20px",
         }}
       >
-        T-Shirt Printing in Corby
+        Workwear Printing in Corby
       </h1>
 
       <p
@@ -60,7 +60,7 @@ export default function TshirtPrintingCorby() {
           lineHeight: "1.7",
         }}
       >
-        Premium custom T-shirt printing for businesses,
+        Premium custom Workwear printing for businesses,
         events, gyms, schools and organisations across
         Northampton.
       </p>
@@ -126,7 +126,7 @@ We proudly serve businesses across Corby, Weldon, Great Oakley, Stanion, Rocking
     fontSize: "32px",
   }}
 >
-  Our T-Shirt Printing Services
+  Our Workwear Printing Services
 </h2>
 
 <div
@@ -223,7 +223,7 @@ We proudly serve businesses across Corby, Weldon, Great Oakley, Stanion, Rocking
       lineHeight: "1.8",
     }}
   >
-    Looking for professional T-shirt printing in Corby?
+    Looking for professional Workwear printing in Corby?
     Contact Kett Press Co today for a fast, no-obligation quote.
   </p>
   <a href="tel:07770118148">
