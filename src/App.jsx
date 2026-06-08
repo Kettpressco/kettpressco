@@ -1,5 +1,6 @@
 import React from "react";
 import portfolio from "./data/portfolio";
+import reviews from "./data/reviews";
 
 const services = [
   {
@@ -1032,6 +1033,103 @@ export default function App() {
           ))}
         </div>
       </section>
+
+{/* GOOGLE REVIEWS */}
+<section
+  style={{
+    padding: "100px 20px",
+    background: "#f8fafc",
+  }}
+>
+  <div
+    style={{
+      maxWidth: "1200px",
+      margin: "0 auto",
+    }}
+  >
+    <div style={{ textAlign: "center", marginBottom: "50px" }}>
+      <h2
+        style={{
+          fontSize: "clamp(2rem,5vw,3rem)",
+          color: "#111827",
+          marginBottom: "15px",
+        }}
+      >
+        Customer Reviews
+      </h2>
+
+      <p
+        style={{
+          color: "#6b7280",
+          maxWidth: "700px",
+          margin: "0 auto",
+        }}
+      >
+        See what customers are saying about Kett Press Co's custom
+        T-shirt printing, workwear and branded clothing services.
+      </p>
+    </div>
+
+    <div
+      style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))",
+        gap: "25px",
+      }}
+    >
+      {reviews.map((review, index) => (
+        <div
+          key={index}
+          style={{
+            background: "#fff",
+            padding: "30px",
+            borderRadius: "16px",
+            boxShadow: "0 8px 30px rgba(0,0,0,0.08)",
+          }}
+        >
+          <div
+            style={{
+              color: "#f59e0b",
+              fontSize: "20px",
+              marginBottom: "15px",
+            }}
+          >
+            ★★★★★
+          </div>
+
+          <p
+            style={{
+              color: "#4b5563",
+              lineHeight: "1.8",
+              marginBottom: "20px",
+              fontStyle: "italic",
+            }}
+          >
+            "{review.review}"
+          </p>
+
+          <strong
+            style={{
+              color: "#111827",
+            }}
+          >
+            {review.name}
+          </strong>
+
+          <div
+            style={{
+              color: "#10b981",
+              fontSize: "14px",
+              marginTop: "5px",
+            }}
+          >
+            Verified Google Review
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
 
       {/* QUOTE */}
 
