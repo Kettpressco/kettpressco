@@ -1344,6 +1344,10 @@ export default function App() {
     T-Shirt Printing Kettering
   </a>
 
+<Route
+  path="/workwear-printing-wellingborough"
+  element={<WorkwearPrintingWellingborough />}
+/>
   <a
     href="/t-shirt-printing-wellingborough"
     style={{ color: "#fff", textDecoration: "none" }}
