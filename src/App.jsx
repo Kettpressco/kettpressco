@@ -1,6 +1,7 @@
 import React from "react";
 import portfolio from "./data/portfolio";
 import reviews from "./data/reviews";
+import { FaFacebook, FaInstagram } from "react-icons/fa";
 
 const services = [
   {
@@ -1405,6 +1406,58 @@ export default function App() {
 </a>
   
 </div>
+
+<div
+  style={{
+    display: "flex",
+    justifyContent: "center",
+    gap: "25px",
+    marginTop: "30px",
+    marginBottom: "20px",
+  }}
+>
+  <a
+    href="https://www.facebook.com/Kettpress"
+    target="_blank"
+    rel="noreferrer"
+    aria-label="Facebook"
+    style={{
+      color: "#fff",
+      fontSize: "30px",
+      transition: "0.3s",
+    }}
+  >
+    <FaFacebook />
+  </a>
+
+  <a
+    href="https://www.instagram.com/kettpressco/"
+    target="_blank"
+    rel="noreferrer"
+    aria-label="Instagram"
+    style={{
+      color: "#fff",
+      fontSize: "30px",
+      transition: "0.3s",
+    }}
+  >
+    <FaInstagram />
+  </a>
+</div>
+
+<p
+  style={{
+    maxWidth: "700px",
+    margin: "0 auto 20px",
+    color: "#bbb",
+    lineHeight: "1.6",
+  }}
+>
+  Follow Kett Press Co on Facebook and Instagram to see our latest
+  custom T-shirt printing, workwear printing, hoodie printing and
+  customer projects across Kettering, Wellingborough, Corby and
+  Northamptonshire.
+</p>
 
   <p>
     © 2026 Kett Press Co | Custom Printing | Workwear
