@@ -39,12 +39,12 @@ export default function ChurchEventHoodies() {
     <>
       {/* HERO */}
       <section
-        style={{
-          background: "#111827",
-          color: "#fff",
-          padding: "120px 20px",
-          textAlign: "center",
-        }}
+  style={{
+    background: "#111827",
+    color: "#fff",
+    padding: "140px 20px 100px",
+    textAlign: "center",
+  }}
       >
         <div
           style={{
