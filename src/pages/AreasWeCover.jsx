@@ -24,6 +24,12 @@ export default function AreasWeCover() {
     boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
     textAlign: "center",
   };
+  const heroImage = {
+  width: "100%",
+  height: "250px",
+  objectFit: "cover",
+  borderRadius: "16px",
+};
 
   return (
     <>
