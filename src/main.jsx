@@ -16,6 +16,7 @@ import TshirtprintingWellingborough from "./pages/TshirtprintingWellingborough.j
 import WorkwearPrintingWellingborough from "./pages/WorkwearPrintingWellingborough.jsx";
 import WorkwearPrintingCorby from "./pages/WorkwearPrintingCorby.jsx";
 import ChurchEventHoodies from "./pages/ChurchEventHoodies.jsx";
+import ConstructionWorkwearKettering from "./pages/ConstructionWorkwearKettering.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -66,6 +67,10 @@ createRoot(document.getElementById("root")).render(
 <Route
   path="/church-event-hoodie-printing"
   element={<ChurchEventHoodies />}
+/>
+<Route
+  path="/construction-workwear-kettering"
+  element={<ConstructionWorkwearKettering />}
 />
 </Routes>
       
