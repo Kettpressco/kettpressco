@@ -27,107 +27,73 @@ export default function AreasWeCover() {
 
   return (
     <>
-      {/* HERO */}
-      <section
-        style={{
-          background: "#111827",
-          color: "#fff",
-          padding: "120px 20px",
-          textAlign: "center",
-        }}
-      >
-        <div
-          style={{
-            maxWidth: "1100px",
-            margin: "0 auto",
-          }}
-        >
-          <h1
-            style={{
-              fontSize: "clamp(2.5rem,5vw,4rem)",
-              lineHeight: "1.2",
-              marginBottom: "20px",
-            }}
-          >
-            Areas We Cover Across Northamptonshire
-          </h1>
+     <section
+  style={{
+    position: "relative",
+    minHeight: "80vh",
+    backgroundImage: "url('/images/work1.jpg')",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  }}
+>
+  <div
+    style={{
+      position: "absolute",
+      inset: 0,
+      background: "rgba(0,0,0,0.65)",
+    }}
+  />
 
-          <p
-            style={{
-              maxWidth: "800px",
-              margin: "0 auto",
-              lineHeight: "1.8",
-              fontSize: "18px",
-            }}
-          >
-            Kett Press Co provides premium T-shirt printing, workwear
-            printing, hoodie printing and custom branded clothing for
-            businesses, organisations, events and individuals throughout
-            Northamptonshire.
-          </p>
-        </div>
-      </section>
+  <div
+    style={{
+      position: "relative",
+      zIndex: 2,
+      maxWidth: "1000px",
+      textAlign: "center",
+      color: "#fff",
+      padding: "20px",
+    }}
+  >
+    <h1
+      style={{
+        fontSize: "clamp(2.5rem,5vw,4.5rem)",
+        lineHeight: "1.2",
+        marginBottom: "20px",
+      }}
+    >
+      Custom Printing Across Northamptonshire
+    </h1>
 
-      {/* INTRO */}
-      <section
-        style={{
-          padding: "80px 20px",
-          maxWidth: "1100px",
-          margin: "0 auto",
-        }}
-      >
-        <h2>Local Printing Specialists</h2>
-
-        <p style={{ lineHeight: "1.9", color: "#555" }}>
-          We work with businesses, schools, gyms, charities, churches,
-          sports teams and organisations throughout Northamptonshire.
-          Whether you need custom T-shirts, branded workwear, hoodies,
-          uniforms or promotional clothing, Kett Press Co delivers
-          professional results with fast turnaround times.
-        </p>
-      </section>
-
-      {/* AREAS GRID */}
-      <section
-        style={{
-          background: "#f8fafc",
-          padding: "100px 20px",
-        }}
-      >
-        <div
-          style={{
-            maxWidth: "1200px",
-            margin: "0 auto",
-          }}
-        >
-          <h2
-            style={{
-              textAlign: "center",
-              marginBottom: "50px",
-            }}
-          >
-            Areas We Serve
-          </h2>
-
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns:
-                "repeat(auto-fit,minmax(250px,1fr))",
-              gap: "20px",
-            }}
-          >
-            <div style={areaCard}>Kettering</div>
-            <div style={areaCard}>Northampton</div>
-            <div style={areaCard}>Wellingborough</div>
-            <div style={areaCard}>Corby</div>
-            <div style={areaCard}>Rushden</div>
-            <div style={areaCard}>Rothwell</div>
-            <div style={areaCard}>Desborough</div>
-            <div style={areaCard}>Burton Latimer</div>
-          </div>
-        </div>
-      </section>
+    <p
+      style={{
+        maxWidth: "750px",
+        margin: "0 auto",
+        fontSize: "18px",
+        lineHeight: "1.8",
+      }}
+    >
+      Premium T-Shirt Printing, Workwear Printing,
+      Hoodie Printing and Branded Apparel for
+      businesses, events, organisations and teams
+      across Northamptonshire.
+    </p>
+  </div>
+</section>
+<div
+  style={{
+    display: "grid",
+    gridTemplateColumns: "repeat(3,1fr)",
+    gap: "15px",
+    marginTop: "50px",
+  }}
+>
+  <img src="/images/work1.jpg" alt="" style={heroImage} />
+  <img src="/images/work2.jpg" alt="" style={heroImage} />
+  <img src="/images/work3.jpg" alt="" style={heroImage} />
+</div>
 
       {/* GALLERY */}
       <section
