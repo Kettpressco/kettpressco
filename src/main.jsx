@@ -8,6 +8,7 @@ import App from "./App.jsx";
 import TshirtPrintingKettering from "./pages/TShirtPrintingKettering.jsx";
 import WorkwearPrintingKettering from "./pages/WorkwearPrintingKettering.jsx";
 import HoodiePrintingNorthampton from "./pages/HoodiePrintingNorthampton.jsx";
+import GymWearPrintingNorthampton from "./pages/GymWearPrintingNorthampton.jsx";
 import DtfPrintingNorthamptonshire from "./pages/dtfprintingnorthamptonshire.jsx";
 import DtfPrintingNorthampton from "./pages/DtfPrintingNorthampton.jsx";
 import TshirtPrintingNorthampton from "./pages/TshirtPrintingNorthampton.jsx";
@@ -55,6 +56,10 @@ createRoot(document.getElementById("root")).render(
       <Route
   path="/hoodie-printing-northampton"
   element={<HoodiePrintingNorthampton />}
+/>
+<Route
+  path="/gym-wear-printing-northampton"
+  element={<GymWearPrintingNorthampton />}
 />
 <Route
   path="/dtf-printing-northamptonshire"
