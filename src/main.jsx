@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./index.css";
 import App from "./App.jsx";
 
+import AreasWeCover from "./pages/AreasWeCover.jsx";
 import TshirtPrintingKettering from "./pages/TShirtPrintingKettering.jsx";
 import WorkwearPrintingKettering from "./pages/WorkwearPrintingKettering.jsx";
 import HoodiePrintingNorthampton from "./pages/HoodiePrintingNorthampton.jsx";
@@ -24,11 +25,15 @@ createRoot(document.getElementById("root")).render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />} />
-
+        
         <Route
           path="/t-shirt-printing-kettering"
           element={<TshirtPrintingKettering />}
         />
+    <Route
+  path="/areas-we-cover"
+  element={<AreasWeCover />}
+/>    
 <Route
   path="/dtf-printing-northampton"
   element={<DtfPrintingNorthampton />}

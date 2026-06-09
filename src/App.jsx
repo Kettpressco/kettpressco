@@ -1339,8 +1339,15 @@ export default function App() {
   }}
 >
   <a
+  href="/areas-we-cover"
+  style={{ color: "#fff", textDecoration: "none" }}
+>
+  Areas We Cover
+</a>
+  <a
     href="/t-shirt-printing-kettering"
     style={{ color: "#fff", textDecoration: "none" }}
+
   >
     T-Shirt Printing Kettering
   </a>
