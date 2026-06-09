@@ -1385,6 +1385,12 @@ export default function App() {
   >
     T-Shirt Printing Northampton
   </a>
+  <a
+  href="/gym-wear-printing-northampton"
+  style={{ color: "#fff", textDecoration: "none" }}
+>
+  Gym Wear Printing Northampton
+</a>
 
   <a
     href="/t-shirt-printing-corby"
