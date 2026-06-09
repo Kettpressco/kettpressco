@@ -1404,6 +1404,12 @@ export default function App() {
 >
   Church Event Hoodie Printing
 </a>
+<a
+  href="/construction-workwear-kettering"
+  style={{ color: "#fff", textDecoration: "none" }}
+>
+  Construction Workwear Kettering
+</a>
   
 </div>
 
