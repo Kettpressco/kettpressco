@@ -1579,3 +1579,38 @@ export default function App() {
     </div>
   );
 }
+const navLink = {
+  color: "white",
+  textDecoration: "none",
+  fontWeight: "bold",
+};
+
+const heroButton = {
+  background: "#D62828",
+  color: "white",
+  border: "none",
+  padding: "18px 35px",
+  borderRadius: "12px",
+  cursor: "pointer",
+  fontSize: "18px",
+  fontWeight: "bold",
+};
+
+const whatsappButton = {
+  background: "#25D366",
+  color: "white",
+  border: "none",
+  padding: "18px 35px",
+  borderRadius: "12px",
+  cursor: "pointer",
+  fontSize: "18px",
+  fontWeight: "bold",
+};
+
+const inputStyle = {
+  padding: "16px",
+  borderRadius: "12px",
+  border: "1px solid #ddd",
+  fontSize: "16px",
+  outline: "none",
+};
