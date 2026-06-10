@@ -1,8 +1,10 @@
 import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import portfolio from "./data/portfolio";
 import reviews from "./data/reviews";
-import { FaFacebook, FaInstagram } from "react-icons/fa";
 
+import { FaFacebook, FaInstagram } from "react-icons/fa";
+import CustomTshirtPrintingNorthampton from "./pages/CustomTshirtPrintingNorthampton";
 const services = [
   {
     icon: "👕",
@@ -1412,11 +1414,7 @@ export default function App() {
         >
           Custom T-Shirt Printing Kettering
         </a>
-        <Route
-          path="/custom-t-shirt-printing-northampton"
-          element={<CustomTshirtPrintingNorthampton />}
-        />
-
+    
         <a
           href="/custom-t-shirt-printing-northampton"
           style={{ color: "#fff", textDecoration: "none" }}
