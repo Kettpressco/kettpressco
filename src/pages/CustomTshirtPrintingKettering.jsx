@@ -132,6 +132,13 @@ export default function CustomTshirtPrintingKettering() {
             Looking for custom t-shirt printing in Kettering? Contact
             Kett Press Co today for a fast, competitive quote.
           </p>
+          <p>
+  Looking for printing services outside Kettering? We also provide
+  <a href="/custom-t-shirt-printing-northampton">
+    {" "}custom T-shirt printing in Northampton
+  </a>
+  .
+</p>
 
           <a href="/contact" className="primary-btn">
             Request a Quote

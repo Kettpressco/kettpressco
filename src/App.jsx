@@ -1332,12 +1332,7 @@ export default function App() {
     {/* BUSINESS */}
 
     <div>
-      <h3
-        style={{
-          color: "#fff",
-          marginBottom: "20px",
-        }}
-      >
+      <h3 style={{ color: "#fff", marginBottom: "20px" }}>
         Kett Press Co
       </h3>
 
@@ -1347,21 +1342,17 @@ export default function App() {
           color: "#bbb",
         }}
       >
-        Premium custom T-shirt printing, workwear printing, hoodie printing
-        and branded clothing for businesses, tradespeople, restaurants,
-        churches, schools and events across Northamptonshire.
+        Premium custom T-shirt printing, workwear printing,
+        hoodie printing and branded clothing for businesses,
+        tradespeople, restaurants, churches, schools and
+        events across Northamptonshire.
       </p>
     </div>
 
     {/* SERVICES */}
 
     <div>
-      <h3
-        style={{
-          color: "#fff",
-          marginBottom: "20px",
-        }}
-      >
+      <h3 style={{ color: "#fff", marginBottom: "20px" }}>
         Popular Services
       </h3>
 
@@ -1397,12 +1388,7 @@ export default function App() {
     {/* GEO PAGES */}
 
     <div>
-      <h3
-        style={{
-          color: "#fff",
-          marginBottom: "20px",
-        }}
-      >
+      <h3 style={{ color: "#fff", marginBottom: "20px" }}>
         Areas We Cover
       </h3>
 
@@ -1425,6 +1411,17 @@ export default function App() {
           style={{ color: "#fff", textDecoration: "none" }}
         >
           Custom T-Shirt Printing Kettering
+        </a>
+        <Route
+          path="/custom-t-shirt-printing-northampton"
+          element={<CustomTshirtPrintingNorthampton />}
+        />
+
+        <a
+          href="/custom-t-shirt-printing-northampton"
+          style={{ color: "#fff", textDecoration: "none" }}
+        >
+          Custom T-Shirt Printing Northampton
         </a>
 
         <a
@@ -1559,9 +1556,11 @@ export default function App() {
       lineHeight: "1.7",
     }}
   >
-    Kett Press Co provides custom T-shirt printing, workwear printing,
-    branded clothing, logo printing and hoodie printing throughout
-    Kettering, Northampton, Corby, Wellingborough and Northamptonshire.
+    Kett Press Co provides custom T-shirt printing,
+    workwear printing, branded clothing, logo printing
+    and hoodie printing throughout Kettering,
+    Northampton, Corby, Wellingborough and
+    Northamptonshire.
   </p>
 
   <p
@@ -1573,12 +1572,14 @@ export default function App() {
       marginTop: "20px",
     }}
   >
-    © 2026 Kett Press Co | Custom Printing & Workwear | Northamptonshire
+    © 2026 Kett Press Co | Custom Printing & Workwear |
+    Northamptonshire
   </p>
 </footer>
     </div>
   );
 }
+
 const navLink = {
   color: "white",
   textDecoration: "none",

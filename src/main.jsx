@@ -21,6 +21,7 @@ import WorkwearPrintingCorby from "./pages/WorkwearPrintingCorby.jsx";
 import ChurchEventHoodies from "./pages/ChurchEventHoodies.jsx";
 import ConstructionWorkwearKettering from "./pages/ConstructionWorkwearKettering.jsx";
 import CustomTShirtPrintingKettering from "./pages/CustomTshirtPrintingKettering.jsx";
+import CustomTshirtPrintingNorthampton from "./pages/CustomTshirtPrintingNorthampton.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -29,10 +30,16 @@ createRoot(document.getElementById("root")).render(
       <Routes>
         <Route path="/" element={<App />} />
         
+         <Route
+          path="/custom-t-shirt-printing-northampton"
+          element={<CustomTshirtPrintingNorthampton />}
+        />
+        
         <Route
           path="/t-shirt-printing-kettering"
           element={<TshirtPrintingKettering />}
         />
+
     <Route
   path="/areas-we-cover"
   element={<AreasWeCover />}
@@ -88,6 +95,10 @@ createRoot(document.getElementById("root")).render(
 <Route
   path="/custom-t-shirt-printing-kettering"
   element={<CustomTShirtPrintingKettering />}
+/>
+<Route
+  path="/custom-t-shirt-printing-northampton"
+  element={<CustomTshirtPrintingNorthampton />}
 />
 
       </Routes>
