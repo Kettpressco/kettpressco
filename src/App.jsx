@@ -1314,210 +1314,268 @@ export default function App() {
 
 <footer
   style={{
-    background: "black",
+    background: "#000",
     color: "#bbb",
-    textAlign: "center",
-    padding: "40px 20px",
+    padding: "60px 20px 30px",
   }}
 >
-  <h3
+  <div
     style={{
-      color: "#fff",
-      marginBottom: "15px",
+      maxWidth: "1200px",
+      margin: "0 auto",
+      display: "grid",
+      gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+      gap: "40px",
+      textAlign: "left",
     }}
   >
-    Popular Services
-  </h3>
+    {/* BUSINESS */}
 
- <div
-  style={{
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "center",
-    gap: "20px",
-    marginBottom: "20px",
-  }}
->
-  <a
-  href="/areas-we-cover"
-  style={{ color: "#fff", textDecoration: "none" }}
->
-  Areas We Cover
-</a>
-  <a
-    href="/t-shirt-printing-kettering"
-    style={{ color: "#fff", textDecoration: "none" }}
+    <div>
+      <h3
+        style={{
+          color: "#fff",
+          marginBottom: "20px",
+        }}
+      >
+        Kett Press Co
+      </h3>
 
-  >
-    T-Shirt Printing Kettering
-  </a>
+      <p
+        style={{
+          lineHeight: "1.7",
+          color: "#bbb",
+        }}
+      >
+        Premium custom T-shirt printing, workwear printing, hoodie printing
+        and branded clothing for businesses, tradespeople, restaurants,
+        churches, schools and events across Northamptonshire.
+      </p>
+    </div>
 
-  <a
-    href="/t-shirt-printing-wellingborough"
-    style={{ color: "#fff", textDecoration: "none" }}
-  >
-    T-Shirt Printing Wellingborough
-  </a>
+    {/* SERVICES */}
 
-<a
-  href="/workwear-printing-wellingborough"
-  style={{ color: "#fff", textDecoration: "none" }}
->
-  Workwear Printing Wellingborough
-</a>
-  <a
-    href="/workwear-printing-kettering"
-    style={{ color: "#fff", textDecoration: "none" }}
-  >
-    Workwear Printing Kettering
-  </a>
+    <div>
+      <h3
+        style={{
+          color: "#fff",
+          marginBottom: "20px",
+        }}
+      >
+        Popular Services
+      </h3>
 
-  <a
-    href="/hoodie-printing-northampton"
-    style={{ color: "#fff", textDecoration: "none" }}
-  >
-    Hoodie Printing Northampton
-  </a>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "10px",
+        }}
+      >
+        <a href="/" style={{ color: "#fff", textDecoration: "none" }}>
+          Custom T-Shirt Printing
+        </a>
 
-  <a
-    href="/dtf-printing-northamptonshire"
-    style={{ color: "#fff", textDecoration: "none" }}
-  >
-    DTF Printing Northamptonshire
-  </a>
+        <a href="/" style={{ color: "#fff", textDecoration: "none" }}>
+          Workwear Printing
+        </a>
 
-  <a
-    href="/t-shirt-printing-northampton"
-    style={{ color: "#fff", textDecoration: "none" }}
-  >
-    T-Shirt Printing Northampton
-  </a>
-  <a
-  href="/gym-wear-printing-northampton"
-  style={{ color: "#fff", textDecoration: "none" }}
->
-  Gym Wear Printing Northampton
-</a>
+        <a href="/" style={{ color: "#fff", textDecoration: "none" }}>
+          Hoodie Printing
+        </a>
 
-  <a
-    href="/t-shirt-printing-corby"
-    style={{ color: "#fff", textDecoration: "none" }}
-  >
-    T-Shirt Printing Corby
-  </a>
-  <a
-  href="/workwear-printing-corby"
-  style={{ color: "#fff", textDecoration: "none" }}
->
-  Workwear Printing Corby
-</a>
-<a
-  href="/church-event-hoodie-printing"
-  style={{ color: "#fff", textDecoration: "none" }}
->
-  Church Event Hoodie Printing
-</a>
-<a
-  href="/construction-workwear-kettering"
-  style={{ color: "#fff", textDecoration: "none" }}
->
-  Construction Workwear Kettering
-</a>
-  
-</div>
+        <a href="/" style={{ color: "#fff", textDecoration: "none" }}>
+          DTF Printing
+        </a>
 
-<div
-  style={{
-    display: "flex",
-    justifyContent: "center",
-    gap: "25px",
-    marginTop: "30px",
-    marginBottom: "20px",
-  }}
->
-  <a
-    href="https://www.facebook.com/Kettpress"
-    target="_blank"
-    rel="noreferrer"
-    aria-label="Facebook"
+        <a href="/" style={{ color: "#fff", textDecoration: "none" }}>
+          Logo Printing
+        </a>
+      </div>
+    </div>
+
+    {/* GEO PAGES */}
+
+    <div>
+      <h3
+        style={{
+          color: "#fff",
+          marginBottom: "20px",
+        }}
+      >
+        Areas We Cover
+      </h3>
+
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "10px",
+        }}
+      >
+        <a
+          href="/areas-we-cover"
+          style={{ color: "#fff", textDecoration: "none" }}
+        >
+          Areas We Cover
+        </a>
+
+        <a
+          href="/custom-t-shirt-printing-kettering"
+          style={{ color: "#fff", textDecoration: "none" }}
+        >
+          Custom T-Shirt Printing Kettering
+        </a>
+
+        <a
+          href="/t-shirt-printing-kettering"
+          style={{ color: "#fff", textDecoration: "none" }}
+        >
+          T-Shirt Printing Kettering
+        </a>
+
+        <a
+          href="/workwear-printing-kettering"
+          style={{ color: "#fff", textDecoration: "none" }}
+        >
+          Workwear Printing Kettering
+        </a>
+
+        <a
+          href="/construction-workwear-kettering"
+          style={{ color: "#fff", textDecoration: "none" }}
+        >
+          Construction Workwear Kettering
+        </a>
+
+        <a
+          href="/t-shirt-printing-northampton"
+          style={{ color: "#fff", textDecoration: "none" }}
+        >
+          T-Shirt Printing Northampton
+        </a>
+
+        <a
+          href="/hoodie-printing-northampton"
+          style={{ color: "#fff", textDecoration: "none" }}
+        >
+          Hoodie Printing Northampton
+        </a>
+
+        <a
+          href="/gym-wear-printing-northampton"
+          style={{ color: "#fff", textDecoration: "none" }}
+        >
+          Gym Wear Printing Northampton
+        </a>
+
+        <a
+          href="/dtf-printing-northamptonshire"
+          style={{ color: "#fff", textDecoration: "none" }}
+        >
+          DTF Printing Northamptonshire
+        </a>
+
+        <a
+          href="/t-shirt-printing-corby"
+          style={{ color: "#fff", textDecoration: "none" }}
+        >
+          T-Shirt Printing Corby
+        </a>
+
+        <a
+          href="/workwear-printing-corby"
+          style={{ color: "#fff", textDecoration: "none" }}
+        >
+          Workwear Printing Corby
+        </a>
+
+        <a
+          href="/t-shirt-printing-wellingborough"
+          style={{ color: "#fff", textDecoration: "none" }}
+        >
+          T-Shirt Printing Wellingborough
+        </a>
+
+        <a
+          href="/workwear-printing-wellingborough"
+          style={{ color: "#fff", textDecoration: "none" }}
+        >
+          Workwear Printing Wellingborough
+        </a>
+
+        <a
+          href="/church-event-hoodie-printing"
+          style={{ color: "#fff", textDecoration: "none" }}
+        >
+          Church Event Hoodie Printing
+        </a>
+      </div>
+    </div>
+  </div>
+
+  {/* SOCIALS */}
+
+  <div
     style={{
-      color: "#fff",
-      fontSize: "30px",
-      transition: "0.3s",
+      display: "flex",
+      justifyContent: "center",
+      gap: "25px",
+      marginTop: "50px",
+      marginBottom: "20px",
     }}
   >
-    <FaFacebook />
-  </a>
+    <a
+      href="https://www.facebook.com/Kettpress"
+      target="_blank"
+      rel="noreferrer"
+      style={{
+        color: "#fff",
+        fontSize: "30px",
+      }}
+    >
+      <FaFacebook />
+    </a>
 
-  <a
-    href="https://www.instagram.com/kettpressco/"
-    target="_blank"
-    rel="noreferrer"
-    aria-label="Instagram"
+    <a
+      href="https://www.instagram.com/kettpressco/"
+      target="_blank"
+      rel="noreferrer"
+      style={{
+        color: "#fff",
+        fontSize: "30px",
+      }}
+    >
+      <FaInstagram />
+    </a>
+  </div>
+
+  <p
     style={{
-      color: "#fff",
-      fontSize: "30px",
-      transition: "0.3s",
+      textAlign: "center",
+      maxWidth: "900px",
+      margin: "0 auto 20px",
+      color: "#bbb",
+      lineHeight: "1.7",
     }}
   >
-    <FaInstagram />
-  </a>
-</div>
+    Kett Press Co provides custom T-shirt printing, workwear printing,
+    branded clothing, logo printing and hoodie printing throughout
+    Kettering, Northampton, Corby, Wellingborough and Northamptonshire.
+  </p>
 
-<p
-  style={{
-    maxWidth: "700px",
-    margin: "0 auto 20px",
-    color: "#bbb",
-    lineHeight: "1.6",
-  }}
->
-  Follow Kett Press Co on Facebook and Instagram to see our latest
-  custom T-shirt printing, workwear printing, hoodie printing and
-  customer projects across Kettering, Wellingborough, Corby and
-  Northamptonshire.
-</p>
-
-  <p>
-    © 2026 Kett Press Co | Custom Printing | Workwear
+  <p
+    style={{
+      textAlign: "center",
+      color: "#888",
+      borderTop: "1px solid #222",
+      paddingTop: "20px",
+      marginTop: "20px",
+    }}
+  >
+    © 2026 Kett Press Co | Custom Printing & Workwear | Northamptonshire
   </p>
 </footer>
     </div>
   );
 }
-
-const navLink = {
-  color: "white",
-  textDecoration: "none",
-  fontWeight: "bold",
-};
-
-const heroButton = {
-  background: "#D62828",
-  color: "white",
-  border: "none",
-  padding: "18px 35px",
-  borderRadius: "12px",
-  cursor: "pointer",
-  fontSize: "18px",
-  fontWeight: "bold",
-};
-
-const whatsappButton = {
-  background: "#25D366",
-  color: "white",
-  border: "none",
-  padding: "18px 35px",
-  borderRadius: "12px",
-  cursor: "pointer",
-  fontSize: "18px",
-  fontWeight: "bold",
-};
-
-const inputStyle = {
-  padding: "16px",
-  borderRadius: "12px",
-  border: "1px solid #ddd",
-  fontSize: "16px",
-  outline: "none",
-};
