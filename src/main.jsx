@@ -1,6 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
 
 import "./index.css";
 import App from "./App.jsx";
@@ -19,10 +20,12 @@ import WorkwearPrintingWellingborough from "./pages/WorkwearPrintingWellingborou
 import WorkwearPrintingCorby from "./pages/WorkwearPrintingCorby.jsx";
 import ChurchEventHoodies from "./pages/ChurchEventHoodies.jsx";
 import ConstructionWorkwearKettering from "./pages/ConstructionWorkwearKettering.jsx";
+import CustomTShirtPrintingKettering from "./pages/CustomTshirtPrintingKettering.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <BrowserRouter>
+    <HelmetProvider>
+      <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />} />
         
@@ -82,8 +85,13 @@ createRoot(document.getElementById("root")).render(
   path="/construction-workwear-kettering"
   element={<ConstructionWorkwearKettering />}
 />
-</Routes>
-      
-    </BrowserRouter>
+<Route
+  path="/custom-t-shirt-printing-kettering"
+  element={<CustomTShirtPrintingKettering />}
+/>
+
+      </Routes>
+      </BrowserRouter>
+    </HelmetProvider>
   </StrictMode>
 );
