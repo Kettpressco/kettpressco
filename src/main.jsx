@@ -6,6 +6,7 @@ import { HelmetProvider } from "react-helmet-async";
 import "./index.css";
 import App from "./App.jsx";
 
+import PrintingMethodsForCustomClothingKettering from "./pages/printingmethodsforcustomclothingkettering";
 import AreasWeCover from "./pages/AreasWeCover.jsx";
 import TshirtPrintingKettering from "./pages/TShirtPrintingKettering.jsx";
 import WorkwearPrintingKettering from "./pages/WorkwearPrintingKettering.jsx";
