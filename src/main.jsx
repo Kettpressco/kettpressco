@@ -29,7 +29,7 @@ createRoot(document.getElementById("root")).render(
       <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />} />
-        
+
          <Route
           path="/custom-t-shirt-printing-northampton"
           element={<CustomTshirtPrintingNorthampton />}
@@ -99,6 +99,10 @@ createRoot(document.getElementById("root")).render(
 <Route
   path="/custom-t-shirt-printing-northampton"
   element={<CustomTshirtPrintingNorthampton />}
+/>
+<Route
+  path="/printing-methods-for-custom-clothing-kettering"
+  element={<PrintingMethodsForCustomClothingKettering />}
 />
 
       </Routes>

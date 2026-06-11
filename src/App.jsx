@@ -1551,6 +1551,12 @@ export default function App() {
         >
           Church Event Hoodie Printing
         </a>
+        <a
+  href="/printing-methods-for-custom-clothing-kettering"
+  style={{ color: "#fff", textDecoration: "none" }}
+>
+  Printing Methods Guide
+</a>
       </div>
     </div>
   </div>
