@@ -1393,7 +1393,7 @@ export default function App() {
   >
     <strong style={{ color: "#fff" }}>Email</strong>
     <br />
-    kettpressco@gmail.com
+    info@kettpressco.com
   </p>
 </div>
     {/* SERVICES */}
