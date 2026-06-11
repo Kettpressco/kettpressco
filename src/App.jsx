@@ -1350,7 +1350,52 @@ export default function App() {
         events across Northamptonshire.
       </p>
     </div>
+{/* CONTACT */}
 
+<div>
+  <h3 style={{ color: "#fff", marginBottom: "20px" }}>
+    Contact Us
+  </h3>
+
+  <p
+    style={{
+      lineHeight: "1.8",
+      color: "#bbb",
+    }}
+  >
+    <strong style={{ color: "#fff" }}>Address</strong>
+    <br />
+    10 Market Street
+    <br />
+    The Shops at the Yards
+    <br />
+    Kettering
+    <br />
+    NN16 0AH
+  </p>
+
+  <p
+    style={{
+      lineHeight: "1.8",
+      color: "#bbb",
+    }}
+  >
+    <strong style={{ color: "#fff" }}>Phone</strong>
+    <br />
+    07770 118148
+  </p>
+
+  <p
+    style={{
+      lineHeight: "1.8",
+      color: "#bbb",
+    }}
+  >
+    <strong style={{ color: "#fff" }}>Email</strong>
+    <br />
+    kettpressco@gmail.com
+  </p>
+</div>
     {/* SERVICES */}
 
     <div>
@@ -1415,6 +1460,7 @@ export default function App() {
           Custom T-Shirt Printing Kettering
         </a>
     
+
         <a
           href="/custom-t-shirt-printing-northampton"
           style={{ color: "#fff", textDecoration: "none" }}
@@ -1554,11 +1600,19 @@ export default function App() {
       lineHeight: "1.7",
     }}
   >
-    Kett Press Co provides custom T-shirt printing,
-    workwear printing, branded clothing, logo printing
-    and hoodie printing throughout Kettering,
-    Northampton, Corby, Wellingborough and
-    Northamptonshire.
+    Kett Press Co is based at 10 Market Street, The Shops at
+
+  the Yards, Kettering, NN16 0AH. We provide custom
+
+  T-shirt printing, workwear printing, hoodie printing,
+
+  DTF transfers, logo printing and branded clothing for
+
+  businesses, schools, churches and events throughout
+
+  Kettering, Northampton, Corby, Wellingborough and
+
+  Northamptonshire.
   </p>
 
   <p
