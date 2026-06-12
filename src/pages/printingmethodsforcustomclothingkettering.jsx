@@ -70,7 +70,7 @@ export default function PrintingMethodsForCustomClothingKettering() {
 
           <div>
             <img
-              src="/images/polo.jpg"
+              src="/images/Tshirt10.jpg"
               alt="Custom printed polo shirts by Kett Press Co"
               style={{
                 width: "100%",
