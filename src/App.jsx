@@ -1563,6 +1563,12 @@ export default function App() {
 >
   T-Shirt Printing Cost Guide
 </a>
+<a
+  href="/dtf-vs-vinyl-printing"
+  style={{ color: "#fff", textDecoration: "none" }}
+>
+  DTF vs Vinyl Printing
+</a>
       </div>
     </div>
   </div>
