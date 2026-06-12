@@ -122,7 +122,7 @@ export default function PrintingMethodsForCustomClothingKettering() {
           </div>
 
           <img
-            src="/images/poloTshirt.jpg"
+            src="/images/PoloTshirt.jpg"
             alt="Branded workwear polo shirts"
             style={{
               width: "100%",
