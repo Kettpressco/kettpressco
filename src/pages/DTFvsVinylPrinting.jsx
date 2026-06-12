@@ -193,7 +193,7 @@ const localBusinessSchema = {
           }}
         >
           <img
-            src="/images/polo.jpg"
+            src="/images/Polo.jpg"
             alt="Branded polo shirts"
             style={{
               width: "100%",
@@ -202,7 +202,7 @@ const localBusinessSchema = {
           />
 
           <img
-            src="/images/polo1.jpg"
+            src="/images/Polo1.jpg"
             alt="Custom workwear printing"
             style={{
               width: "100%",
