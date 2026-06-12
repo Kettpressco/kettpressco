@@ -12,7 +12,7 @@ export default function ConstructionWorkwearKettring() {
 
   useEffect(() => {
     document.title =
-      "Construction Workwear Printing Kettering | Custom Printed Workwear | Kett Press Co";
+      "Construction Workwear Printing Kettering | Branded Hi-Vis & Uniforms| Kett Press Co";
 
     const meta = document.createElement("meta");
     meta.name = "description";
@@ -49,7 +49,7 @@ export default function ConstructionWorkwearKettring() {
           marginBottom: "20px",
         }}
       >
-        Workwear Printing in Corby
+        Construction Workwear Printing in Kettering 
       </h1>
 
       <p
@@ -60,9 +60,8 @@ export default function ConstructionWorkwearKettring() {
           lineHeight: "1.7",
         }}
       >
-        Premium custom Workwear printing for businesses,
-        events, gyms, schools and organisations across
-        Northampton.
+        Premium custom Construction Workwear printing for your business
+        and organisations across Northampton.
       </p>
 
       <div
@@ -113,9 +112,9 @@ export default function ConstructionWorkwearKettring() {
     {/* PAGE CONTENT */}
 
     <p>
-     Kett Press Co provides professional workwear printing in Corby for businesses, contractors, tradespeople and organisations looking for high-quality branded clothing. We supply printed workwear, uniforms, polo shirts, hoodies, sweatshirts and hi-vis clothing designed to help businesses create a professional image.
-Our custom workwear printing services are ideal for construction companies, electricians, plumbers, landscapers, retailers, hospitality businesses and local organisations throughout Corby and Northamptonshire. Every garment is printed with durable, professional-quality branding to ensure your team looks consistent and professional.
-We proudly serve businesses across Corby, Weldon, Great Oakley, Stanion, Rockingham, Kettering and the surrounding Northamptonshire area. Contact Kett Press Co today for a free quote on custom workwear printing in Corby.
+     Kett Press Co provides professional Construction workwear printing in Kettering for businesses, contractors, tradespeople and organisations looking for high-quality branded clothing. We supply printed workwear, uniforms, polo shirts, hoodies, sweatshirts and hi-vis clothing designed to help businesses create a professional image.
+Our custom workwear printing services are ideal for construction companies, electricians, plumbers and landscapers,throughout Kettering and Northamptonshire. Every garment is printed with durable, professional-quality branding to ensure your team looks consistent and professional.
+We proudly serve businesses across Kettering, Weldon, Great Oakley, Stanion, Rockingham, Kettering and the surrounding Northamptonshire area. Contact Kett Press Co today for a free quote on custom workwear printing in Kettering.
     </p>
 
 <h2
@@ -138,7 +137,7 @@ We proudly serve businesses across Corby, Weldon, Great Oakley, Stanion, Rocking
   }}
 >
   <div style={serviceCard}>
-    <h3>Custom Business T-Shirts</h3>
+    <h3>Custom Construction T-Shirts</h3>
     <p>
       Professional branded clothing for businesses, teams
       and organisations.
@@ -223,7 +222,7 @@ We proudly serve businesses across Corby, Weldon, Great Oakley, Stanion, Rocking
       lineHeight: "1.8",
     }}
   >
-    Looking for professional Workwear printing in Corby?
+    Looking for professional Workwear printing in Kettering?
     Contact Kett Press Co today for a fast, no-obligation quote.
   </p>
   <a href="tel:07770118148">

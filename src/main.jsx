@@ -23,6 +23,7 @@ import ChurchEventHoodies from "./pages/ChurchEventHoodies.jsx";
 import ConstructionWorkwearKettering from "./pages/ConstructionWorkwearKettering.jsx";
 import CustomTShirtPrintingKettering from "./pages/CustomTshirtPrintingKettering.jsx";
 import CustomTshirtPrintingNorthampton from "./pages/CustomTshirtPrintingNorthampton.jsx";
+import TShirtPrintingCostGuide from "./pages/TShirtPrintingCostGuide";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -106,6 +107,10 @@ createRoot(document.getElementById("root")).render(
   element={<PrintingMethodsForCustomClothingKettering />}
 />
 
+<Route
+  path="/t-shirt-printing-cost-guide"
+  element={<TShirtPrintingCostGuide />}
+/>
       </Routes>
       </BrowserRouter>
     </HelmetProvider>
