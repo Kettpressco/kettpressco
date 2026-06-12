@@ -317,14 +317,60 @@ export default function TShirtPrintingCostGuide() {
             Northamptonshire.
           </p>
 
-          <p
-            style={{
-              fontWeight: "600",
-              fontSize: "20px",
-            }}
-          >
-            Contact us today for a free quotation and expert advice.
-          </p>
+        <div
+  style={{
+    marginTop: "30px",
+    lineHeight: "2",
+    fontSize: "18px",
+  }}
+>
+  <p>
+    📞 <strong>Call:</strong> 07770 118148
+  </p>
+
+  <p>
+    ✉️ <strong>Email:</strong> info@kettpressco.com
+  </p>
+
+  <p>
+    💬{" "}
+    <a
+      href="https://wa.me/447770118148"
+      target="_blank"
+      rel="noreferrer"
+      style={{
+        color: "#25D366",
+        textDecoration: "none",
+        fontWeight: "bold",
+      }}
+    >
+      Message Us On WhatsApp
+    </a>
+  </p>
+
+  <p>
+    📍 <strong>Visit Us:</strong> 10 Market Street, The Shops at the
+    Yards, Kettering, NN16 0AH
+  </p>
+</div>
+<a
+  href="https://wa.me/447770118148"
+  target="_blank"
+  rel="noreferrer"
+  style={{
+    display: "inline-block",
+    marginTop: "20px",
+    background: "#25D366",
+    color: "#fff",
+    padding: "15px 30px",
+    borderRadius: "10px",
+    textDecoration: "none",
+    fontWeight: "bold",
+    fontSize: "18px",
+  }}
+>
+  Get A Free Quote On WhatsApp
+</a>
         </div>
       </section>
     </div>
