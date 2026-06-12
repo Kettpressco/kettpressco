@@ -127,7 +127,7 @@ export default function TShirtPrintingCostGuide() {
           }}
         >
           <img
-            src="/images/image1.jpg"
+            src="/images/Tshirt9.jpg"
             alt="Printed workwear and branded clothing"
             style={{
               width: "100%",
@@ -178,7 +178,7 @@ export default function TShirtPrintingCostGuide() {
                   Printed T-Shirts
                 </td>
                 <td style={{ padding: "15px", borderBottom: "1px solid #ddd" }}>
-                  £10 - £20+
+                  £7.99 - £20+
                 </td>
               </tr>
 
@@ -187,7 +187,7 @@ export default function TShirtPrintingCostGuide() {
                   Branded Polo Shirts
                 </td>
                 <td style={{ padding: "15px", borderBottom: "1px solid #ddd" }}>
-                  £15 - £30+
+                  £12 - £25+
                 </td>
               </tr>
 
@@ -196,7 +196,7 @@ export default function TShirtPrintingCostGuide() {
                   Custom Hoodies
                 </td>
                 <td style={{ padding: "15px", borderBottom: "1px solid #ddd" }}>
-                  £20 - £45+
+                  £15 - £35+
                 </td>
               </tr>
 
@@ -205,7 +205,7 @@ export default function TShirtPrintingCostGuide() {
                   Workwear Packages
                 </td>
                 <td style={{ padding: "15px" }}>
-                  Varies by garment and branding
+                  Varies by garment, branding, quantity and bundles 
                 </td>
               </tr>
             </tbody>
