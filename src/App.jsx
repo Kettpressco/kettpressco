@@ -1557,6 +1557,12 @@ export default function App() {
 >
   Printing Methods Guide
 </a>
+<a
+  href="/t-shirt-printing-cost-guide"
+  style={{ color: "#fff", textDecoration: "none" }}
+>
+  T-Shirt Printing Cost Guide
+</a>
       </div>
     </div>
   </div>
