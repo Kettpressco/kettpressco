@@ -24,7 +24,7 @@ import ConstructionWorkwearKettering from "./pages/ConstructionWorkwearKettering
 import CustomTShirtPrintingKettering from "./pages/CustomTshirtPrintingKettering.jsx";
 import CustomTshirtPrintingNorthampton from "./pages/CustomTshirtPrintingNorthampton.jsx";
 import TShirtPrintingCostGuide from "./pages/TShirtPrintingCostGuide";
-
+import DTFvsVinylPrinting from "./pages/DTFvsVinylPrinting";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <HelmetProvider>
@@ -110,6 +110,10 @@ createRoot(document.getElementById("root")).render(
 <Route
   path="/t-shirt-printing-cost-guide"
   element={<TShirtPrintingCostGuide />}
+/>
+<Route
+  path="/dtf-vs-vinyl-printing"
+  element={<DTFvsVinylPrinting />}
 />
       </Routes>
       </BrowserRouter>
