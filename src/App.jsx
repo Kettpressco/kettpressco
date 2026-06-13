@@ -17,13 +17,13 @@ const services = [
     icon: "🦺",
     title: "Workwear Printing",
     text: "Professional branded uniforms and durable workwear solutions.",
-    image: "/images/workwear.jpg",
+    image: "/images/PoloTshirt.jpg",
   },
   {
     icon: "🎨",
     title: "Logo Printing",
     text: "Sharp logo printing and custom branding for workwear, hoodies and uniforms.",
-    image: "/images/tshirt3.jpg",
+    image: "/images/Tshirt10.jpg",
   },
 ];
 export default function App() {
@@ -84,7 +84,7 @@ export default function App() {
           }}
         >
           <img
-  src="/images/logo.jpg"
+  src="/images/Polo.jpg"
   alt="Kett Press Co Logo"
   style={{
     width: "60px",
