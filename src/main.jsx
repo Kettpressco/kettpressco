@@ -26,7 +26,7 @@ import CustomTshirtPrintingNorthampton from "./pages/CustomTshirtPrintingNortham
 import TShirtPrintingCostGuide from "./pages/TShirtPrintingCostGuide";
 import DTFvsVinylPrinting from "./pages/DTFvsVinylPrinting";
 import TshirtPrintingKetteringPage from "./pages/TshirtPrintingKetteringPage";
-
+import WorkwearPrintingKetteringPage from "./pages/WorkwearPrintingKetteringPage";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -38,6 +38,10 @@ createRoot(document.getElementById("root")).render(
 <Route
   path="/tshirt-printing-kettering"
   element={<TshirtPrintingKetteringPage />}
+/>
+<Route
+  path="/workwear-printing-kettering"
+  element={<WorkwearPrintingKetteringPage />}
 />
          <Route
           path="/custom-t-shirt-printing-northampton"
