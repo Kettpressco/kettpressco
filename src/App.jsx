@@ -84,7 +84,7 @@ export default function App() {
           }}
         >
           <img
-  src="/images/Polo.jpg"
+  src="/images/logo.jpg"
   alt="Kett Press Co Logo"
   style={{
     width: "60px",
