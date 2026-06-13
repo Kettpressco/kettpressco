@@ -116,6 +116,12 @@ export default function App() {
           <a href="#services" style={navLink}>
             Services
           </a>
+          <a
+  href="/tshirt-printing-kettering"
+  style={navLinkStyle}
+>
+  T-Shirt Printing
+</a>
 
           <a href="#portfolio" style={navLink}>
             Portfolio
