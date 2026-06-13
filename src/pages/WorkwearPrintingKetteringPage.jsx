@@ -38,21 +38,21 @@ export default function WorkwearPrintingKetteringPage() {
           schools, clubs and organisations across Kettering and Northamptonshire.
         </p>
 
-        <Link
-          to="/contact"
-          style={{
-            display: "inline-block",
-            marginTop: "25px",
-            background: "#D62828",
-            color: "#fff",
-            padding: "14px 28px",
-            borderRadius: "8px",
-            textDecoration: "none",
-            fontWeight: "bold",
-          }}
-        >
-          Get A Free Quote
-        </Link>
+        <a href="/contact">
+  <button
+    style={{
+      background: "#D62828",
+      color: "white",
+      border: "none",
+      padding: "12px 20px",
+      borderRadius: "10px",
+      cursor: "pointer",
+      fontWeight: "bold",
+    }}
+  >
+    Get Quote
+  </button>
+</a>
       </section>
 
       <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "50px 20px" }}>
