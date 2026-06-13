@@ -150,20 +150,21 @@ export default function WorkwearPrintingKetteringPage() {
           <p>📞 07442514098</p>
           <p>📍 Kettering, Northamptonshire</p>
 
-          <Link
-            to="/contact"
-            style={{
-              display: "inline-block",
-              marginTop: "15px",
-              background: "#D62828",
-              color: "#fff",
-              padding: "12px 24px",
-              borderRadius: "8px",
-              textDecoration: "none",
-            }}
-          >
-            Request A Quote
-          </Link>
+       <Link
+  to="/contact"
+  style={{
+    display: "inline-block",
+    marginTop: "20px",
+    background: "#D62828",
+    color: "#fff",
+    padding: "12px 24px",
+    borderRadius: "8px",
+    textDecoration: "none",
+    fontWeight: "bold",
+  }}
+>
+  Get A Free Workwear Quote
+</Link>
         </div>
 
         {/* MAP */}
@@ -179,7 +180,12 @@ export default function WorkwearPrintingKetteringPage() {
             loading="lazy"
           ></iframe>
         </div>
-
+<div>
+  <h3>Related Services</h3>
+  <Link to="/tshirt-printing-kettering">
+    T-Shirt Printing Kettering
+  </Link>
+</div>
       </div>
     </div>
   );

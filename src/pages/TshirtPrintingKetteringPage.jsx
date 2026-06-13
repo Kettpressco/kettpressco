@@ -179,7 +179,7 @@ export default function TshirtPrintingKetteringPage() {
           </p>
 
           <p>
-            📞 07459 899431
+            📞 07442514098
           </p>
 
           <p>
@@ -218,7 +218,12 @@ export default function TshirtPrintingKetteringPage() {
             loading="lazy"
           ></iframe>
         </div>
-
+<div>
+  <h3>Related Services</h3>
+  <Link to="/workwear-printing-kettering">
+    Workwear Printing Kettering
+  </Link>
+</div>
       </div>
     </div>
   );

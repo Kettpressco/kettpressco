@@ -5,7 +5,7 @@ import { HelmetProvider } from "react-helmet-async";
 
 import "./index.css";
 import App from "./App.jsx";
-
+import ContactPage from "./pages/ContactPage";
 import PrintingMethodsForCustomClothingKettering from "./pages/printingmethodsforcustomclothingkettering";
 import AreasWeCover from "./pages/AreasWeCover.jsx";
 import TshirtPrintingKettering from "./pages/TShirtPrintingKettering.jsx";
@@ -34,7 +34,7 @@ createRoot(document.getElementById("root")).render(
       <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />} />
-<Route path="/contact" element={<ContactPage />} />
+
 <Route
   path="/tshirt-printing-kettering"
   element={<TshirtPrintingKetteringPage />}
@@ -126,6 +126,10 @@ createRoot(document.getElementById("root")).render(
   path="/dtf-vs-vinyl-printing"
   element={<DTFvsVinylPrinting />}
 />
+
+
+
+<Route path="/contact" element={<ContactPage />} />
       </Routes>
       </BrowserRouter>
     </HelmetProvider>
