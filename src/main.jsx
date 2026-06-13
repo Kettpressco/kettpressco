@@ -34,7 +34,7 @@ createRoot(document.getElementById("root")).render(
       <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />} />
-
+<Route path="/contact" element={<ContactPage />} />
 <Route
   path="/tshirt-printing-kettering"
   element={<TshirtPrintingKetteringPage />}
