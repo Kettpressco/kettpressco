@@ -118,7 +118,7 @@ export default function App() {
           </a>
           <a
   href="/tshirt-printing-kettering"
-  style={navLinkStyle}
+  style={navLink}
 >
   T-Shirt Printing
 </a>
