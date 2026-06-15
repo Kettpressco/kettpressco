@@ -196,19 +196,19 @@ export default function HowLongDoesDTFPrintingLast() {
           }}
         >
           <img
-            src="/images/work1.jpg"
+            src="/images/Tshirt10.jpg"
             alt="DTF Print"
             style={{ width: "100%", borderRadius: "12px" }}
           />
 
           <img
-            src="/images/work2.jpg"
+            src="/images/Cwork.jpg"
             alt="DTF Print"
             style={{ width: "100%", borderRadius: "12px" }}
           />
 
           <img
-            src="/images/work3.jpg"
+            src="/images/PoloTshirt.jpg"
             alt="DTF Print"
             style={{ width: "100%", borderRadius: "12px" }}
           />
@@ -230,9 +230,9 @@ export default function HowLongDoesDTFPrintingLast() {
             <br />
             Kettering, Northamptonshire
             <br />
-            Email: kettpressco@gmail.com
+            Email: info@kettpressco.com
             <br />
-            Phone: 07547 947457
+            Phone: 075442 514098
           </p>
 
           <a
