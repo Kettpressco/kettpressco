@@ -28,6 +28,7 @@ import DTFvsVinylPrinting from "./pages/DTFvsVinylPrinting";
 import TshirtPrintingKetteringPage from "./pages/TshirtPrintingKetteringPage";
 import WorkwearPrintingKetteringPage from "./pages/WorkwearPrintingKetteringPage";
 import BestWorkwearForTradespeople from "./pages/BestWorkwearForTradespeople";
+import HowLongDoesDTFPrintingLast from "./pages/HowLongDoesDTFPrintingLast";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -131,7 +132,10 @@ createRoot(document.getElementById("root")).render(
   path="/best-workwear-for-tradespeople"
   element={<BestWorkwearForTradespeople />}
 />
-
+<Route
+  path="/how-long-does-dtf-printing-last"
+  element={<HowLongDoesDTFPrintingLast />}
+/>
 
 <Route path="/contact" element={<ContactPage />} />
       </Routes>

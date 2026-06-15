@@ -1584,6 +1584,13 @@ export default function App() {
 >
   Best Workwear For Tradespeople
 </a>
+
+<a
+  href="/how-long-does-dtf-printing-last"
+  style={{ color: "#fff", textDecoration: "none" }}
+>
+  How Long Does DTF Printing Last?
+</a>
       </div>
     </div>
   </div>
