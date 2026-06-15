@@ -27,6 +27,7 @@ import TShirtPrintingCostGuide from "./pages/TShirtPrintingCostGuide";
 import DTFvsVinylPrinting from "./pages/DTFvsVinylPrinting";
 import TshirtPrintingKetteringPage from "./pages/TshirtPrintingKetteringPage";
 import WorkwearPrintingKetteringPage from "./pages/WorkwearPrintingKetteringPage";
+import BestWorkwearForTradespeople from "./pages/BestWorkwearForTradespeople";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -126,7 +127,10 @@ createRoot(document.getElementById("root")).render(
   path="/dtf-vs-vinyl-printing"
   element={<DTFvsVinylPrinting />}
 />
-
+<Route
+  path="/best-workwear-for-tradespeople"
+  element={<BestWorkwearForTradespeople />}
+/>
 
 
 <Route path="/contact" element={<ContactPage />} />
