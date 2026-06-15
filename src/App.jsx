@@ -1591,6 +1591,12 @@ export default function App() {
 >
   How Long Does DTF Printing Last?
 </a>
+<a
+  href="/custom-hoodies-for-schools"
+  style={{ color: "#fff", textDecoration: "none" }}
+>
+  Custom Hoodies For Schools
+</a>
       </div>
     </div>
   </div>

@@ -29,6 +29,7 @@ import TshirtPrintingKetteringPage from "./pages/TshirtPrintingKetteringPage";
 import WorkwearPrintingKetteringPage from "./pages/WorkwearPrintingKetteringPage";
 import BestWorkwearForTradespeople from "./pages/BestWorkwearForTradespeople";
 import HowLongDoesDTFPrintingLast from "./pages/HowLongDoesDTFPrintingLast";
+import CustomHoodiesForSchools from "./pages/CustomHoodiesForSchools";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -135,6 +136,10 @@ createRoot(document.getElementById("root")).render(
 <Route
   path="/how-long-does-dtf-printing-last"
   element={<HowLongDoesDTFPrintingLast />}
+/>
+<Route
+  path="/custom-hoodies-for-schools"
+  element={<CustomHoodiesForSchools />}
 />
 
 <Route path="/contact" element={<ContactPage />} />
