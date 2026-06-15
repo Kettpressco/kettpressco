@@ -184,13 +184,13 @@ export default function CustomHoodiesForSchools() {
           />
 
           <img
-            src="/images/hoodie1.jpg"
+            src="/images/event1.jpg"
             alt="Hoodie Style"
             style={{ width: "100%", borderRadius: "12px" }}
           />
 
           <img
-            src="/images/hoodie2.jpg"
+            src="/images/event2.jpg"
             alt="Hoodie Style"
             style={{ width: "100%", borderRadius: "12px" }}
           />
