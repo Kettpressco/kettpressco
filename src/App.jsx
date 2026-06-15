@@ -1578,6 +1578,12 @@ export default function App() {
 >
   DTF vs Vinyl Printing
 </a>
+<a
+  href="/best-workwear-for-tradespeople"
+  style={{ color: "#fff", textDecoration: "none" }}
+>
+  Best Workwear For Tradespeople
+</a>
       </div>
     </div>
   </div>
