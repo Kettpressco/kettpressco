@@ -30,6 +30,7 @@ import WorkwearPrintingKetteringPage from "./pages/WorkwearPrintingKetteringPage
 import BestWorkwearForTradespeople from "./pages/BestWorkwearForTradespeople";
 import HowLongDoesDTFPrintingLast from "./pages/HowLongDoesDTFPrintingLast";
 import CustomHoodiesForSchools from "./pages/CustomHoodiesForSchools";
+import ChurchEventHoodiePrinting from "./pages/ChurchEventHoodiePrinting";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -142,6 +143,10 @@ createRoot(document.getElementById("root")).render(
   element={<CustomHoodiesForSchools />}
 />
 
+<Route
+  path="/church-event-hoodie-printing"
+  element={<ChurchEventHoodiePrinting />}
+/>
 <Route path="/contact" element={<ContactPage />} />
       </Routes>
       </BrowserRouter>

@@ -1597,6 +1597,13 @@ export default function App() {
 >
   Custom Hoodies For Schools
 </a>
+
+<a
+  href="/church-event-hoodie-printing"
+  style={{ color: "#fff", textDecoration: "none" }}
+>
+  Church Event Hoodie Printing
+</a>
       </div>
     </div>
   </div>
