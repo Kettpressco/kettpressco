@@ -17,10 +17,10 @@ export default function QuoteCalculator() {
         basePrice = 12;
         break;
       case "Hoodie":
-        basePrice = 22;
+        basePrice = 20;
         break;
       case "Sweatshirt":
-        basePrice = 18;
+        basePrice = 17;
         break;
       case "Hi-Vis":
         basePrice = 15;
@@ -36,10 +36,10 @@ export default function QuoteCalculator() {
         printCost = 3;
         break;
       case "Front + Back":
-        printCost = 5;
+        printCost = 4;
         break;
       case "Front + Back + Sleeve":
-        printCost = 7;
+        printCost = 6;
         break;
       default:
         printCost = 3;
@@ -219,7 +219,7 @@ export default function QuoteCalculator() {
           </p>
 
           <p>
-            <strong>Email:</strong> kettpressco@gmail.com
+            <strong>Email:</strong> info@kettpressco.com
           </p>
 
           <p>
