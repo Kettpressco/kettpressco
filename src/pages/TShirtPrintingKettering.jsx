@@ -16,7 +16,7 @@ export default function TshirtPrintingKettering() {
     const meta = document.createElement("meta");
     meta.name = "description";
     meta.content =
-      "Professional T-Shirt Printing in Kettering. Custom printed T-shirts for businesses, events, gyms and organisations across Northamptonshire.";
+      "Based in Kettering, Northamptonshire, providing custom clothing printing for businesses, schools, events and organisations.";
     document.head.appendChild(meta);
 
     return () => {
@@ -223,7 +223,7 @@ export default function TshirtPrintingKettering() {
       lineHeight: "1.8",
     }}
   >
-    Looking for professional T-shirt printing in Kettering?
+    Kett Press Co | T-Shirt Printing Kettering | Workwear Printing Northamptonshire
     Contact Kett Press Co today for a fast, no-obligation quote.
   </p>
   <a href="tel:07770118148">

@@ -11,12 +11,12 @@ export default function TshirtPrintingNorthampton() {
 
   useEffect(() => {
     document.title =
-      "T-Shirt Printing Kettering | Custom Printed T-Shirts | Kett Press Co";
+      "T-Shirt Printing Northampton | DTF Printing & Personalised Clothing | Kett Press Co";
 
     const meta = document.createElement("meta");
     meta.name = "description";
     meta.content =
-      "Professional T-Shirt Printing in Kettering. Custom printed T-shirts for businesses, events, gyms and organisations across Northamptonshire.";
+      "Professional T-Shirt Printing in Northampton. Custom printed T-shirts for businesses, events, gyms and organisations across Northamptonshire.";
     document.head.appendChild(meta);
 
     return () => {
@@ -48,7 +48,7 @@ export default function TshirtPrintingNorthampton() {
           marginBottom: "20px",
         }}
       >
-        T-Shirt Printing in Kettering
+        T-Shirt Printing in Northampton
       </h1>
 
       <p
