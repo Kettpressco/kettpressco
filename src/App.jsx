@@ -130,29 +130,25 @@ export default function App() {
             Portfolio
           </a>
 
-          <a href="#quote" style={navLink}>
-            Quote
-          </a>
+         <a href="/quote-calculator">Instant Quote</a>
 
           <a href="#contact" style={navLink}>
             Contact
           </a>
 
-          <a href="#quote">
-            <button
-              style={{
-                background: "#D62828",
-                color: "white",
-                border: "none",
-                padding: "12px 20px",
-                borderRadius: "10px",
-                cursor: "pointer",
-                fontWeight: "bold",
-              }}
-            >
-              Get Quote
-            </button>
-          </a>
+          <a
+  href="/quote-calculator"
+  style={{
+    background: "#000",
+    color: "#fff",
+    padding: "14px 28px",
+    borderRadius: "8px",
+    textDecoration: "none",
+    marginLeft: "10px",
+  }}
+>
+  Instant Quote
+</a>
         </div>
       </nav>
 
