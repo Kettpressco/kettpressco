@@ -1586,7 +1586,12 @@ export default function App() {
 >
   Hi-Vis Workwear Printing Kettering
 </a>
-
+<a
+  href="/branded-workwear-printing-northamptonshire"
+  style={{ color: "#fff", textDecoration: "none" }}
+>
+  Branded Workwear Printing Northamptonshire
+</a>
 
 <a
   href="/how-long-does-dtf-printing-last"

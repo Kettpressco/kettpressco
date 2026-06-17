@@ -33,6 +33,7 @@ import CustomHoodiesForSchools from "./pages/CustomHoodiesForSchools";
 import ChurchEventHoodiePrinting from "./pages/ChurchEventHoodiePrinting";
 import QuoteCalculator from "./pages/QuoteCalculator";
 import HiVisWorkwearPrintingKettering from "./pages/HiVisWorkwearPrintingKettering";
+import BrandedWorkwearPrintingNorthamptonshire from "./pages/BrandedWorkwearPrintingNorthamptonshire";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
