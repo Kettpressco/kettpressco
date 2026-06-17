@@ -38,18 +38,21 @@ export default function BrandedWorkwearPrintingNorthamptonshire() {
         style={{
           background: "#111",
           color: "#fff",
-          padding: "90px 20px",
+         padding: "70px 20px 80px",
           textAlign: "center",
         }}
       >
         <h1
-          style={{
-            fontSize: "clamp(2rem, 5vw, 3.5rem)",
-            marginBottom: "20px",
-          }}
-        >
-          Branded Workwear Printing Northamptonshire
-        </h1>
+  style={{
+    fontSize: "clamp(1.8rem, 6vw, 3.5rem)",
+    lineHeight: "1.2",
+    marginBottom: "25px",
+    padding: "0 10px",
+    wordBreak: "normal",
+  }}
+>
+  Branded Workwear Printing Northamptonshire
+</h1>
 
         <p
           style={{
@@ -74,7 +77,7 @@ export default function BrandedWorkwearPrintingNorthamptonshire() {
       <section style={sectionStyle}>
         <div style={cardStyle}>
           <img
-            src="/images/work1.jpg"
+            src="/images/PoloTshirt.jpg"
             alt="Branded Workwear Printing Northamptonshire"
             style={{
               width: "100%",
