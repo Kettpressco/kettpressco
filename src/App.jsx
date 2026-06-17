@@ -1580,6 +1580,12 @@ export default function App() {
 >
   Best Workwear For Tradespeople
 </a>
+<a
+  href="/hi-vis-workwear-printing-kettering"
+  style={{ color: "#fff", textDecoration: "none" }}
+>
+  Hi-Vis Workwear Printing Kettering
+</a>
 
 <a
   href="/how-long-does-dtf-printing-last"

@@ -32,6 +32,7 @@ import HowLongDoesDTFPrintingLast from "./pages/HowLongDoesDTFPrintingLast";
 import CustomHoodiesForSchools from "./pages/CustomHoodiesForSchools";
 import ChurchEventHoodiePrinting from "./pages/ChurchEventHoodiePrinting";
 import QuoteCalculator from "./pages/QuoteCalculator";
+import HiVisWorkwearPrintingKettering from "./pages/HiVisWorkwearPrintingKettering";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -147,6 +148,10 @@ createRoot(document.getElementById("root")).render(
 <Route
   path="/custom-hoodies-for-schools"
   element={<CustomHoodiesForSchools />}
+/>
+<Route
+  path="/hi-vis-workwear-printing-kettering"
+  element={<HiVisWorkwearPrintingKettering />}
 />
 
 <Route
