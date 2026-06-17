@@ -153,6 +153,10 @@ createRoot(document.getElementById("root")).render(
   path="/hi-vis-workwear-printing-kettering"
   element={<HiVisWorkwearPrintingKettering />}
 />
+<Route
+  path="/branded-workwear-printing-northamptonshire"
+  element={<BrandedWorkwearPrintingNorthamptonshire />}
+/>
 
 <Route
   path="/church-event-hoodie-printing"
