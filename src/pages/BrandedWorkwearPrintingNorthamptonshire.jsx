@@ -95,10 +95,9 @@ export default function BrandedWorkwearPrintingNorthamptonshire() {
 
           <p style={{ lineHeight: "1.9", color: "#444" }}>
             Businesses throughout Northamptonshire use branded uniforms to
-            improve team consistency, build customer trust and strengthen
-            brand recognition. Durable logo printing and embroidery remain
-            popular choices for professional workwear across many industries.
-            :contentReference[oaicite:0]{index=0}
+improve team consistency, build customer trust and strengthen
+brand recognition. Durable logo printing helps companies create a
+professional appearance while promoting their brand every day.
           </p>
         </div>
 
@@ -167,8 +166,9 @@ export default function BrandedWorkwearPrintingNorthamptonshire() {
 
           <p style={{ lineHeight: "1.9", color: "#444" }}>
             We work with local businesses, tradespeople, gyms, schools,
-            charities and event organisers throughout Northamptonshire,
-            providing reliable branded clothing solutions. :contentReference[oaicite:1]{index=1}
+charities and event organisers throughout Northamptonshire,
+providing reliable branded clothing solutions with quality printing
+and professional customer service.
           </p>
         </div>
       </section>
