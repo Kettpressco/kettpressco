@@ -6,18 +6,31 @@ const serviceCard = {
   borderRadius: "12px",
   boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
 };
+const sectionStyle = {
+  padding: "70px 20px",
+  maxWidth: "1200px",
+  margin: "0 auto",
+};
+
+const cardStyle = {
+  background: "#fff",
+  padding: "30px",
+  borderRadius: "16px",
+  boxShadow: "0 5px 20px rgba(0,0,0,0.08)",
+};
+
 
 export default function TshirtPrintingWellingborough() {
     
 
   useEffect(() => {
     document.title =
-      "T-Shirt Printing Wellingborough | Custom Printed T-Shirts | Kett Press Co";
+      "T-Shirt Printing Wellingborough | Custom Printed T-Shirts & Workwear| Kett Press Co";
 
     const meta = document.createElement("meta");
     meta.name = "description";
     meta.content =
-      "Professional T-Shirt Printing in Wellingborough. Custom printed T-shirts for businesses, events, gyms and organisations across Northamptonshire.";
+      "Custom T-shirt printing in Wellingborough for businesses, events, gyms and organisations. Quality printed clothing, hoodies and branded workwear from Kett Press Co.";
     document.head.appendChild(meta);
 
     return () => {
@@ -178,6 +191,31 @@ export default function TshirtPrintingWellingborough() {
     </p>
   </div>
 </div>
+
+
+{/* Wellingborough Local SEO Section */}
+
+<section style={sectionStyle}>
+  <div style={cardStyle}>
+    <h2>
+      T-Shirt Printing Services For Businesses In Wellingborough
+    </h2>
+
+    <p style={{ lineHeight: "1.9", color: "#444" }}>
+      Kett Press Co provides custom T-shirt printing in Wellingborough
+      for businesses, tradespeople, gyms, schools, charities and events.
+      We help local organisations create professional branded clothing
+      using high-quality printing methods designed for everyday use.
+    </p>
+
+    <p style={{ lineHeight: "1.9", color: "#444" }}>
+      Whether you need a small batch of personalised T-shirts or branded
+      uniforms for your team, we provide a simple ordering process from
+      artwork approval through to finished garments.
+    </p>
+  </div>
+</section>
+
 
 <h2
   style={{
