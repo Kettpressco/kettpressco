@@ -522,6 +522,41 @@ export default function App() {
           ))}
         </div>
         
+        <section
+  style={{
+    padding: "60px 20px",
+    textAlign: "center",
+    maxWidth: "1000px",
+    margin: "0 auto",
+  }}
+>
+  <h2
+    style={{
+      fontSize: "36px",
+      marginBottom: "20px",
+      color: "#111",
+    }}
+  >
+    Local T-Shirt Printers In Northamptonshire
+  </h2>
+
+  <p
+    style={{
+      fontSize: "18px",
+      lineHeight: "1.9",
+      color: "#555",
+      maxWidth: "850px",
+      margin: "0 auto",
+    }}
+  >
+    Kett Press Co provides professional T-shirt printing, custom hoodies,
+    workwear and branded clothing for customers across Kettering,
+    Northampton, Wellingborough, Corby, Rushden and the surrounding
+    Northamptonshire areas. Whether you need a single personalised
+    T-shirt, branded workwear or bulk uniforms for your team, we can
+    help.
+  </p>
+</section>
         
         {/* POPULAR PACKAGES */}
 
