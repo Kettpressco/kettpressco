@@ -96,19 +96,19 @@ export default function WorkwearPrintingLeicester() {
           }}
         >
           <img
-            src="/images/work1.jpg"
+            src="/images/Polo1.jpg"
             alt="Workwear Printing Leicester"
             style={imageStyle}
           />
 
           <img
-            src="/images/work2.jpg"
+            src="/images/work3.jpg"
             alt="Branded Workwear Leicester"
             style={imageStyle}
           />
 
           <img
-            src="/images/work3.jpg"
+            src="/images/PoloTshirt.jpg"
             alt="Printed Workwear Leicester"
             style={imageStyle}
           />
