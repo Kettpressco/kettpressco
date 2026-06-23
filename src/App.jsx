@@ -1627,7 +1627,19 @@ export default function App() {
 >
   Branded Workwear Printing Northamptonshire
 </a>
+<a
+  href="/t-shirt-printing-leicester"
+  style={{ color: "#fff", textDecoration: "none" }}
+>
+  T-Shirt Printing Leicester
+</a>
 
+<a
+  href="/workwear-printing-leicester"
+  style={{ color: "#fff", textDecoration: "none" }}
+>
+  Workwear Printing Leicester
+</a>
 <a
   href="/how-long-does-dtf-printing-last"
   style={{ color: "#fff", textDecoration: "none" }}

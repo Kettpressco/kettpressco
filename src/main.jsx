@@ -34,6 +34,8 @@ import ChurchEventHoodiePrinting from "./pages/ChurchEventHoodiePrinting";
 import QuoteCalculator from "./pages/QuoteCalculator";
 import HiVisWorkwearPrintingKettering from "./pages/HiVisWorkwearPrintingKettering";
 import BrandedWorkwearPrintingNorthamptonshire from "./pages/BrandedWorkwearPrintingNorthamptonshire";
+import TShirtPrintingLeicester from "./pages/TShirtPrintingLeicester";
+import WorkwearPrintingLeicester from "./pages/WorkwearPrintingLeicester";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -129,7 +131,14 @@ createRoot(document.getElementById("root")).render(
   path="/printing-methods-for-custom-clothing-kettering"
   element={<PrintingMethodsForCustomClothingKettering />}
 />
-
+<Route
+  path="/t-shirt-printing-leicester"
+  element={<TShirtPrintingLeicester />}
+/>
+<Route
+  path="/workwear-printing-leicester"
+  element={<WorkwearPrintingLeicester />}
+/>
 <Route
   path="/t-shirt-printing-cost-guide"
   element={<TShirtPrintingCostGuide />}
