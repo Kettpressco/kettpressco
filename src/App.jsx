@@ -1641,6 +1641,13 @@ export default function App() {
   Workwear Printing Leicester
 </a>
 <a
+  href="/custom-hoodie-printing-leicester"
+  style={{ color: "#fff", textDecoration: "none" }}
+>
+  Custom Hoodie Printing Leicester
+</a>
+
+<a
   href="/how-long-does-dtf-printing-last"
   style={{ color: "#fff", textDecoration: "none" }}
 >

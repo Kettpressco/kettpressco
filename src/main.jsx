@@ -36,6 +36,7 @@ import HiVisWorkwearPrintingKettering from "./pages/HiVisWorkwearPrintingKetteri
 import BrandedWorkwearPrintingNorthamptonshire from "./pages/BrandedWorkwearPrintingNorthamptonshire";
 import TShirtPrintingLeicester from "./pages/TShirtPrintingLeicester";
 import WorkwearPrintingLeicester from "./pages/WorkwearPrintingLeicester";
+import CustomHoodiePrintingLeicester from "./pages/CustomHoodiePrintingLeicester";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -139,6 +140,11 @@ createRoot(document.getElementById("root")).render(
   path="/workwear-printing-leicester"
   element={<WorkwearPrintingLeicester />}
 />
+<Route
+  path="/custom-hoodie-printing-leicester"
+  element={<CustomHoodiePrintingLeicester />}
+/>
+
 <Route
   path="/t-shirt-printing-cost-guide"
   element={<TShirtPrintingCostGuide />}
