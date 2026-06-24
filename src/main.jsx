@@ -37,6 +37,7 @@ import BrandedWorkwearPrintingNorthamptonshire from "./pages/BrandedWorkwearPrin
 import TShirtPrintingLeicester from "./pages/TShirtPrintingLeicester";
 import WorkwearPrintingLeicester from "./pages/WorkwearPrintingLeicester";
 import CustomHoodiePrintingLeicester from "./pages/CustomHoodiePrintingLeicester";
+import TShirtPrintingRugby from "./pages/TShirtPrintingRugby";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -131,6 +132,10 @@ createRoot(document.getElementById("root")).render(
 <Route
   path="/printing-methods-for-custom-clothing-kettering"
   element={<PrintingMethodsForCustomClothingKettering />}
+/>
+<Route
+  path="/tshirt-printing-rugby"
+  element={<TShirtPrintingRugby />}
 />
 <Route
   path="/t-shirt-printing-leicester"

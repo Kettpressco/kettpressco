@@ -1628,6 +1628,12 @@ export default function App() {
   Branded Workwear Printing Northamptonshire
 </a>
 <a
+  href="/tshirt-printing-rugby"
+  style={{ color: "#fff", textDecoration: "none" }}
+>
+  T-Shirt Printing Rugby
+</a>
+<a
   href="/t-shirt-printing-leicester"
   style={{ color: "#fff", textDecoration: "none" }}
 >
