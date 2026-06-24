@@ -1634,6 +1634,12 @@ export default function App() {
   T-Shirt Printing Rugby
 </a>
 <a
+  href="/workwear-printing-rugby"
+  style={{ color: "#fff", textDecoration: "none" }}
+>
+  Workwear Printing Rugby
+</a>
+<a
   href="/t-shirt-printing-leicester"
   style={{ color: "#fff", textDecoration: "none" }}
 >

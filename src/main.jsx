@@ -38,6 +38,7 @@ import TShirtPrintingLeicester from "./pages/TShirtPrintingLeicester";
 import WorkwearPrintingLeicester from "./pages/WorkwearPrintingLeicester";
 import CustomHoodiePrintingLeicester from "./pages/CustomHoodiePrintingLeicester";
 import TShirtPrintingRugby from "./pages/TShirtPrintingRugby";
+import WorkwearPrintingRugby from "./pages/WorkwearPrintingRugby";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -136,6 +137,10 @@ createRoot(document.getElementById("root")).render(
 <Route
   path="/tshirt-printing-rugby"
   element={<TShirtPrintingRugby />}
+/>
+<Route
+  path="/workwear-printing-rugby"
+  element={<WorkwearPrintingRugby />}
 />
 <Route
   path="/t-shirt-printing-leicester"
