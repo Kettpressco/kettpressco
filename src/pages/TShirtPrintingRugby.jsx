@@ -118,7 +118,7 @@ export default function TShirtPrintingRugby() {
             }}
           >
             <img
-              src="/images/work1.jpg"
+              src="/images/tshirt4.jpg"
               alt="Printed T-Shirts"
               style={{
                 width: "100%",
@@ -127,7 +127,7 @@ export default function TShirtPrintingRugby() {
             />
 
             <img
-              src="/images/work2.jpg"
+              src="/images/Tshirt10.jpg"
               alt="Printed Workwear"
               style={{
                 width: "100%",
@@ -136,7 +136,7 @@ export default function TShirtPrintingRugby() {
             />
 
             <img
-              src="/images/work3.jpg"
+              src="/images/hoodie.jpg"
               alt="Custom Hoodies"
               style={{
                 width: "100%",
