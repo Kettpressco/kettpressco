@@ -85,7 +85,7 @@ export default function WorkwearPrintingUK() {
         </div>
 
         <img
-          src="/images/polo.jpg"
+          src="/images/workwear4.jpg"
           alt="Workwear Printing UK"
           style={imageStyle}
         />
@@ -176,7 +176,7 @@ export default function WorkwearPrintingUK() {
         </div>
 
         <img
-          src="/images/work1.jpg"
+          src="/images/PoloTshirt.jpg"
           alt="Branded Workwear UK"
           style={imageStyle}
         />
