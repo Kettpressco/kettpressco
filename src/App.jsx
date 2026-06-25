@@ -1492,7 +1492,12 @@ export default function App() {
         >
           Areas We Cover
         </a>
-
+<a
+  href="/t-shirt-printing-uk"
+  style={{ color: "#fff", textDecoration: "none" }}
+>
+  T Shirt Printing UK
+</a>
         <a
           href="/custom-t-shirt-printing-kettering"
           style={{ color: "#fff", textDecoration: "none" }}

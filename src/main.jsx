@@ -8,6 +8,7 @@ import App from "./App.jsx";
 import ContactPage from "./pages/ContactPage";
 import PrintingMethodsForCustomClothingKettering from "./pages/printingmethodsforcustomclothingkettering";
 import AreasWeCover from "./pages/AreasWeCover.jsx";
+
 import TshirtPrintingKettering from "./pages/TShirtPrintingKettering.jsx";
 import WorkwearPrintingKettering from "./pages/WorkwearPrintingKettering.jsx";
 import HoodiePrintingNorthampton from "./pages/HoodiePrintingNorthampton.jsx";
@@ -39,6 +40,7 @@ import WorkwearPrintingLeicester from "./pages/WorkwearPrintingLeicester";
 import CustomHoodiePrintingLeicester from "./pages/CustomHoodiePrintingLeicester";
 import TShirtPrintingRugby from "./pages/TShirtPrintingRugby";
 import WorkwearPrintingRugby from "./pages/WorkwearPrintingRugby";
+import TShirtPrintingUK from "./pages/TShirtPrintingUK";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -178,6 +180,10 @@ createRoot(document.getElementById("root")).render(
 <Route
   path="/hi-vis-workwear-printing-kettering"
   element={<HiVisWorkwearPrintingKettering />}
+/>
+<Route
+  path="/t-shirt-printing-uk"
+  element={<TShirtPrintingUK />}
 />
 <Route
   path="/branded-workwear-printing-northamptonshire"
