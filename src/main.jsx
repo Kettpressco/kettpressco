@@ -42,7 +42,8 @@ import TShirtPrintingRugby from "./pages/TShirtPrintingRugby";
 import WorkwearPrintingRugby from "./pages/WorkwearPrintingRugby";
 import TShirtPrintingUK from "./pages/TShirtPrintingUK";
 import CustomTShirtsUK from "./pages/CustomTShirtsUK";
-
+import WorkwearPrintingUK from "./pages/WorkwearPrintingUK";
+ 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <HelmetProvider>
@@ -190,11 +191,15 @@ createRoot(document.getElementById("root")).render(
   path="/custom-t-shirts-uk"
   element={<CustomTShirtsUK />}
 />
+
 <Route
   path="/branded-workwear-printing-northamptonshire"
   element={<BrandedWorkwearPrintingNorthamptonshire />}
 />
-
+<Route
+  path="/workwear-printing-uk"
+  element={<WorkwearPrintingUK />}
+/>
 <Route
   path="/church-event-hoodie-printing"
   element={<ChurchEventHoodiePrinting />}
