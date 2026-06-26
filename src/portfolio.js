@@ -13,15 +13,15 @@ const portfolio = [
   },
   {
     title: "Professional Workwear",
-    image: "/images/work1.jpg",
+    image: "/images/Cwork.jpg",
   },
   {
     title: "Printed Uniforms",
-    image: "/images/work2.jpg",
+    image: "/images/work11.jpg",
   },
   {
     title: "Custom Business Clothing",
-    image: "/images/work3.jpg",
+    image: "/images/work12.jpg",
   },
 ];
 
