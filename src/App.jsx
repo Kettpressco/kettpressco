@@ -1097,18 +1097,20 @@ export default function App() {
     finished products.
   </p>
 
-  <iframe
-    width="100%"
-    height="500"
-    src="https://www.youtube.com/embed/https://https://www.youtube.com/shorts/KXzoDizLXKs"
-    title="Kett Press Co YouTube"
-    style={{
-      border: "none",
-      borderRadius: "16px",
-      maxWidth: "900px",
-    }}
-    allowFullScreen
-  ></iframe>
+<iframe
+  width="315"
+  height="560"
+  src="https://www.youtube.com/embed/KXzoDizLXKs"
+  title="Kett Press Co YouTube Short"
+  style={{
+    border: "none",
+    borderRadius: "16px",
+    margin: "0 auto",
+    display: "block",
+  }}
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowFullScreen
+></iframe>
 </section>
 
 {/* GOOGLE REVIEWS */}
