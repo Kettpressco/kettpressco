@@ -600,7 +600,7 @@ export default function App() {
     {[
       {
         title: "Get Started Package",
-        price: "£58",
+        price: "£68",
         image: "/images/tshirt.jpg",
         items: [
           "4 T-Shirts",
@@ -610,7 +610,7 @@ export default function App() {
       },
       {
         title: "Smart Workwear Deal",
-        price: "£70",
+        price: "£89",
         image: "/images/workwear.jpg",
         items: [
           "3 T-Shirts",
@@ -620,7 +620,7 @@ export default function App() {
       },
       {
         title: "Business Starter Pack",
-        price: "£75",
+        price: "£95.99",
         image: "/images/Polo.jpg",
         items: [
           "4 T-Shirts",
@@ -631,7 +631,7 @@ export default function App() {
       },
       {
         title: "Best Value Workwear Bundle",
-        price: "£105",
+        price: "£120",
         image: "/images/workwear4.jpg",
         popular: true,
         items: [
