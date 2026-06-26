@@ -831,22 +831,21 @@ export default function App() {
   >
     {[
       {
-        name: "Ian",
-        company: "Local Gym",
+        name: "simon webster",
         review:
-          "Fantastic quality workwear and excellent service from start to finish.",
+          "Incredibly helpful really went out of his way to help us with what seems an impossible task and came through and delivered!Cannot recommend enough will definitely use next time I need a print.",
       },
       {
-        name: "Sarah",
+        name: "Raphael Kalima",
         company: "Event Organiser",
         review:
-          "Quick turnaround and brilliant print quality. Highly recommended.",
+          "Great service !!! I was happy with the product.The printing is of great quality.",
       },
       {
         name: "Itai",
-        company: "Construction Company",
+        company: "Church",
         review:
-          "Professional branded uniforms delivered on time and exactly as requested.",
+          "High quality hoodie and print.",
       },
     ].map((review, index) => (
       <div
