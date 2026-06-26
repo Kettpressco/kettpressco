@@ -1075,6 +1075,41 @@ export default function App() {
           ))}
         </div>
       </section>
+      <section
+  style={{
+    maxWidth: "1200px",
+    margin: "80px auto",
+    padding: "0 20px",
+    textAlign: "center",
+  }}
+>
+  <h2>Watch Kett Press Co In Action</h2>
+
+  <p
+    style={{
+      maxWidth: "800px",
+      margin: "20px auto",
+      lineHeight: "1.8",
+    }}
+  >
+    See how we produce custom T-shirts, workwear, hoodies and personalised
+    clothing. Watch real customer orders, behind-the-scenes printing and
+    finished products.
+  </p>
+
+  <iframe
+    width="100%"
+    height="500"
+    src="https://www.youtube.com/embed/https://https://www.youtube.com/shorts/KXzoDizLXKs"
+    title="Kett Press Co YouTube"
+    style={{
+      border: "none",
+      borderRadius: "16px",
+      maxWidth: "900px",
+    }}
+    allowFullScreen
+  ></iframe>
+</section>
 
 {/* GOOGLE REVIEWS */}
 <section
@@ -1350,6 +1385,40 @@ export default function App() {
           </button>
         </a>
       </section>
+
+<section
+  style={{
+    maxWidth: "1200px",
+    margin: "60px auto",
+    padding: "40px 20px",
+    textAlign: "center",
+  }}
+>
+  <h2>See Kett Press Co In Action</h2>
+
+  <p>
+    Watch our latest printing projects, behind-the-scenes videos, business
+    updates and custom clothing transformations on our YouTube channel.
+  </p>
+
+  <a
+    href="https://www.youtube.com/@Kettpressco"
+    target="_blank"
+    rel="noopener noreferrer"
+    style={{
+      display: "inline-block",
+      background: "#FF0000",
+      color: "#fff",
+      padding: "15px 30px",
+      borderRadius: "8px",
+      textDecoration: "none",
+      fontWeight: "bold",
+      marginTop: "20px",
+    }}
+  >
+    Visit Our YouTube Channel
+  </a>
+</section>
 
 {/* FOOTER */}
 
@@ -1714,6 +1783,14 @@ export default function App() {
       marginBottom: "20px",
     }}
   >
+    <a
+  href="https://www.youtube.com/@Kettpressco"
+  target="_blank"
+  rel="noopener noreferrer"
+  style={{ color: "#fff", textDecoration: "none" }}
+>
+  YouTube
+</a>
     <a
       href="https://www.facebook.com/Kettpress"
       target="_blank"
