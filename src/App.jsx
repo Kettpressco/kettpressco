@@ -621,7 +621,7 @@ export default function App() {
       {
         title: "Business Starter Pack",
         price: "£75",
-        image: "/images/logo.jpg",
+        image: "/images/Polo.jpg",
         items: [
           "4 T-Shirts",
           "1 Hoodie or Sweatshirt",
