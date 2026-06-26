@@ -1,7 +1,7 @@
 const portfolio = [
   {
     title: "Event Printing",
-    image: "/images/event1.jpg",
+    image: "/images/hoodie.jpg",
   },
   {
     title: "Custom Event Apparel",
@@ -9,19 +9,19 @@ const portfolio = [
   },
   {
     title: "Branded Event Wear",
-    image: "/images/event3.jpg",
+    image: "/images/tshirt15.jpg",
   },
   {
     title: "Professional Workwear",
-    image: "/images/work1.jpg",
+    image: "/images/work11.jpg",
   },
   {
     title: "Printed Uniforms",
-    image: "/images/work2.jpg",
+    image: "/images/work12.jpg",
   },
   {
     title: "Custom Business Clothing",
-    image: "/images/work3.jpg",
+    image: "/images/workwear4.jpg",
   },
 ];
 
