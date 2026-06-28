@@ -9,6 +9,7 @@ import ContactPage from "./pages/ContactPage";
 import PrintingMethodsForCustomClothingKettering from "./pages/printingmethodsforcustomclothingkettering";
 import AreasWeCover from "./pages/AreasWeCover.jsx";
 
+import ThankYou from "./ThankYou";
 import TshirtPrintingKettering from "./pages/TShirtPrintingKettering.jsx";
 import WorkwearPrintingKettering from "./pages/WorkwearPrintingKettering.jsx";
 import HoodiePrintingNorthampton from "./pages/HoodiePrintingNorthampton.jsx";
@@ -51,6 +52,7 @@ createRoot(document.getElementById("root")).render(
       <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />} />
+        <Route path="/thank-you" element={<ThankYou />} />
 
 <Route
   path="/quote-calculator"

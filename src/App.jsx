@@ -1261,11 +1261,11 @@ export default function App() {
     value="false"
   />
 
-  <input
-    type="hidden"
-    name="_next"
-    value="https://www.kettpressco.com"
-  />
+<input
+  type="hidden"
+  name="_next"
+  value="https://www.kettpressco.com/thank-you"
+/>
            <input
   type="text"
   name="name"
