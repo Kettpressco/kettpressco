@@ -285,7 +285,7 @@ export default function App() {
     }}
   >
     Ordering custom printed clothing is simple. From your first enquiry to
-    final delivery, we make the process quick and hassle-free.
+    final delivery, we make the process quick and hassle-free. 3days turnaround
   </p>
 
   <div
@@ -387,7 +387,7 @@ export default function App() {
         }}
       >
         We'll review your artwork, confirm the details, and ensure everything
-        is ready before production begins.
+        is ready before production begins, we can also redo for artwork for Free.
       </p>
     </div>
 
@@ -433,8 +433,10 @@ export default function App() {
           lineHeight: "1.7",
         }}
       >
-        We professionally print your order and prepare it for collection or
-        delivery, ensuring high-quality results every time.
+      We professionally print every order using premium DTF printing technology and 
+      carefully inspect each garment before packing. Whether you're ordering custom T-shirts, 
+      branded workwear, personalised hoodies, or event clothing, we ensure vibrant, 
+      long-lasting prints with fast UK delivery or convenient local collection.
       </p>
     </div>
   </div>
@@ -550,7 +552,7 @@ export default function App() {
     }}
   >
     Kett Press Co provides professional T-shirt printing, custom hoodies,
-    workwear and branded clothing for customers across Kettering,
+    workwear and branded clothing for customers across,whole of UK,  Kettering,
     Northampton, Wellingborough, Corby, Rushden and the surrounding
     Northamptonshire areas. Whether you need a single personalised
     T-shirt, branded workwear or bulk uniforms for your team, we can
@@ -764,9 +766,9 @@ export default function App() {
   >
     Kett Press Co provides professional T-shirt printing,
     branded workwear, logo printing and custom apparel for
-    businesses, gyms, events and organisations across
-    Kettering, Northampton, Corby, Wellingborough and
-    Northamptonshire. We focus on premium print quality,
+    businesses, gyms, events and organisations across UK, 
+    Kettering, Northampton, Corby, Wellingborough,
+    Northamptonshire,Leicestershire and Coventry. We focus on premium print quality,
     reliable service and fast turnaround times.
   </p>
 
@@ -842,7 +844,7 @@ export default function App() {
           "Great service !!! I was happy with the product.The printing is of great quality.",
       },
       {
-        name: "Itai",
+        name: "Bassie",
         company: "Church",
         review:
           "High quality hoodie and print.",
@@ -910,9 +912,13 @@ export default function App() {
     <div>
       <h3>Do you offer workwear printing in Northampton?</h3>
       <p>
-        Yes. We provide branded workwear, uniforms and logo printing
-        for businesses across Northampton, Kettering, Corby,
-        Wellingborough and Northamptonshire.
+        Yes.At Kett Press Co, we supply and professionally print high-quality
+garments from trusted brands including Gildan, Cotton Ridge,
+Pro RTX, RTX, AWD Just Hoods, Uneek, Fruit of the Loom,
+Russell, Regatta Professional, Result Clothing and more.
+Whether you need branded workwear, personalised T-shirts,
+custom hoodies or corporate uniforms, we offer garments
+to suit every budget and business.
       </p>
     </div>
 
@@ -980,7 +986,7 @@ export default function App() {
     }}
   >
     Kett Press Co provides T-shirt printing, workwear printing,
-    logo printing and custom branded clothing throughout
+    logo printing and custom branded clothing throughout Uk and 
     Northamptonshire.
   </p>
 
