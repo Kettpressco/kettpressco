@@ -1,7 +1,8 @@
 import { useState } from "react";
 import emailjs from "@emailjs/browser";
-
+import { useNavigate } from "react-router-dom";
 export default function ContactPage() {
+ const navigate = useNavigate();
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -38,7 +39,7 @@ export default function ContactPage() {
   .then(
     () => {
       alert("Quote sent successfully! We will contact you soon.");
-
+navigate("/thank-you");
       setForm({
         name: "",
         email: "",
