@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
-
+import { useEffect } from "react";
 export default function ThankYou() {
 
- useEffect(() => {
-  if (typeof window !== "undefined" && window.gtag) {
-    window.gtag("event", "ads_conversion_Request_quote_1");
-    console.log("Request Quote conversion event sent.");
-  } else {
-    console.warn("Google tag not loaded.");
+useEffect(() => {
+  if (window.gtag) {
+    window.gtag("event", "generate_lead", {
+      event_category: "Quote Form",
+      event_label: "Website Quote Submission",
+    });
   }
 }, []);
 
