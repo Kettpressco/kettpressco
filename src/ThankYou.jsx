@@ -2,12 +2,14 @@ import React, { useEffect } from "react";
 
 export default function ThankYou() {
 
-  useEffect(() => {
-    // Google Ads conversion tracking
-    if (window.gtag) {
-      window.gtag("event", "ads_conversion_Request_quote_1", {});
-    }
-  }, []);
+ useEffect(() => {
+  if (typeof window !== "undefined" && window.gtag) {
+    window.gtag("event", "ads_conversion_Request_quote_1");
+    console.log("Request Quote conversion event sent.");
+  } else {
+    console.warn("Google tag not loaded.");
+  }
+}, []);
 
   return (
     <div
