@@ -52,7 +52,7 @@ createRoot(document.getElementById("root")).render(
       <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />} />
-        <Route path="/thank-you" element={<ThankYou />} />
+  <Route path="/thank-you" element={<ThankYou />} />
 
 <Route
   path="/quote-calculator"
