@@ -2,14 +2,24 @@ import React, { useEffect } from "react";
 
 export default function ThankYou() {
 
-useEffect(() => {
-  if (window.gtag) {
-    window.gtag("event", "generate_lead", {
-      event_category: "Quote Form",
-      event_label: "Website Quote Submission",
-    });
-  }
-}, []);
+  useEffect(() => {
+
+    if (window.gtag) {
+
+      // Google Ads conversion
+      window.gtag("event", "conversion", {
+        send_to: "AW-18242325650/eYwUCJnd1cccEJKZz_pD",
+      });
+
+      // GA4 lead event
+      window.gtag("event", "generate_lead", {
+        event_category: "Quote Form",
+        event_label: "Website Quote Submission",
+      });
+
+    }
+
+  }, []);
 
   return (
     <div
