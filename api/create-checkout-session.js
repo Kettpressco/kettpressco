@@ -1,6 +1,10 @@
 import Stripe from "stripe";
 
 
+if (!process.env.STRIPE_SECRET_KEY) {
+  throw new Error("Missing STRIPE_SECRET_KEY");
+}
+
 const stripe = new Stripe(
   process.env.STRIPE_SECRET_KEY
 );
@@ -98,14 +102,16 @@ res.status(200).json({
 
   }
 
-  catch(error){
+catch(error){
+
+  console.error("STRIPE ERROR:", error);
+
+  res.status(500).json({
+    error: error.message,
+    details: error.raw?.message || "No details"
+  });
 
 
-    res.status(500).json({
-
-      error:error.message
-
-    });
 
 
   }
