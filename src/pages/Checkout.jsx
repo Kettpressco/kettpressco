@@ -1,7 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
+import { loadStripe } from "@stripe/stripe-js";
 
+const stripePromise = loadStripe(
+  import.meta.env.VITE_STRIPE_PUBLIC_KEY
+);
 
 export default function Checkout() {
 
@@ -267,17 +271,12 @@ const handleSubmit = async (e) => {
 
 
 
-          <button
-
-            type="submit"
-
-            style={buttonStyle}
-
-          >
-
-            Pay Securely
-
-          </button>
+<button
+  type="submit"
+  style={buttonStyle}
+>
+  Pay Securely
+</button>
 
 
 
