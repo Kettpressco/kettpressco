@@ -64,6 +64,10 @@ const handleSubmit = async (e) => {
 
   const session = await response.json();
 
+console.log("Stripe response:", session);
+
+alert(JSON.stringify(session));
+
 window.location.href = session.url;
 
 };

@@ -72,7 +72,9 @@ export default async function handler(req, res) {
           })),
 
 
-        mode:"payment",
+      mode:"payment",
+
+ui_mode:"hosted",
 
 
         success_url:
