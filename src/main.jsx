@@ -45,18 +45,49 @@ import TShirtPrintingUK from "./pages/TShirtPrintingUK";
 import CustomTShirtsUK from "./pages/CustomTShirtsUK";
 import WorkwearPrintingUK from "./pages/WorkwearPrintingUK";
  import PersonalisedTShirtsUK from "./pages/PersonalisedTShirtsUK";
+import { CartProvider } from "./context/CartContext";
+import Shop from "./pages/Shop.jsx";
+import Cart from "./pages/Cart.jsx";
+import Product from "./pages/Product.jsx";
+import Checkout from "./pages/Checkout.jsx";
+import OrderSuccess from "./pages/OrderSuccess.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <HelmetProvider>
       <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />} />
-  <Route path="/thank-you" element={<ThankYou />} />
+
+        <CartProvider>
+
+          <Routes>
+
+            <Route path="/" element={<App />} />
+            <Route path="/thank-you" element={<ThankYou />} />
 
 <Route
   path="/quote-calculator"
   element={<QuoteCalculator />}
+/>
+<Route
+  path="/shop"
+  element={<Shop />}
+/>
+
+<Route
+  path="/cart"
+  element={<Cart />}
+/>
+<Route
+ path="/product/:slug"
+ element={<Product />}
+/>
+<Route
+  path="/checkout"
+  element={<Checkout />}
+/>
+<Route
+ path="/order-success"
+ element={<OrderSuccess />}
 />
 
 <Route
@@ -212,7 +243,10 @@ createRoot(document.getElementById("root")).render(
   element={<ChurchEventHoodiePrinting />}
 />
 <Route path="/contact" element={<ContactPage />} />
-      </Routes>
+          </Routes>
+
+        </CartProvider>
+
       </BrowserRouter>
     </HelmetProvider>
   </StrictMode>

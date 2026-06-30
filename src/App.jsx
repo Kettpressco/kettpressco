@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import portfolio from "./data/portfolio";
 import reviews from "./data/reviews";
+import CartIcon from "./components/CartIcon";
 
 import { FaFacebook, FaInstagram } from "react-icons/fa";
 import CustomTshirtPrintingNorthampton from "./pages/CustomTshirtPrintingNorthampton";
@@ -132,11 +133,20 @@ export default function App() {
 
          <a href="/quote-calculator">Instant Quote</a>
 
-          <a href="#contact" style={navLink}>
-            Contact
-          </a>
+       <a href="#contact" style={navLink}>
+  Contact
+</a>
 
-          <a
+
+<a href="/shop" style={navLink}>
+  Shop
+</a>
+
+
+<CartIcon />
+
+
+<a
   href="/quote-calculator"
   style={{
     background: "#000",
