@@ -64,9 +64,7 @@ const handleSubmit = async (e) => {
 
   const session = await response.json();
 
-  await stripe.redirectToCheckout({
-    sessionId: session.id
-  });
+window.location.href = session.url;
 
 };
 
