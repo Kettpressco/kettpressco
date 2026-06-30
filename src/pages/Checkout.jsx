@@ -62,11 +62,16 @@ const handleSubmit = async (e) => {
     }
   );
 
-  const session = await response.json();
+const session = await response.json();
 
-console.log("Stripe response:", session);
+console.log("API RESPONSE:", session);
 
 alert(JSON.stringify(session));
+
+if (!session.url) {
+  alert("Stripe URL missing");
+  return;
+}
 
 window.location.href = session.url;
 
