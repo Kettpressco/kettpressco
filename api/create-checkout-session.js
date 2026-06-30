@@ -31,6 +31,7 @@ export default async function handler(req, res) {
 
     const session =
       await stripe.checkout.sessions.create({
+        payment_method_collection: "always",
 
 
         payment_method_types:[
@@ -86,7 +87,7 @@ export default async function handler(req, res) {
 
       });
 
-
+console.log("Stripe session:", session);
 res.status(200).json({
   id: session.id,
   url: session.url
