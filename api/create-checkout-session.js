@@ -77,8 +77,7 @@ export default async function handler(req, res) {
 
 
       mode:"payment",
-
-ui_mode:"hosted",
+ui_mode: "hosted_page",
 
 
         success_url:
