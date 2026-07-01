@@ -64,7 +64,7 @@ const products = [
     category: "Polos",
     brand: "Pro RTX",
     price: 14.99,
-    image: "/images/RG027 BLK MODEL 1 HERO.jpg", 
+    image: "/images/04442 AQA FRONT.jpg", 
     description:
       "Professional polo shirt perfect for embroidered logos and branded workwear.",
     colours: [
