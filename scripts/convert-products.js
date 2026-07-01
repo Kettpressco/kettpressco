@@ -11,7 +11,10 @@ fs.createReadStream("./data/pencarrie-products.csv")
 
     if (!styleCode) return;
 
+    const colour = row["Colourway Name"] || "Default";
+
     if (!products[styleCode]) {
+
       products[styleCode] = {
         id: styleCode,
         name: row["Title"],
@@ -24,24 +27,24 @@ fs.createReadStream("./data/pencarrie-products.csv")
         material: row["Material"] || "",
         weight: row["Weight"] || "",
 
-        images: {
-          model: row["Model Image"] || "",
-          front: row["Front Image"] || "",
-          back: row["Back Image"] || "",
-          side: row["Side Image"] || ""
-        },
+        variants: [],
 
         features: row["Features"] || ""
       };
+
     }
 
+
+    // Add colour
     if (
-      row["Colourway Name"] &&
-      !products[styleCode].colours.includes(row["Colourway Name"])
+      colour &&
+      !products[styleCode].colours.includes(colour)
     ) {
-      products[styleCode].colours.push(row["Colourway Name"]);
+      products[styleCode].colours.push(colour);
     }
 
+
+    // Add size
     if (
       row["Size"] &&
       !products[styleCode].sizes.includes(row["Size"])
@@ -49,21 +52,65 @@ fs.createReadStream("./data/pencarrie-products.csv")
       products[styleCode].sizes.push(row["Size"]);
     }
 
+
+
+    // Add colour image variant
+
+    let existingVariant =
+      products[styleCode].variants.find(
+        (v) => v.colour === colour
+      );
+
+
+    if (!existingVariant) {
+
+      existingVariant = {
+
+        colour,
+
+        images: {
+
+          model: row["Model Image"] || "",
+
+          front: row["Front Image"] || "",
+
+          back: row["Back Image"] || "",
+
+          side: row["Side Image"] || ""
+
+        }
+
+      };
+
+
+      products[styleCode].variants.push(
+        existingVariant
+      );
+
+    }
+
+
   })
   .on("end", () => {
 
-    const output = 
+
+    const output =
 `export default ${JSON.stringify(
   Object.values(products),
   null,
   2
 )};`;
 
+
     fs.writeFileSync(
       "./src/data/products.js",
       output
     );
 
-    console.log("Products converted successfully!");
+
+    console.log(
+      "Products converted with colour variants!"
+    );
+
 
   });

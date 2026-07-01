@@ -2,13 +2,42 @@ import { useState } from "react";
 import { useCart } from "../context/CartContext";
 import { Link } from "react-router-dom";
 
-
 export default function ProductCard({ product }) {
-
   const { addToCart } = useCart();
 
-  const [size, setSize] = useState(product.sizes[0]);
-  const [colour, setColour] = useState(product.colours[0]);
+  const firstVariant = product.variants?.[0];
+
+  const [size, setSize] = useState(product.sizes?.[0] || "");
+
+  const [colour, setColour] = useState(
+    firstVariant?.colour ||
+      product.colours?.[0] ||
+      ""
+  );
+
+
+  const selectedVariant =
+    product.variants?.find(
+      (variant) =>
+        variant.colour === colour
+    );
+
+
+  const image =
+    selectedVariant?.images?.model ||
+    selectedVariant?.images?.front ||
+    product.images?.model ||
+    product.images?.front ||
+    "/images/placeholder.jpg";
+
+
+  const slug =
+    product.slug ||
+    product.name
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-|-$/g, "");
+
 
 
   const handleAddToCart = () => {
@@ -21,123 +50,242 @@ export default function ProductCard({ product }) {
 
       colour,
 
-      quantity: 1
+      image,
+
+      quantity: 1,
 
     });
 
   };
 
 
+
+  const colourCode = (name) => {
+
+    const colours = {
+
+      black:"#000",
+
+      white:"#fff",
+
+      navy:"#001f3f",
+
+      blue:"#0074D9",
+
+      red:"#ff4136",
+
+      green:"#2ecc40",
+
+      grey:"#999",
+
+      gray:"#999",
+
+      yellow:"#ffdc00",
+
+      orange:"#ff851b",
+
+      pink:"#ff69b4",
+
+      purple:"#b10dc9",
+
+      brown:"#85144b",
+
+    };
+
+
+    return (
+      colours[
+        name
+          ?.toLowerCase()
+          .trim()
+      ] || "#ddd"
+    );
+
+  };
+
+
+
   return (
 
     <div
       style={{
-        background: "#fff",
-        borderRadius: "16px",
-        padding: "20px",
-        boxShadow: "0 5px 20px rgba(0,0,0,0.08)",
-        display: "flex",
-        flexDirection: "column",
-        gap: "15px"
+        background:"#fff",
+        borderRadius:"16px",
+        padding:"20px",
+        boxShadow:"0 5px 20px rgba(0,0,0,0.08)",
+        display:"flex",
+        flexDirection:"column",
+        gap:"15px"
       }}
     >
 
+
       <img
-        src={product.image}
+        src={image}
         alt={product.name}
+        loading="lazy"
         style={{
-          width: "100%",
-          height: "260px",
-          objectFit: "cover",
-          borderRadius: "12px"
+          width:"100%",
+          height:"260px",
+          objectFit:"contain",
+          borderRadius:"12px",
+          background:"#f8f8f8",
+          transition:"0.3s"
         }}
       />
 
 
-    <Link
-to={`/product/${product.slug}`}
-  style={{
-    textDecoration:"none",
-    color:"#111"
-  }}
->
-  <h3>
-    {product.name}
-  </h3>
-</Link>
+
+      <Link
+        to={`/product/${slug}`}
+        style={{
+          textDecoration:"none",
+          color:"#111"
+        }}
+      >
+
+        <h3>
+          {product.name}
+        </h3>
+
+      </Link>
+
+
 
       <p
         style={{
-          color: "#666",
-          minHeight: "50px"
+          color:"#666",
+          minHeight:"50px"
         }}
       >
-        {product.description}
+        {product.material || product.features || ""}
       </p>
+
 
 
       <strong
         style={{
-          fontSize: "20px"
+          fontSize:"20px"
         }}
       >
-        £{product.price.toFixed(2)}
+        £{Number(product.price).toFixed(2)}
       </strong>
 
 
 
-      <label>
-        Size
-      </label>
 
-      <select
-        value={size}
-        onChange={(e)=>setSize(e.target.value)}
-        style={{
-          padding:"10px",
-          borderRadius:"8px"
-        }}
-      >
+      {product.sizes?.length > 0 && (
 
-        {product.sizes.map((item)=>(
-          <option
-            key={item}
-            value={item}
-          >
-            {item}
-          </option>
-        ))}
+        <>
 
-      </select>
+        <label>
+          Size
+        </label>
 
 
+        <select
 
-      <label>
-        Colour
-      </label>
+          value={size}
+
+          onChange={(e)=>
+            setSize(e.target.value)
+          }
+
+          style={{
+            padding:"10px",
+            borderRadius:"8px"
+          }}
+
+        >
+
+          {product.sizes.map((item)=>(
+
+            <option
+              key={item}
+              value={item}
+            >
+              {item}
+            </option>
+
+          ))}
 
 
-      <select
-        value={colour}
-        onChange={(e)=>setColour(e.target.value)}
-        style={{
-          padding:"10px",
-          borderRadius:"8px"
-        }}
-      >
+        </select>
+
+        </>
+
+      )}
+
+
+
+
+
+      {product.colours?.length > 0 && (
+
+        <>
+
+        <label>
+          Colour
+        </label>
+
+
+        <div
+          style={{
+            display:"flex",
+            gap:"10px",
+            flexWrap:"wrap"
+          }}
+        >
 
         {product.colours.map((item)=>(
 
-          <option
+          <button
+
             key={item}
-            value={item}
-          >
-            {item}
-          </option>
+
+            title={item}
+
+            onClick={() =>
+              setColour(item)
+            }
+
+            style={{
+
+              width:"34px",
+
+              height:"34px",
+
+              borderRadius:"50%",
+
+              border:
+                colour === item
+                ? "3px solid #111"
+                : "1px solid #ccc",
+
+              background:
+                colourCode(item),
+
+              cursor:"pointer"
+
+            }}
+
+          />
 
         ))}
 
-      </select>
+        </div>
+
+
+        <small>
+          Selected: {colour}
+        </small>
+
+
+        </>
+
+      )}
+
+
 
 
 
