@@ -36,7 +36,7 @@ const products = [
     category: "T-Shirts",
     brand: "AWDis",
     price: 12.99,
-    image: "/images/tshirt.jpg",
+    image: "/images/03564 WHI MODEL 5.jpg",
     description:
       "Soft cotton t-shirt ideal for personalised printing, businesses, events and clothing brands.",
     colours: [
@@ -63,8 +63,8 @@ const products = [
     name: "Classic Polo Shirt",
     category: "Polos",
     brand: "Pro RTX",
-    price: 16.99,
-    image: "/images/polo.jpg",
+    price: 14.99,
+    image: "/images/RG027 BLK MODEL 1 HERO.jpg", 
     description:
       "Professional polo shirt perfect for embroidered logos and branded workwear.",
     colours: [
@@ -91,7 +91,7 @@ const products = [
     category: "Sweatshirts",
     brand: "Result",
     price: 22.99,
-    image: "/images/sweatshirt.jpg",
+    image: "/images/03574 WHI MODEL 2.jpg",
     description:
       "Durable sweatshirt designed for tradespeople, businesses and outdoor work.",
     colours: [
@@ -116,7 +116,7 @@ const products = [
     category: "Hi-Vis",
     brand: "Result",
     price: 34.99,
-    image: "/images/hivis.jpg",
+    image: "/images/RX705 ORA MODEL 1 HERO.jpg", 
     description:
       "High visibility work jacket suitable for construction, warehouses and outdoor teams.",
     colours: [
@@ -141,7 +141,7 @@ const products = [
     category: "Hoodies",
     brand: "AWDis",
     price: 29.99,
-    image: "/images/ziphoodie.jpg",
+    image: "/images/RG045 NRY MODEL 1.jpg", 
     description:
       "Full zip hoodie suitable for embroidered branding and personalised clothing.",
     colours: [
@@ -166,7 +166,7 @@ const products = [
     category: "T-Shirts",
     brand: "AWDis",
     price: 15.99,
-    image: "/images/longsleeve.jpg",
+    image: "/images/RX102 BLK FRONT.jpg",
     description:
       "Comfortable long sleeve t-shirt for printing, teams and casual clothing.",
     colours: [
@@ -190,7 +190,7 @@ const products = [
     category: "Workwear",
     brand: "Premier",
     price: 21.99,
-    image: "/images/workshirt.jpg",
+    image: "/images/PR200 ROY MODEL 1.jpg", 
     description:
       "Smart work shirt ideal for company uniforms and embroidered branding.",
     colours: [
