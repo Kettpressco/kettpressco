@@ -16,19 +16,22 @@ export default function ProductCard({ product }) {
   );
 
 
-  const selectedVariant =
-    product.variants?.find(
-      (variant) =>
-        variant.colour === colour
-    );
 
 
-  const image =
-    selectedVariant?.images?.model ||
-    selectedVariant?.images?.front ||
-    product.images?.model ||
-    product.images?.front ||
-    "/images/placeholder.jpg";
+
+const selectedVariant =
+  product.variants?.find(
+    (variant) =>
+      variant.colour === colour
+  );
+
+
+const image =
+  selectedVariant?.images?.front ||
+  selectedVariant?.images?.model ||
+  product.images?.front ||
+  product.images?.model ||
+  "/images/placeholder.jpg";
 
 
   const slug =
@@ -120,20 +123,19 @@ export default function ProductCard({ product }) {
     >
 
 
-      <img
-        src={image}
-        alt={product.name}
-        loading="lazy"
-        style={{
-          width:"100%",
-          height:"260px",
-          objectFit:"contain",
-          borderRadius:"12px",
-          background:"#f8f8f8",
-          transition:"0.3s"
-        }}
-      />
-
+     <img
+ src={image}
+ key={image}
+ alt={product.name}
+ loading="lazy"
+ style={{
+   width:"100%",
+   height:"260px",
+   objectFit:"contain",
+   borderRadius:"12px",
+   background:"#f8f8f8"
+ }}
+/>
 
 
       <Link
@@ -221,70 +223,41 @@ export default function ProductCard({ product }) {
 
 
       {product.colours?.length > 0 && (
+  <>
+    <label>Colour</label>
 
-        <>
+    <div
+      style={{
+        display:"flex",
+        gap:"10px",
+        flexWrap:"wrap"
+      }}
+    >
 
-        <label>
-          Colour
-        </label>
+      {product.colours.map((item)=>(
 
-
-        <div
+        <button
+          key={item}
+          onClick={() => setColour(item)}
+          title={item}
           style={{
-            display:"flex",
-            gap:"10px",
-            flexWrap:"wrap"
-          }}
-        >
-
-        {product.colours.map((item)=>(
-
-          <button
-
-            key={item}
-
-            title={item}
-
-            onClick={() =>
-              setColour(item)
-            }
-
-            style={{
-
-              width:"34px",
-
-              height:"34px",
-
-              borderRadius:"50%",
-
-              border:
-                colour === item
+            width:"32px",
+            height:"32px",
+            borderRadius:"50%",
+            border:
+              colour === item
                 ? "3px solid #111"
                 : "1px solid #ccc",
+            background:item.toLowerCase(),
+            cursor:"pointer"
+          }}
+        />
 
-              background:
-                colourCode(item),
+      ))}
 
-              cursor:"pointer"
-
-            }}
-
-          />
-
-        ))}
-
-        </div>
-
-
-        <small>
-          Selected: {colour}
-        </small>
-
-
-        </>
-
-      )}
-
+    </div>
+  </>
+)}
 
 
 

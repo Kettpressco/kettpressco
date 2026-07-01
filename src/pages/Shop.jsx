@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ProductCard from "../components/ProductCard";
-
+import { supabase } from "../lib/supabase";
 export default function Shop() {
 
   const [products, setProducts] = useState([]);
@@ -8,18 +8,29 @@ export default function Shop() {
   const [category, setCategory] = useState("All");
 
 
-  useEffect(() => {
-    fetch("/products.json")
-      .then((response) => response.json())
-      .then((data) => {
-        setProducts(data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error loading products:", error);
-        setLoading(false);
-      });
-  }, []);
+ useEffect(() => {
+
+  async function loadProducts(){
+
+    const { data, error } = await supabase
+      .from("products")
+      .select("*")
+      .limit(100);
+
+    if(error){
+      console.error(error);
+      setLoading(false);
+      return;
+    }
+
+    setProducts(data);
+    setLoading(false);
+
+  }
+
+  loadProducts();
+
+}, []);
 
 
   if (loading) {
