@@ -59,16 +59,30 @@ export default function Shop() {
   ];
 
 
-  const filteredProducts =
-    category === "All"
-      ? products
-      : products.filter(
-          (product) =>
-            product.category &&
-            product.category === category
-        );
+const categoryMap = {
+  "T-Shirts": ["T-Shirt"],
+  "Hoodies": ["Hood"],
+  "Sweatshirts": ["Sweatshirt"],
+  "Polos": ["Polo"],
+  "Workwear": [
+    "Jacket",
+    "Gilet",
+    "Soft Shell Jacket",
+    "Trousers"
+  ],
+  "Hi-Vis": [
+    "Gilet",
+    "Jacket"
+  ]
+};
 
 
+const filteredProducts =
+  category === "All"
+    ? products
+    : products.filter((product) =>
+        categoryMap[category]?.includes(product.category)
+      );
   return (
 
     <div

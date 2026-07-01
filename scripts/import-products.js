@@ -48,7 +48,14 @@ fs.createReadStream("./data/pencarrie-products.csv")
 
       features:
         row["Features"] || "",
+category:
+  row["Type"] || "",
 
+categories:
+  row["Suggested Categories"] || "",
+
+collections:
+  row["Suggested Collections"] || "",
 
       colours: [],
 
