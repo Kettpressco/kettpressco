@@ -3,6 +3,7 @@ import { useState } from "react";
 import products from "../data/products";
 import { useCart } from "../context/CartContext";
 import { Helmet } from "react-helmet-async";
+import ArtworkUpload from "../components/ArtworkUpload";
 
 export default function Product() {
 
@@ -25,6 +26,7 @@ export default function Product() {
     product?.colours[0] || ""
   );
 
+  const [artwork, setArtwork] = useState("");
 
   if (!product) {
 
@@ -49,21 +51,23 @@ export default function Product() {
 
 
 
-  const handleAdd = () => {
+const handleAddToCart = () => {
 
-    addToCart({
+  addToCart({
 
-      ...product,
+    ...product,
 
-      size,
+    size,
 
-      colour,
+    colour,
 
-      quantity:1
+    artwork,
 
-    });
+    quantity:1
 
-  };
+  });
+
+};
 
 <Helmet>
 
@@ -267,8 +271,9 @@ content={`${product.description} Personalised clothing printing available from K
         </select>
 
 
-
-
+<ArtworkUpload 
+  onUpload={setArtwork}
+/>
         <button
 
           onClick={handleAdd}

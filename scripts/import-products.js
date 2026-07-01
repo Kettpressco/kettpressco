@@ -34,9 +34,46 @@ fs.createReadStream("./data/pencarrie-products.csv")
       supplier_code:
         row["Supplier Code"] || "",
 
-      price:
-        Number(row["Single List Price"] || 0),
+  price:
+  (() => {
 
+    const basePrice =
+      Number(row["Single List Price"] || 0);
+
+    const category =
+      row["Type"] || "";
+
+
+    let finalPrice;
+
+
+    if(category === "T-Shirt") {
+
+      finalPrice = basePrice + 3.99;
+
+    } else {
+
+      finalPrice = basePrice + 5;
+
+    }
+
+
+    const minimumPrice = 9.99;
+
+
+    if(finalPrice < minimumPrice) {
+
+      finalPrice = minimumPrice;
+
+    }
+
+
+    return Number(
+      finalPrice.toFixed(2)
+    );
+
+
+  })(),
 
       material:
         row["Material"] || "",
@@ -56,6 +93,8 @@ categories:
 
 collections:
   row["Suggested Collections"] || "",
+
+
 
       colours: [],
 
