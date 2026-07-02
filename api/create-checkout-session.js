@@ -1,5 +1,11 @@
 import Stripe from "stripe";
+import { createClient } from "@supabase/supabase-js";
 
+const supabase = createClient(
+  process.env.SUPABASE_URL,
+
+  process.env.SUPABASE_SERVICE_ROLE_KEY
+);
 
 if (!process.env.STRIPE_SECRET_KEY) {
   throw new Error("Missing STRIPE_SECRET_KEY");
@@ -92,7 +98,20 @@ ui_mode: "hosted_page",
 
       });
 
-res.status(200).json({
+await supabase.from("orders").insert([
+  {
+    customer_name: req.body.customer?.name,
+    customer_email: req.body.customer?.email,
+    total: cart.reduce(
+      (sum, item) => sum + item.price * item.quantity,
+      0
+    ),
+    items: cart,
+    stripe_session_id: session.id
+  }
+]);
+
+return res.status(200).json({
   id: session.id,
   url: session.url
 });

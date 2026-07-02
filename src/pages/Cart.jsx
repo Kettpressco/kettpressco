@@ -178,7 +178,25 @@ export default function Cart() {
               £{item.price.toFixed(2)}
             </strong>
 
+{item.artwork && (
+  <div style={{ marginTop: "10px" }}>
+    <p style={{ fontSize: "12px", color: "#666" }}>
+      Artwork Preview:
+    </p>
 
+    <img
+      src={item.artwork}
+      alt="Artwork"
+      style={{
+        width: "60px",
+        height: "60px",
+        objectFit: "cover",
+        borderRadius: "8px",
+        border: "1px solid #ddd"
+      }}
+    />
+  </div>
+)}
           </div>
 
 
