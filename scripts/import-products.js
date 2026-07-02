@@ -1,6 +1,7 @@
 import fs from "fs";
 import csv from "csv-parser";
 import { createClient } from "@supabase/supabase-js";
+import { PRICING } from "../src/config/pricing.js";
 
 const supabaseUrl = "https://bqzhjlmyeoyrbzsuufcu.supabase.co";
 const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJxemhqbG15ZW95cmJ6c3V1ZmN1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI5MTYzMDcsImV4cCI6MjA5ODQ5MjMwN30.2CFFTM7FeXVAghDSxeXMA3vDxZIMnfhxcnzplO44AvY";
@@ -44,18 +45,21 @@ fs.createReadStream("./data/pencarrie-products.csv")
       row["Type"] || "";
 
 
-    let finalPrice;
+ const margin =
+  category === "T-Shirt"
+    ? PRICING.margins.tshirt
+    : PRICING.margins.default;
 
+let finalPrice =
+  basePrice +
+  margin +
+  PRICING.printing.standard;
 
-    if(category === "T-Shirt") {
+if (finalPrice < PRICING.minimumPrice) {
+  finalPrice = PRICING.minimumPrice;
+}
 
-      finalPrice = basePrice + 3.99;
-
-    } else {
-
-      finalPrice = basePrice + 5;
-
-    }
+finalPrice = Number(finalPrice.toFixed(2));
 
 
     const minimumPrice = 9.99;

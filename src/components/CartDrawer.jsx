@@ -1,173 +1,129 @@
-import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 
-
-export default function CartDrawer() {
+export default function CartDrawer({ open, onClose }) {
 
   const {
     cart,
-    cartTotal,
-    removeFromCart
+    removeFromCart,
+    updateQuantity,
+    subtotal,
+    discount,
+    total
   } = useCart();
 
+  if (!open) return null;
 
   return (
-
     <div
       style={{
-        position:"fixed",
-        right:0,
-        top:0,
-        width:"380px",
-        height:"100vh",
-        background:"#fff",
-        boxShadow:"-5px 0 20px rgba(0,0,0,0.15)",
-        padding:"30px",
-        zIndex:2000,
-        overflowY:"auto"
+        position: "fixed",
+        top: 0,
+        right: 0,
+        width: "380px",
+        height: "100vh",
+        background: "#fff",
+        boxShadow: "-2px 0 10px rgba(0,0,0,0.2)",
+        zIndex: 2000,
+        display: "flex",
+        flexDirection: "column",
       }}
     >
 
-      <h2>
-        Shopping Cart
-      </h2>
+      {/* HEADER */}
+      <div
+        style={{
+          padding: "15px",
+          borderBottom: "1px solid #eee",
+          display: "flex",
+          justifyContent: "space-between",
+        }}
+      >
+        <h3>Your Cart</h3>
+        <button onClick={onClose}>X</button>
+      </div>
 
-
-      {cart.length === 0 ? (
-
-        <>
-
-          <p>
-            Your cart is empty.
-          </p>
-
-
-          <Link
-            to="/shop"
-            style={{
-              display:"inline-block",
-              background:"#111",
-              color:"#fff",
-              padding:"12px 20px",
-              borderRadius:"8px",
-              textDecoration:"none"
-            }}
-          >
-
-            Continue Shopping
-
-          </Link>
-
-        </>
-
-
-      ) : (
-
-        <>
-
-
-        {cart.map((item)=>(
-
-          <div
-            key={`${item.id}-${item.size}-${item.colour}`}
-            style={{
-              borderBottom:"1px solid #ddd",
-              paddingBottom:"15px",
-              marginBottom:"15px"
-            }}
-          >
-
-            <h3>
-              {item.name}
-            </h3>
-
-
-            <p>
-              {item.size} / {item.colour}
-            </p>
-
-
-            <p>
-              Qty: {item.quantity}
-            </p>
-
-
-            <strong>
-              £{(item.price * item.quantity).toFixed(2)}
-            </strong>
-
-
-            <br />
-
-
-            <button
-
-              onClick={() =>
-                removeFromCart(
-                  item.id,
-                  item.size,
-                  item.colour
-                )
-              }
-
+      {/* ITEMS */}
+      <div style={{ flex: 1, overflowY: "auto", padding: "10px" }}>
+        {cart.length === 0 ? (
+          <p>Your cart is empty</p>
+        ) : (
+          cart.map((item, index) => (
+            <div
+              key={index}
               style={{
-                marginTop:"10px",
-                background:"#c62828",
-                color:"#fff",
-                border:"none",
-                padding:"8px 12px",
-                borderRadius:"6px",
-                cursor:"pointer"
+                borderBottom: "1px solid #eee",
+                padding: "10px 0",
               }}
-
             >
+              <p style={{ margin: 0 }}>
+                <b>{item.product?.name}</b>
+              </p>
 
-              Remove
+              <small>
+                {item.colour} / {item.size}
+              </small>
 
-            </button>
+              <div style={{ display: "flex", gap: "10px", marginTop: "5px" }}>
+                <button
+                  onClick={() =>
+                    updateQuantity(
+                      item.id,
+                      item.size,
+                      item.colour,
+                      item.quantity - 1
+                    )
+                  }
+                >
+                  -
+                </button>
 
+                <span>{item.quantity}</span>
 
-          </div>
+                <button
+                  onClick={() =>
+                    updateQuantity(
+                      item.id,
+                      item.size,
+                      item.colour,
+                      item.quantity + 1
+                    )
+                  }
+                >
+                  +
+                </button>
 
-        ))}
+                <button
+                  onClick={() =>
+                    removeFromCart(item.id, item.size, item.colour)
+                  }
+                >
+                  Remove
+                </button>
+              </div>
+            </div>
+          ))
+        )}
+      </div>
 
+      {/* TOTALS */}
+      <div style={{ padding: "15px", borderTop: "1px solid #eee" }}>
+        <p>Subtotal: £{subtotal.toFixed(2)}</p>
+        <p>Discount: -£{discount.toFixed(2)}</p>
+        <h3>Total: £{total.toFixed(2)}</h3>
 
-
-        <h2>
-          Total £{cartTotal.toFixed(2)}
-        </h2>
-
-
-
-        <Link
-
-          to="/cart"
-
+        <button
           style={{
-            display:"block",
-            textAlign:"center",
-            background:"#111",
-            color:"#fff",
-            padding:"15px",
-            borderRadius:"10px",
-            textDecoration:"none",
-            marginTop:"20px"
+            width: "100%",
+            padding: "12px",
+            background: "black",
+            color: "white",
+            marginTop: "10px",
           }}
-
         >
-
-          View Cart
-
-        </Link>
-
-
-        </>
-
-      )}
-
+          Checkout
+        </button>
+      </div>
 
     </div>
-
   );
-
 }

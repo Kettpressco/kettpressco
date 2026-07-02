@@ -4,8 +4,17 @@ import portfolio from "./data/portfolio";
 import reviews from "./data/reviews";
 import CartIcon from "./components/CartIcon";
 
+import { useState } from "react";
+import CartDrawer from "./components/CartDrawer";
+
+import Header from "./components/Header";
+import { CartProvider } from "./context/CartContext";
+
 import { FaFacebook, FaInstagram } from "react-icons/fa";
 import CustomTshirtPrintingNorthampton from "./pages/CustomTshirtPrintingNorthampton";
+
+
+
 
 const services = [
   {
@@ -28,6 +37,7 @@ const services = [
   },
 ];
 export default function App() {
+  const [cartOpen, setCartOpen] = useState(false);
   return (
     <div
       style={{
@@ -49,6 +59,7 @@ export default function App() {
     letterSpacing: "0.3px",
   }}
 >
+<Header onCartClick={() => setCartOpen(true)} />
   <a
     href="#quote"
     style={{
@@ -60,211 +71,6 @@ export default function App() {
   </a>
 </div>
 
-      {/* NAVBAR */}
-      
-
-      <nav
-        style={{
-          position: "sticky",
-          top: 0,
-          zIndex: 1000,
-          background: "#111",
-          color: "white",
-          padding: "18px 40px",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          flexWrap: "wrap",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "12px",
-          }}
-        >
-          <img
-  src="/images/logo.jpg"
-  alt="Kett Press Co Logo"
-  style={{
-    width: "60px",
-    height: "60px",
-    objectFit: "cover",
-    borderRadius: "50%",
-  }}
-/>
-          <div>
-            <h2 style={{ margin: 0 }}>Kett Press Co</h2>
-
-            <small style={{ color: "#6f1d1dff" }}>
-              Custom Printing & Workwear
-            </small>
-          </div>
-        </div>
-
-        <div
-          style={{
-            display: "flex",
-            gap: "20px",
-            alignItems: "center",
-            flexWrap: "wrap",
-          }}
-        >
-          <a href="#home" style={navLink}>
-            Home
-          </a>
-
-          <a href="#services" style={navLink}>
-            Services
-          </a>
-          <a
-  href="/tshirt-printing-kettering"
-  style={navLink}
->
-  T-Shirt Printing
-</a>
-<a href="/workwear-printing-kettering" style={navLink}>
-  Workwear Printing
-</a>
-          <a href="#portfolio" style={navLink}>
-            Portfolio
-          </a>
-
-         <a href="/quote-calculator">Instant Quote</a>
-
-       <a href="#contact" style={navLink}>
-  Contact
-</a>
-
-
-<a href="/shop" style={navLink}>
-  Shop
-</a>
-
-
-<CartIcon />
-
-
-<a
-  href="/quote-calculator"
-  style={{
-    background: "#000",
-    color: "#fff",
-    padding: "14px 28px",
-    borderRadius: "8px",
-    textDecoration: "none",
-    marginLeft: "10px",
-  }}
->
-  Instant Quote
-</a>
-        </div>
-      </nav>
-
-      {/* HERO */}
-
-      <section
-        id="home"
-        style={{
-          minHeight: "90vh",
-          backgroundImage:
-            "linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1523381210434-271e8be1f52b?q=80&w=1600&auto=format&fit=crop')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          color: "white",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          textAlign: "center",
-          padding: "100px 20px",
-        }}
-      >
-        <h1
-          style={{
-            fontSize: "clamp(42px,5vw,58px)",
-            lineHeight: "1.3",
-            textAlign: "center",
-            marginBottom: "20px",
-            color: "#fff",
-          }}
-        >
-
-  T-Shirt Printing & Workwear Printing in 
-  <br />
-  Kettering, Northamptonshire
-        </h1>
-
-        <p
-          style={{
-            fontSize: "clamp(18px,2vw,24px)",
-            lineHeight: "1.8",
-            maxWidth: "850px",
-            margin: "0 auto 20px auto",
-            textAlign: "center",
-            padding: "0 20px",
-            color: "#ddd",
-        
-          }}
-        >
-          T-Shirts • Workwear • Hoodies • Business Branding
-        </p>
-
-        <p
-          style={{
-            marginTop: "20px",
-            color: "#bbb",
-          }}
-        >
-          Serving Kettering & Northamptonshire
-        </p>
-
-        <div
-          style={{
-            display: "flex",
-            gap: "20px",
-            marginTop: "35px",
-            flexWrap: "wrap",
-            justifyContent: "center",
-          }}
-        >
-          <a href="#quote">
-            <button style={heroButton}>
-              Get Instant Quote
-            </button>
-          </a>
-
-          <a
-            href="https://wa.me/447770118148"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <button style={whatsappButton}>
-  WhatsApp for a Quick Quote
-</button>
-          </a>
-        </div>
-      </section>
-<div
-  style={{
-    marginTop: "20px",
-    textAlign: "center",
-  }}
->
-  <a
-    href="PASTE_YOUR_GOOGLE_PROFILE_LINK_HERE"
-    target="_blank"
-    rel="noreferrer"
-    style={{
-      color: "#fff",
-      textDecoration: "none",
-      fontWeight: "600",
-    }}
-  >
-    ⭐ Read Our Google Reviews
-  </a>
-</div>
 
 {/* HOW IT WORKS */}
 
@@ -1833,7 +1639,7 @@ to suit every budget and business.
       <FaInstagram />
     </a>
   </div>
-
+<CartDrawer open={cartOpen} setOpen={setCartOpen} />
   <p
     style={{
       textAlign: "center",
@@ -1871,6 +1677,8 @@ to suit every budget and business.
     Northamptonshire
   </p>
 </footer>
+
+
     </div>
   );
 }
@@ -1910,3 +1718,12 @@ const inputStyle = {
   fontSize: "16px",
   outline: "none",
 };
+<CartProvider>
+  <div>
+    <BrowserRouter>
+      ...
+    </BrowserRouter>
+
+    <CartDrawer />
+  </div>
+</CartProvider>

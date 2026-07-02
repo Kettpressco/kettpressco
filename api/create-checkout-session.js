@@ -1,6 +1,6 @@
 import Stripe from "stripe";
 import { createClient } from "@supabase/supabase-js";
-
+import { calculateCartTotal } from "../utils/calculateCartTotal";
 const supabase = createClient(
   process.env.SUPABASE_URL,
 
@@ -102,10 +102,7 @@ await supabase.from("orders").insert([
   {
     customer_name: req.body.customer?.name,
     customer_email: req.body.customer?.email,
-    total: cart.reduce(
-      (sum, item) => sum + item.price * item.quantity,
-      0
-    ),
+  total: calculateCartTotal(cart),
     items: cart,
     stripe_session_id: session.id
   }

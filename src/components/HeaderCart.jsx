@@ -1,6 +1,6 @@
 import { useCart } from "../context/CartContext";
 
-export default function CartIcon({ onClick }) {
+export default function HeaderCart({ onClick }) {
 
   const { cartCount } = useCart();
 
@@ -10,11 +10,13 @@ export default function CartIcon({ onClick }) {
       style={{
         position: "relative",
         cursor: "pointer",
+        fontSize: "20px",
         display: "flex",
         alignItems: "center",
-        fontSize: "20px",
+        gap: "6px",
       }}
     >
+
       🛒
 
       {/* Badge */}
@@ -22,8 +24,8 @@ export default function CartIcon({ onClick }) {
         <span
           style={{
             position: "absolute",
-            top: "-6px",
-            right: "-8px",
+            top: "-8px",
+            right: "-10px",
             background: "red",
             color: "white",
             borderRadius: "50%",
@@ -39,6 +41,7 @@ export default function CartIcon({ onClick }) {
           {cartCount}
         </span>
       )}
+
     </div>
   );
 }

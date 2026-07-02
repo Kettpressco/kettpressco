@@ -1,11 +1,13 @@
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import { useState } from "react";
-import products from "../data/products";
 import { useCart } from "../context/CartContext";
-import { Helmet } from "react-helmet-async";
+import { calculatePrice } from "../utils/calculatePrice";
 import ArtworkUpload from "../components/ArtworkUpload";
 
+
 export default function Product() {
+
+  
 
     const { slug } = useParams();
 
@@ -29,6 +31,19 @@ export default function Product() {
   const [artwork, setArtwork] = useState("");
 
   if (!product) {
+    const [options, setOptions] = useState({
+  backPrint: false,
+  sleevePrint: false,
+  oversizedPrint: false,
+  artworkEdit: false,
+  newArtwork: false,
+});
+    const quantity = 1;
+
+const price = calculatePrice(product, {
+  quantity,
+  ...options,
+});
 
     return (
 
@@ -49,7 +64,74 @@ export default function Product() {
 
   }
 
+<div style={{ marginTop: "20px" }}>
 
+  <h3>Print Options</h3>
+
+  <label>
+    <input
+      type="checkbox"
+      checked={options.backPrint}
+      onChange={() =>
+        setOptions({ ...options, backPrint: !options.backPrint })
+      }
+    />
+    Back Print (+£5)
+  </label>
+
+  <br />
+
+  <label>
+    <input
+      type="checkbox"
+      checked={options.sleevePrint}
+      onChange={() =>
+        setOptions({ ...options, sleevePrint: !options.sleevePrint })
+      }
+    />
+    Sleeve Print (+£3)
+  </label>
+
+  <br />
+
+  <label>
+    <input
+      type="checkbox"
+      checked={options.oversizedPrint}
+      onChange={() =>
+        setOptions({ ...options, oversizedPrint: !options.oversizedPrint })
+      }
+    />
+    Oversized Print (+£5)
+  </label>
+
+  <br />
+
+  <label>
+    <input
+      type="checkbox"
+      checked={options.artworkEdit}
+      onChange={() =>
+        setOptions({ ...options, artworkEdit: !options.artworkEdit })
+      }
+    />
+    Artwork Edit (+£5)
+  </label>
+
+  <br />
+
+  <label>
+    <input
+      type="checkbox"
+      checked={options.newArtwork}
+      onChange={() =>
+        setOptions({ ...options, newArtwork: !options.newArtwork })
+      }
+    />
+    New Artwork Design (+£20)
+  </label>
+
+</div>
 
 const handleAddToCart = () => {
 
