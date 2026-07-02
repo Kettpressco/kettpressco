@@ -92,7 +92,6 @@ ui_mode: "hosted_page",
 
       });
 
-console.log("Stripe session:", session);
 res.status(200).json({
   id: session.id,
   url: session.url

@@ -64,10 +64,6 @@ const handleSubmit = async (e) => {
 
 const session = await response.json();
 
-console.log("API RESPONSE:", session);
-
-alert(JSON.stringify(session));
-
 if (!session.url) {
   alert("Stripe URL missing");
   return;
