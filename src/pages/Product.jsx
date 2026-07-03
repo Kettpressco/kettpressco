@@ -1,30 +1,24 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import { supabase } from "../lib/supabase";
 import { useCart } from "../context/CartContext";
 import { calculatePrice } from "../utils/calculatePrice";
 import ArtworkUpload from "../components/ArtworkUpload";
 
-import products from "../data/products"; // ⚠️ make sure this exists
-
 export default function Product() {
   const { slug } = useParams();
-  const product = products.find((item) => item.slug === slug);
+  const { addToCart, setCartOpen } = useCart();
 
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-
-
-  
-  const { addToCart } = useCart();
-
-  // ✅ safe initial states (only after product exists check in UI)
-  const [size, setSize] = useState(product?.sizes?.[0] || "");
-  const [colour, setColour] = useState(product?.colours?.[0] || "");
+  const [size, setSize] = useState("");
+  const [colour, setColour] = useState("");
   const [quantity, setQuantity] = useState(1);
-  const [artwork, setArtwork] = useState(null);
+  const [artworkUrl, setArtworkUrl] = useState("");
 
   const [options, setOptions] = useState({
-    
     backPrint: false,
     sleevePrint: false,
     oversizedPrint: false,
@@ -32,12 +26,53 @@ export default function Product() {
     newArtwork: false,
   });
 
-  const quantityValue = Number(quantity) || 1;
+  useEffect(() => {
+    fetchProduct();
+  }, [slug]);
 
+  const makeSlug = (name = "") =>
+    name
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-|-$/g, "");
 
-  
+  const fetchProduct = async () => {
+    try {
+      setLoading(true);
 
-  // ❌ safe guard FIRST (no hooks after this point)
+      const { data, error } = await supabase.from("products").select("*");
+
+      if (error) throw error;
+
+      const found = data.find(
+        (item) =>
+          String(item.id) === String(slug) ||
+          item.slug === slug ||
+          makeSlug(item.name || item.title) === slug
+      );
+
+      setProduct(found || null);
+
+      if (found) {
+        setSize(found.sizes?.[0] || "");
+        setColour(found.variants?.[0]?.colour || found.colours?.[0] || "");
+      }
+    } catch (error) {
+      console.error("PRODUCT LOAD ERROR:", error);
+      setProduct(null);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div style={{ padding: "80px", textAlign: "center" }}>
+        <h1>Loading product...</h1>
+      </div>
+    );
+  }
+
   if (!product) {
     return (
       <div style={{ padding: "80px", textAlign: "center" }}>
@@ -46,38 +81,42 @@ export default function Product() {
     );
   }
 
-  // ✅ price ALWAYS derived (never stored)
-calculatePrice(product, options)
+  const selectedVariant = product.variants?.find(
+    (variant) => variant.colour === colour
+  );
 
-  // ✅ correct function name
+  const mainImage =
+    selectedVariant?.images?.front ||
+    selectedVariant?.images?.model ||
+    product.images?.front ||
+    product.images?.model ||
+    product.image ||
+    "/images/placeholder.jpg";
 
- const finalPrice = calculatePrice(product, options);
+  const finalPrice = calculatePrice(product, options);
+  const quantityValue = Number(quantity || 1);
 
-const handleAdd = () => {
-  const item = {
-    id: product.id,
-    name: product.name || product.title,
-    price: finalPrice,
-    basePrice: Number(product.price || product.base_price || 0),
-    quantity,
-    size,
-    colour,
-    image: mainImage,
-    artworkUrl,
-    options: {
-      backPrint,
-      sleevePrint,
-      oversizedPrint,
-      artworkEdit,
-      newArtwork,
-    },
+  const handleAddToCart = () => {
+    const item = {
+      product,
+      id: product.id,
+      name: product.name || product.title,
+      price: finalPrice,
+      basePrice: Number(product.price || product.base_price || 0),
+      quantity: quantityValue,
+      size,
+      colour,
+      image: mainImage,
+      artworkUrl,
+      options,
+    };
+
+    console.log("ADDING TO CART:", item);
+
+    addToCart(item);
+    setCartOpen(true);
   };
 
-  console.log("ADDING TO CART:", item);
-
-  addToCart(item);
-  onCartClick?.();
-};
   return (
     <div
       style={{
@@ -89,82 +128,69 @@ const handleAdd = () => {
         gap: "50px",
       }}
     >
-      {/* SEO */}
       <Helmet>
-        <title>
-          {product.name} | Custom Printing | Kett Press Co
-        </title>
-
+        <title>{product.name} | Custom Printing | Kett Press Co</title>
         <meta
           name="description"
-          content={`${product.description} Personalised clothing printing available from Kett Press Co.`}
+          content={`Customise ${product.name} with print, logo or artwork from Kett Press Co.`}
         />
-
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Product",
-            name: product.name,
-            image: product.image,
-            description: product.description,
-            brand: {
-              "@type": "Brand",
-              name: product.brand,
-            },
-            offers: {
-              "@type": "Offer",
-              priceCurrency: "GBP",
-               price,
-              availability: "https://schema.org/InStock",
-            },
-          })}
-        </script>
       </Helmet>
 
-      {/* IMAGE */}
       <img
-        src={product.image}
+        src={mainImage}
         alt={product.name}
         style={{
           width: "100%",
           borderRadius: "20px",
+          background: "#f7f7f7",
+          objectFit: "contain",
         }}
       />
 
-      {/* DETAILS */}
       <div>
         <h1>{product.name}</h1>
 
-        <p>{product.description}</p>
+        <p style={{ color: "#666", lineHeight: "1.7" }}>
+          {product.material || product.features || "Custom printed clothing"}
+        </p>
 
-        {/* LIVE PRICE */}
-        <h2>£{price.toFixed(2)}</h2>
+        <h2>£{finalPrice.toFixed(2)}</h2>
+        <p>Standard front print included.</p>
 
-        {/* SIZE */}
-        <label>Size</label>
-        <select
-          value={size}
-          onChange={(e) => setSize(e.target.value)}
-          style={selectStyle}
-        >
-          {product.sizes.map((item) => (
-            <option key={item}>{item}</option>
-          ))}
-        </select>
+        {product.sizes?.length > 0 && (
+          <>
+            <label>Size</label>
+            <select
+              value={size}
+              onChange={(e) => setSize(e.target.value)}
+              style={selectStyle}
+            >
+              {product.sizes.map((item) => (
+                <option key={item} value={item}>
+                  {item}
+                </option>
+              ))}
+            </select>
+          </>
+        )}
 
-        {/* COLOUR */}
-        <label>Colour</label>
-        <select
-          value={colour}
-          onChange={(e) => setColour(e.target.value)}
-          style={selectStyle}
-        >
-          {product.colours.map((item) => (
-            <option key={item}>{item}</option>
-          ))}
-        </select>
+        {product.colours?.length > 0 && (
+          <>
+            <label>Colour</label>
+            <select
+              value={colour}
+              onChange={(e) => setColour(e.target.value)}
+              style={selectStyle}
+            >
+              {product.colours.map((item) => (
+                <option key={item} value={item}>
+                  {item}
+                </option>
+              ))}
+            </select>
+          </>
+        )}
 
-        {/* QUANTITY */}
         <label>Quantity</label>
         <input
           type="number"
@@ -174,7 +200,6 @@ const handleAdd = () => {
           style={selectStyle}
         />
 
-        {/* OPTIONS */}
         <div style={{ marginTop: "20px" }}>
           <h3>Print Options</h3>
 
@@ -185,58 +210,49 @@ const handleAdd = () => {
             ["artworkEdit", "Artwork Edit (+£5)"],
             ["newArtwork", "New Artwork Design (+£20)"],
           ].map(([key, label]) => (
-            <label key={key} style={{ display: "block", margin: "8px 0" }}>
-           <input
-  type="checkbox"
-  checked={options[key]}
-  onChange={() =>
-    setOptions((prev) => ({
-      ...prev,
-      [key]: !prev[key],
-    }))
-  }
-
-/>{" "}
+            <label key={key} style={{ display: "block", margin: "10px 0" }}>
+              <input
+                type="checkbox"
+                checked={options[key]}
+                onChange={() =>
+                  setOptions((prev) => ({
+                    ...prev,
+                    [key]: !prev[key],
+                  }))
+                }
+              />{" "}
               {label}
             </label>
           ))}
         </div>
 
-     <ArtworkUpload
-  onUpload={(url) => {
-    if (!url) {
-      console.log("Upload failed or no URL returned");
-      return;
-    }
+        <ArtworkUpload
+          onUpload={(url) => {
+            if (url) setArtworkUrl(url);
+          }}
+        />
 
-    setArtwork(url);
-  }}
-/>
-<button
-  onClick={handleAddToCart}
-  style={{
-    background:"#111",
-    color:"#fff",
-    border:"none",
-    padding:"16px 35px",
-    borderRadius:"10px",
-    cursor:"pointer",
-    fontSize:"18px",
-  }}
->
-  Add To Cart
-</button>
+        {artworkUrl && (
+          <p style={{ color: "green", marginTop: "10px" }}>
+            ✓ Artwork uploaded
+          </p>
+        )}
+
+        <button onClick={handleAddToCart} style={buttonStyle}>
+          Add To Cart
+        </button>
       </div>
     </div>
   );
 }
 
-// styles
 const selectStyle = {
   display: "block",
   width: "100%",
   padding: "12px",
   margin: "10px 0 20px",
+  borderRadius: "8px",
+  border: "1px solid #ccc",
 };
 
 const buttonStyle = {
@@ -247,4 +263,6 @@ const buttonStyle = {
   borderRadius: "10px",
   cursor: "pointer",
   fontSize: "18px",
+  fontWeight: "700",
+  marginTop: "20px",
 };

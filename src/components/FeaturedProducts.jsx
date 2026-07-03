@@ -118,7 +118,7 @@ export default function FeaturedProducts() {
                   </span>
                 </div>
 
-                <Link to={`/product/${slug}`} style={buttonStyle}>
+                <Link to={`/product/${product.id}`} style={buttonStyle}>
                   Customise & Order →
                 </Link>
               </div>
