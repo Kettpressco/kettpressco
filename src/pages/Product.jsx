@@ -148,7 +148,22 @@ export default function Product() {
       />
 
       <div>
-        <h1>{product.name}</h1>
+       <h1
+  style={{
+    fontSize: "clamp(28px, 3vw, 44px)",
+    fontWeight: "700",
+    lineHeight: "1.2",
+    marginBottom: "20px",
+    color: "#fff",
+
+    whiteSpace: "normal",
+    overflowWrap: "break-word",
+    wordBreak: "break-word",
+    maxWidth: "100%",
+  }}
+>
+  {product.name}
+</h1>
 
         <p style={{ color: "#666", lineHeight: "1.7" }}>
           {product.material || product.features || "Custom printed clothing"}
