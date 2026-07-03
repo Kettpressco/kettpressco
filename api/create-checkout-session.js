@@ -1,6 +1,6 @@
 import Stripe from "stripe";
 import { createClient } from "@supabase/supabase-js";
-import { calculateCartTotal } from "../utils/calculateCartTotal";
+import { calculateCartTotal } from "../src/utils/calculateCartTotal.js";
 const supabase = createClient(
   process.env.SUPABASE_URL,
 
