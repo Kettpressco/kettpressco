@@ -4,12 +4,14 @@ import { useCart } from "../context/CartContext";
 
 export default function Cart() {
 
-  const {
-    cart,
-    removeFromCart,
-    updateQuantity,
-    cartTotal
-  } = useCart();
+const {
+  cart,
+  removeFromCart,
+  updateQuantity,
+  subtotal,
+  discount,
+  total
+} = useCart();
 
 
 
@@ -293,70 +295,39 @@ export default function Cart() {
 
 
 
-      <div
+     <div
+  style={{
+    background: "#f5f5f5",
+    padding: "30px",
+    borderRadius: "15px",
+    textAlign: "right",
+  }}
+>
+  <h2>Order Summary</h2>
 
-        style={{
+  <p>Subtotal: £{subtotal.toFixed(2)}</p>
 
-          background:"#f5f5f5",
+  <p>Discount: -£{discount.toFixed(2)}</p>
 
-          padding:"30px",
+  <h2>Total: £{total.toFixed(2)}</h2>
 
-          borderRadius:"15px",
+  <p>Delivery calculated at checkout.</p>
 
-          textAlign:"right"
-
-        }}
-
-      >
-
-
-        <h2>
-
-          Subtotal:
-          {" "}
-          £{cartTotal.toFixed(2)}
-
-        </h2>
-
-
-
-        <p>
-          Delivery calculated at checkout.
-        </p>
-
-
-
-        <Link
-
-          to="/checkout"
-
-          style={{
-
-            display:"inline-block",
-
-            background:"#111",
-
-            color:"#fff",
-
-            padding:"16px 35px",
-
-            borderRadius:"10px",
-
-            textDecoration:"none",
-
-            marginTop:"15px"
-
-          }}
-
-        >
-
-          Proceed To Checkout
-
-        </Link>
-
-
-      </div>
-
+  <Link
+    to="/checkout"
+    style={{
+      display: "inline-block",
+      background: "#111",
+      color: "#fff",
+      padding: "16px 35px",
+      borderRadius: "10px",
+      textDecoration: "none",
+      marginTop: "15px",
+    }}
+  >
+    Proceed To Checkout
+  </Link>
+</div>
 
     </div>
 

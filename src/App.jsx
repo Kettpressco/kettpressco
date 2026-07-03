@@ -1,14 +1,13 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import portfolio from "./data/portfolio";
 import reviews from "./data/reviews";
 import CartIcon from "./components/CartIcon";
 
 import { useState } from "react";
-import CartDrawer from "./components/CartDrawer";
 
-import Header from "./components/Header";
-import { CartProvider } from "./context/CartContext";
+
+
 
 import { FaFacebook, FaInstagram } from "react-icons/fa";
 import CustomTshirtPrintingNorthampton from "./pages/CustomTshirtPrintingNorthampton";
@@ -37,7 +36,7 @@ const services = [
   },
 ];
 export default function App() {
-  const [cartOpen, setCartOpen] = useState(false);
+
   return (
     <div
       style={{
@@ -59,7 +58,7 @@ export default function App() {
     letterSpacing: "0.3px",
   }}
 >
-<Header onCartClick={() => setCartOpen(true)} />
+
   <a
     href="#quote"
     style={{
@@ -1639,7 +1638,7 @@ to suit every budget and business.
       <FaInstagram />
     </a>
   </div>
-<CartDrawer open={cartOpen} setOpen={setCartOpen} />
+
   <p
     style={{
       textAlign: "center",
@@ -1718,12 +1717,3 @@ const inputStyle = {
   fontSize: "16px",
   outline: "none",
 };
-<CartProvider>
-  <div>
-    <BrowserRouter>
-      ...
-    </BrowserRouter>
-
-    <CartDrawer />
-  </div>
-</CartProvider>

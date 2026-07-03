@@ -1,34 +1,30 @@
-// src/utils/calculatePrice.js
 import { PRICING } from "../config/pricing";
 
-/**
- * Calculates price for ONE product with selected options
- */
 export const calculatePrice = (product, options = {}) => {
-  if (!product) return 0;
+  const basePrice = Number(
+    product?.price ||
+    product?.base_price ||
+    product?.basePrice ||
+    0
+  );
 
-  const {
-    quantity = 1,
-    extras = {}
-  } = options;
+  let price = basePrice;
 
-  // -----------------------------
-  // Base product price (from Supabase / PenCarrie import)
-  // -----------------------------
-  let price = Number(product.price || 0);
+  // standard print
+  price += PRICING.printing.standard;
 
-  // -----------------------------
-  // Add optional extras (per item)
-  // -----------------------------
-  if (extras.backPrint) price += PRICING.printing.back;
-  if (extras.sleevePrint) price += PRICING.printing.sleeve;
-  if (extras.oversizedPrint) price += PRICING.printing.oversized;
+  // extras
+  if (options.backPrint) price += PRICING.printing.back;
+  if (options.sleevePrint) price += PRICING.printing.sleeve;
+  if (options.oversizedPrint) price += PRICING.printing.oversized;
 
-  if (extras.artworkEdit) price += PRICING.artwork.edit;
-  if (extras.newArtwork) price += PRICING.artwork.new;
+  // artwork
+  if (options.artworkEdit) price += PRICING.artwork.edit;
+  if (options.newArtwork) price += PRICING.artwork.new;
 
-  // -----------------------------
-  // Multiply by quantity
-  // -----------------------------
-  return Number((price * quantity).toFixed(2));
+  if (price < PRICING.minimumPrice) {
+    price = PRICING.minimumPrice;
+  }
+
+  return Number(price.toFixed(2));
 };
