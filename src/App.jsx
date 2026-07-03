@@ -6,7 +6,7 @@ import CartIcon from "./components/CartIcon";
 
 import { useState } from "react";
 
-
+import FeaturedProducts from "./components/FeaturedProducts";
 
 
 import { FaFacebook, FaInstagram } from "react-icons/fa";
@@ -37,6 +37,7 @@ const services = [
 ];
 export default function App() {
 
+  
   return (
     <div
       style={{
@@ -103,6 +104,7 @@ export default function App() {
     final delivery, we make the process quick and hassle-free. 3days turnaround
   </p>
 
+<FeaturedProducts />
   <div
     style={{
       display: "grid",
