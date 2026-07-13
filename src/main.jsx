@@ -61,6 +61,10 @@ import TShirtPrintingUK from "./pages/TShirtPrintingUK";
 import CustomTShirtsUK from "./pages/CustomTShirtsUK";
 import PersonalisedTShirtsUK from "./pages/PersonalisedTShirtsUK";
 import WorkwearPrintingUK from "./pages/WorkwearPrintingUK";
+import AdminLogin from "./pages/AdminLogin.jsx";
+import AdminDashboard from "./pages/AdminDashboard.jsx";
+import OrderDetails from "./pages/OrderDetails.jsx";
+
 
 function Layout() {
   const { cartOpen, setCartOpen } = useCart();
@@ -74,7 +78,15 @@ function Layout() {
         <Route path="/" element={<App />} />
         <Route path="/thank-you" element={<ThankYou />} />
         <Route path="/contact" element={<ContactPage />} />
-
+        <Route path="/admin" element={<AdminLogin />} />
+        <Route
+  path="/admin/orders/:id"
+  element={<OrderDetails />}
+/>
+<Route
+  path="/admin/dashboard"
+  element={<AdminDashboard />}
+/>
         <Route path="/quote-calculator" element={<QuoteCalculator />} />
 
         <Route path="/shop" element={<Shop />} />
