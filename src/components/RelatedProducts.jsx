@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { supabase } from "../supabase";
+import { supabase } from "../lib/supabase";
 
 export default function RelatedProducts({
   category,
@@ -24,10 +24,10 @@ export default function RelatedProducts({
           .limit(limit);
 
         if (categories.length > 0) {
-  query = query.in("category", categories);
-} else if (category) {
-  query = query.eq("category", category);
-}
+          query = query.in("category", categories);
+        } else if (category) {
+          query = query.eq("category", category);
+        }
 
         const { data, error } = await query;
 
@@ -47,40 +47,93 @@ export default function RelatedProducts({
     }
 
     fetchProducts();
-}, [category, categories, limit]);
+  }, [category, categories, limit]);
 
   const getProductImage = (product) => {
-    if (product.image) return product.image;
+    // First try product variants
+    if (
+      Array.isArray(product?.variants) &&
+      product.variants.length > 0
+    ) {
+      const variant = product.variants.find(
+        (item) =>
+          item?.images?.front ||
+          item?.images?.model ||
+          item?.images?.side ||
+          item?.images?.back
+      );
 
-    if (product.image_url) return product.image_url;
+      if (variant?.images?.front) {
+        return variant.images.front;
+      }
 
-    if (product.images && Array.isArray(product.images)) {
-      return product.images[0];
-    }
+      if (variant?.images?.model) {
+        return variant.images.model;
+      }
 
-    if (product.images && typeof product.images === "string") {
-      try {
-        const parsedImages = JSON.parse(product.images);
+      if (variant?.images?.side) {
+        return variant.images.side;
+      }
 
-        if (Array.isArray(parsedImages)) {
-          return parsedImages[0];
-        }
-      } catch {
-        return product.images;
+      if (variant?.images?.back) {
+        return variant.images.back;
+      }
+
+      if (variant?.image) {
+        return variant.image;
+      }
+
+      if (variant?.image_url) {
+        return variant.image_url;
       }
     }
 
-    return "/images/logo.jpg";
+    // Then try main product images object
+    if (product?.images?.front) {
+      return product.images.front;
+    }
+
+    if (product?.images?.model) {
+      return product.images.model;
+    }
+
+    if (product?.images?.side) {
+      return product.images.side;
+    }
+
+    if (product?.images?.back) {
+      return product.images.back;
+    }
+
+    if (product?.image) {
+      return product.image;
+    }
+
+    if (product?.image_url) {
+      return product.image_url;
+    }
+
+    return "/images/placeholder.jpg";
   };
 
   const getProductPrice = (product) => {
     const price =
-      product.price ??
-      product.base_price ??
-      product.basePrice ??
+      product?.price ??
+      product?.base_price ??
+      product?.basePrice ??
       0;
 
     return Number(price).toFixed(2);
+  };
+
+  const getProductSlug = (product) => {
+    return (
+      product?.slug ||
+      product?.name
+        ?.toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-|-$/g, "")
+    );
   };
 
   if (loading) {
@@ -97,11 +150,7 @@ export default function RelatedProducts({
     );
   }
 
-  if (error) {
-    return null;
-  }
-
-  if (!products.length) {
+  if (error || products.length === 0) {
     return null;
   }
 
@@ -154,8 +203,8 @@ export default function RelatedProducts({
               lineHeight: "1.8",
             }}
           >
-            Choose your garment, select your size and colour, add your
-            printing options and upload your artwork online.
+            Choose your garment, select your size and colour,
+            add your printing options and upload your artwork online.
           </p>
         </div>
 
@@ -167,107 +216,112 @@ export default function RelatedProducts({
             gap: "25px",
           }}
         >
-          {products.map((product) => (
-            <div
-              key={product.id}
-              style={{
-                background: "#fff",
-                border: "1px solid #eee",
-                borderRadius: "16px",
-                overflow: "hidden",
-                boxShadow: "0 6px 20px rgba(0,0,0,0.06)",
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
-              <Link
-                to={`/product/${product.id}`}
-                style={{
-                  textDecoration: "none",
-                  color: "inherit",
-                }}
-              >
-                <div
-                  style={{
-                    width: "100%",
-                    height: "280px",
-                    background: "#f7f7f7",
-                    overflow: "hidden",
-                  }}
-                >
-                  <img
-                    src={getProductImage(product)}
-                    alt={`${product.name || product.title} custom printing`}
-                    loading="lazy"
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "contain",
-                      padding: "15px",
-                      boxSizing: "border-box",
-                    }}
-                  />
-                </div>
-              </Link>
+          {products.map((product) => {
+            const image = getProductImage(product);
+            const slug = getProductSlug(product);
 
+            return (
               <div
+                key={product.id}
                 style={{
-                  padding: "22px",
+                  background: "#fff",
+                  border: "1px solid #eee",
+                  borderRadius: "16px",
+                  overflow: "hidden",
+                  boxShadow: "0 6px 20px rgba(0,0,0,0.06)",
                   display: "flex",
                   flexDirection: "column",
-                  flexGrow: 1,
                 }}
               >
-                <h3
-                  style={{
-                    fontSize: "1.15rem",
-                    marginTop: 0,
-                    marginBottom: "12px",
-                    color: "#111",
-                  }}
-                >
-                  {product.name || product.title}
-                </h3>
-
-                <p
-                  style={{
-                    color: "#555",
-                    marginBottom: "10px",
-                    fontSize: "0.95rem",
-                  }}
-                >
-                  Customise with your logo, design or artwork.
-                </p>
-
-                <p
-                  style={{
-                    fontSize: "1.2rem",
-                    fontWeight: "700",
-                    marginTop: "auto",
-                    marginBottom: "18px",
-                  }}
-                >
-                  From £{getProductPrice(product)}
-                </p>
-
                 <Link
-                  to={`/product/${product.id}`}
+                  to={`/product/${slug}`}
                   style={{
-                    display: "block",
-                    background: "#111",
-                    color: "#fff",
                     textDecoration: "none",
-                    padding: "14px 18px",
-                    borderRadius: "8px",
-                    textAlign: "center",
-                    fontWeight: "700",
+                    color: "inherit",
                   }}
                 >
-                  Customise & Order
+                  <div
+                    style={{
+                      width: "100%",
+                      height: "280px",
+                      background: "#f7f7f7",
+                      overflow: "hidden",
+                    }}
+                  >
+                    <img
+                      src={image}
+                      alt={`${product.name || product.title} custom printing`}
+                      loading="lazy"
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "contain",
+                        padding: "15px",
+                        boxSizing: "border-box",
+                      }}
+                    />
+                  </div>
                 </Link>
+
+                <div
+                  style={{
+                    padding: "22px",
+                    display: "flex",
+                    flexDirection: "column",
+                    flexGrow: 1,
+                  }}
+                >
+                  <h3
+                    style={{
+                      fontSize: "1.15rem",
+                      marginTop: 0,
+                      marginBottom: "12px",
+                      color: "#111",
+                    }}
+                  >
+                    {product.name || product.title}
+                  </h3>
+
+                  <p
+                    style={{
+                      color: "#555",
+                      marginBottom: "10px",
+                      fontSize: "0.95rem",
+                    }}
+                  >
+                    Customise with your logo, design or artwork.
+                  </p>
+
+                  <p
+                    style={{
+                      fontSize: "1.2rem",
+                      fontWeight: "700",
+                      marginTop: "auto",
+                      marginBottom: "18px",
+                    }}
+                  >
+                    From £{getProductPrice(product)}
+                  </p>
+
+                  <Link
+                    to={`/product/${slug}`}
+                    style={{
+                      display: "block",
+                      background: "#111",
+                      color: "#fff",
+                      textDecoration: "none",
+                      padding: "14px 18px",
+                      borderRadius: "8px",
+                      textAlign: "center",
+                      fontWeight: "700",
+                    }}
+                  >
+                    Customise & Order
+                  </Link>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         <div
