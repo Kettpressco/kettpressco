@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import RelatedProducts from "../components/RelatedProducts";
 
 export default function BrandedWorkwearPrintingNorthamptonshire() {
   const sectionStyle = {
@@ -496,6 +497,17 @@ export default function BrandedWorkwearPrintingNorthamptonshire() {
             />
           </div>
         </section>
+
+<RelatedProducts
+  categories={[
+    "Jacket",
+    "Gilet",
+    "Soft Shell Jacket",
+    "Trousers"
+  ]}
+  limit={4}
+  title="Popular Branded Workwear"
+/>
 
         {/* FAQ */}
         <section style={sectionStyle}>

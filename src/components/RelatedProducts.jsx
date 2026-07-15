@@ -4,6 +4,7 @@ import { supabase } from "../supabase";
 
 export default function RelatedProducts({
   category,
+  categories = [],
   limit = 4,
   title = "Popular Products",
 }) {
@@ -22,9 +23,11 @@ export default function RelatedProducts({
           .select("*")
           .limit(limit);
 
-        if (category) {
-          query = query.eq("category", category);
-        }
+        if (categories.length > 0) {
+  query = query.in("category", categories);
+} else if (category) {
+  query = query.eq("category", category);
+}
 
         const { data, error } = await query;
 
@@ -44,7 +47,7 @@ export default function RelatedProducts({
     }
 
     fetchProducts();
-  }, [category, limit]);
+}, [category, categories, limit]);
 
   const getProductImage = (product) => {
     if (product.image) return product.image;
