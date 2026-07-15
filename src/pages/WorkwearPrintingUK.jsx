@@ -1,4 +1,6 @@
 export default function WorkwearPrintingUK() {
+ import RelatedProducts from "../components/RelatedProducts";
+
   const sectionStyle = {
     maxWidth: "1200px",
     margin: "0 auto",
@@ -235,6 +237,20 @@ export default function WorkwearPrintingUK() {
           </p>
         </div>
       </section>
+
+{/* RELATED WORKWEAR PRODUCTS */}
+<RelatedProducts
+  categories={[
+    "Jacket",
+    "Gilet",
+    "Soft Shell Jacket",
+    "Trousers",
+    "Polo"
+  ]}
+  limit={4}
+  title="Popular Branded Workwear"
+/>
+
 
       {/* FAQ */}
       <section

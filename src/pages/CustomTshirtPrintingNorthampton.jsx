@@ -1,5 +1,6 @@
 import React from "react";
 import { Helmet } from "react-helmet-async";
+import RelatedProducts from "../components/RelatedProducts";
 
 export default function CustomTshirtPrintingNorthampton() {
   const gallery = [
@@ -262,6 +263,15 @@ export default function CustomTshirtPrintingNorthampton() {
             Delapre and surrounding areas.
           </p>
         </section>
+
+{/* RELATED T-SHIRT PRODUCTS */}
+<RelatedProducts
+  categories={[
+    "T-Shirt"
+  ]}
+  limit={4}
+  title="Popular Custom T-Shirts"
+/>
 
         {/* FAQ */}
 
