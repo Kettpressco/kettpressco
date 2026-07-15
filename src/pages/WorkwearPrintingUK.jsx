@@ -1,6 +1,6 @@
-export default function WorkwearPrintingUK() {
- import RelatedProducts from "../components/RelatedProducts";
+import RelatedProducts from "../components/RelatedProducts";
 
+export default function WorkwearPrintingUK() {
   const sectionStyle = {
     maxWidth: "1200px",
     margin: "0 auto",

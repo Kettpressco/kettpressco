@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import RelatedProducts from "../components/RelatedProducts";
 
 export default function WorkwearPrintingKetteringPage() {
   const cardStyle = {
@@ -107,6 +108,18 @@ export default function WorkwearPrintingKetteringPage() {
             <li>Events & Hospitality Staff</li>
           </ul>
         </div>
+
+        <RelatedProducts
+  categories={[
+    "Jacket",
+    "Gilet",
+    "Soft Shell Jacket",
+    "Trousers",
+    "Polo"
+  ]}
+  limit={4}
+  title="Popular Branded Workwear"
+/>
 
         {/* WORK IMAGE */}
         <div style={cardStyle}>
