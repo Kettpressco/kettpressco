@@ -4,14 +4,23 @@ import React, {
   useState,
 } from "react";
 
+import { useSearchParams } from "react-router-dom";
+
 import ProductCard from "../components/ProductCard";
 import { supabase } from "../lib/supabase";
 
 export default function Shop() {
+  const [searchParams] = useSearchParams();
   const [products, setProducts] = useState([]);
 
   const [loading, setLoading] = useState(true);
+useEffect(() => {
+  const categoryFromUrl = searchParams.get("category");
 
+  if (categoryFromUrl) {
+    setCategory(categoryFromUrl);
+  }
+}, [searchParams]);
   const [category, setCategory] =
     useState("All");
 

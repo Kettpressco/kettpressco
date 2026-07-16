@@ -165,6 +165,38 @@ const seoLinks = [
   ["DTF Printing Northamptonshire", "/dtf-printing-northamptonshire"],
   ["Areas We Cover", "/areas-we-cover"],
 ];
+const productCategories = [
+  {
+    title: "T-Shirts",
+    text: "Custom printed T-shirts for businesses, events, teams, brands and personal orders.",
+    image: "/images/tshirt4.jpg",
+    link: "/shop?category=T-Shirts",
+  },
+  {
+    title: "Hoodies",
+    text: "Personalised hoodies with your logo, artwork or custom design.",
+    image: "/images/work10.jpg",
+    link: "/shop?category=Hoodies",
+  },
+  {
+    title: "Workwear",
+    text: "Professional branded workwear for tradespeople, companies and teams.",
+    image: "/images/workwear.jpg",
+    link: "/shop?category=Workwear",
+  },
+  {
+    title: "Polo Shirts",
+    text: "Smart personalised polo shirts for staff uniforms and business branding.",
+    image: "/images/PoloTshirt.jpg",
+    link: "/shop?category=Polos",
+  },
+  {
+    title: "Hi-Vis",
+    text: "Printed hi-vis clothing for construction, logistics and workplace teams.",
+    image: "/images/workwear4.jpg",
+    link: "/shop?category=Hi-Vis",
+  },
+];
 
 export default function App() {
   return (
@@ -412,6 +444,154 @@ export default function App() {
           <span>👕 Single & Bulk Orders</span>
         </div>
       </section>
+
+
+{/* SHOP BY CATEGORY */}
+
+<section
+  style={{
+    padding: "90px 20px",
+    background: "#f8fafc",
+  }}
+>
+  <div
+    style={{
+      maxWidth: "1200px",
+      margin: "0 auto",
+    }}
+  >
+    <div
+      style={{
+        maxWidth: "760px",
+        margin: "0 auto 45px",
+        textAlign: "center",
+      }}
+    >
+      <span
+        style={{
+          display: "block",
+          color: "#ea580c",
+          fontSize: "13px",
+          fontWeight: "900",
+          letterSpacing: "1.6px",
+          marginBottom: "12px",
+        }}
+      >
+        SHOP BY CATEGORY
+      </span>
+
+      <h2
+        style={{
+          fontSize: "clamp(32px, 5vw, 48px)",
+          color: "#111827",
+          margin: "0 0 18px",
+          letterSpacing: "-1px",
+        }}
+      >
+        Find The Right Clothing For Your Order
+      </h2>
+
+      <p
+        style={{
+          color: "#6b7280",
+          fontSize: "17px",
+          lineHeight: "1.8",
+          margin: 0,
+        }}
+      >
+        Choose a category to quickly find the right garment, then customise
+        it with your size, colour, printing options and artwork.
+      </p>
+    </div>
+
+    <div
+      style={{
+        display: "grid",
+        gridTemplateColumns:
+          "repeat(auto-fit, minmax(220px, 1fr))",
+        gap: "22px",
+      }}
+    >
+      {productCategories.map((category) => (
+        <Link
+          key={category.title}
+          to={category.link}
+          style={{
+            textDecoration: "none",
+            color: "inherit",
+          }}
+        >
+          <article
+            style={{
+              background: "#fff",
+              borderRadius: "18px",
+              overflow: "hidden",
+              border: "1px solid #e5e7eb",
+              boxShadow: "0 10px 30px rgba(15,23,42,0.06)",
+              height: "100%",
+            }}
+          >
+            <div
+              style={{
+                height: "220px",
+                background: "#fff",
+                overflow: "hidden",
+              }}
+            >
+              <img
+                src={category.image}
+                alt={`${category.title} custom printing`}
+                loading="lazy"
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                }}
+              />
+            </div>
+
+            <div
+              style={{
+                padding: "24px",
+              }}
+            >
+              <h3
+                style={{
+                  fontSize: "22px",
+                  color: "#111827",
+                  margin: "0 0 10px",
+                }}
+              >
+                {category.title}
+              </h3>
+
+              <p
+                style={{
+                  color: "#6b7280",
+                  lineHeight: "1.7",
+                  fontSize: "14px",
+                  marginBottom: "18px",
+                }}
+              >
+                {category.text}
+              </p>
+
+              <span
+                style={{
+                  color: "#ea580c",
+                  fontWeight: "800",
+                  fontSize: "14px",
+                }}
+              >
+                Shop {category.title} →
+              </span>
+            </div>
+          </article>
+        </Link>
+      ))}
+    </div>
+  </div>
+</section>
 
       {/* FEATURED PRODUCTS */}
 
