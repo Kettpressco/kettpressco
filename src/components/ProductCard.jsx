@@ -1,27 +1,17 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { useCart } from "../context/CartContext";
-import { supabase } from "../lib/supabase";
 import { calculatePrice } from "../utils/calculatePrice";
 
 export default function ProductCard({ product }) {
-  const { addToCart, setCartOpen } = useCart();
-
-  /*
-    Shop.jsx can now pass:
-    - product.displayImage
-    - product.displayVariant
-
-    This lets each card start with a different colour/image
-    instead of every garment defaulting to black.
-  */
-
   const initialVariant = useMemo(() => {
     if (product?.displayVariant) {
       return product.displayVariant;
     }
 
-    if (Array.isArray(product?.variants) && product.variants.length > 0) {
+    if (
+      Array.isArray(product?.variants) &&
+      product.variants.length > 0
+    ) {
       return product.variants[0];
     }
 
@@ -33,26 +23,12 @@ export default function ProductCard({ product }) {
     product?.colours?.[0] ||
     "";
 
-  const [size, setSize] = useState(
-    product?.sizes?.[0] || ""
-  );
-
   const [colour, setColour] = useState(initialColour);
 
-  const [file, setFile] = useState(null);
-  const [uploading, setUploading] = useState(false);
-  const [artworkUrl, setArtworkUrl] = useState("");
-
-  const [options, setOptions] = useState({
-    backPrint: false,
-    sleevePrint: false,
-    oversizedPrint: false,
-    artworkEdit: false,
-    newArtwork: false,
-  });
-
   /*
-    Find currently selected colour variant.
+  ----------------------------------------
+  FIND SELECTED VARIANT
+  ----------------------------------------
   */
 
   const selectedVariant = useMemo(() => {
@@ -74,230 +50,152 @@ export default function ProductCard({ product }) {
   }, [product, colour, initialVariant]);
 
   /*
-    Safely extract an image from a variant.
+  ----------------------------------------
+  IMAGE HELPERS
+  ----------------------------------------
   */
+
+  const getImageFromImages = (images) => {
+    if (!images) {
+      return null;
+    }
+
+    if (
+      typeof images === "object" &&
+      !Array.isArray(images)
+    ) {
+      return (
+        images.front ||
+        images.model ||
+        images.side ||
+        images.back ||
+        images.detail ||
+        null
+      );
+    }
+
+    if (
+      Array.isArray(images) &&
+      images.length > 0
+    ) {
+      return images[0];
+    }
+
+    if (
+      typeof images === "string" &&
+      images.trim()
+    ) {
+      try {
+        const parsed = JSON.parse(images);
+
+        return getImageFromImages(parsed);
+      } catch {
+        return images;
+      }
+    }
+
+    return null;
+  };
 
   const getVariantImage = (variant) => {
-    if (!variant) return null;
-
-    if (variant.image) {
-      return variant.image;
+    if (!variant) {
+      return null;
     }
 
-    if (variant.image_url) {
-      return variant.image_url;
-    }
-
-    if (variant.images) {
-      if (typeof variant.images === "object") {
-        return (
-          variant.images.front ||
-          variant.images.model ||
-          variant.images.side ||
-          variant.images.back ||
-          variant.images.detail ||
-          null
-        );
-      }
-
-      if (Array.isArray(variant.images)) {
-        return variant.images[0] || null;
-      }
-    }
-
-    return null;
+    return (
+      getImageFromImages(variant.images) ||
+      variant.image ||
+      variant.image_url ||
+      null
+    );
   };
-
-  /*
-    Safely extract product fallback image.
-  */
 
   const getProductImage = () => {
-    if (product?.displayImage) {
-      return product.displayImage;
-    }
-
-    if (product?.image) {
-      return product.image;
-    }
-
-    if (product?.image_url) {
-      return product.image_url;
-    }
-
-    if (product?.images) {
-      if (typeof product.images === "object") {
-        return (
-          product.images.front ||
-          product.images.model ||
-          product.images.side ||
-          product.images.back ||
-          product.images.detail ||
-          null
-        );
-      }
-
-      if (Array.isArray(product.images)) {
-        return product.images[0] || null;
-      }
-    }
-
-    return null;
+    return (
+      product?.displayImage ||
+      getImageFromImages(product?.images) ||
+      product?.image ||
+      product?.image_url ||
+      "/images/placeholder.jpg"
+    );
   };
-
-  /*
-    Once customer selects a colour,
-    use that colour's image.
-
-    Before customer changes colour,
-    the colourful Shop.jsx display image
-    can be used.
-  */
 
   const image =
     getVariantImage(selectedVariant) ||
-    getProductImage() ||
-    "/images/placeholder.jpg";
+    getProductImage();
 
   /*
-    Product URL slug.
+  ----------------------------------------
+  PRODUCT NAME
+  ----------------------------------------
+  */
+
+  const productName =
+    product?.name ||
+    product?.title ||
+    "Custom Printed Garment";
+
+  /*
+  ----------------------------------------
+  PRODUCT SLUG
+  ----------------------------------------
   */
 
   const slug =
     product?.slug ||
-    product?.name
-      ?.toLowerCase()
+    productName
+      .toLowerCase()
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/^-|-$/g, "");
 
   /*
-    Calculate current product price.
+  ----------------------------------------
+  PRICE
+  ----------------------------------------
   */
+
+  const standardOptions = {
+    backPrint: false,
+    sleevePrint: false,
+    oversizedPrint: false,
+    artworkEdit: false,
+    newArtwork: false,
+  };
 
   const finalPrice = calculatePrice(
     product,
-    options
+    standardOptions
   );
 
   /*
-    Toggle printing extras.
+  ----------------------------------------
+  AVAILABLE COLOURS
+  ----------------------------------------
   */
 
-  const toggleOption = (key) => {
-    setOptions((previousOptions) => ({
-      ...previousOptions,
-      [key]: !previousOptions[key],
-    }));
-  };
-
-  /*
-    Upload artwork to Supabase.
-  */
-
-  const handleUpload = async () => {
-    if (!file) {
-      alert("Please select a file first");
-      return;
-    }
-
-    try {
-      setUploading(true);
-
-      const fileExt =
-        file.name.split(".").pop() || "file";
-
-      const fileName = `${Date.now()}-${Math.random()
-        .toString(36)
-        .substring(2)}.${fileExt}`;
-
-      const { error } = await supabase.storage
-        .from("artwork")
-        .upload(fileName, file);
-
-      if (error) {
-        console.error(
-          "ARTWORK UPLOAD ERROR:",
-          error
-        );
-
-        alert("Artwork upload failed.");
-        return;
-      }
-
-      const { data } = supabase.storage
-        .from("artwork")
-        .getPublicUrl(fileName);
-
-      const publicUrl = data?.publicUrl || "";
-
-      setArtworkUrl(publicUrl);
-
-      alert("Artwork uploaded successfully!");
-    } catch (error) {
-      console.error(
-        "ARTWORK UPLOAD ERROR:",
-        error
-      );
-
-      alert(
-        "There was a problem uploading your artwork."
-      );
-    } finally {
-      setUploading(false);
-    }
-  };
-
-  /*
-    Add configured product to cart.
-  */
-
-  const handleAddToCart = () => {
+  const availableColours = useMemo(() => {
     if (
-      product?.sizes?.length > 0 &&
-      !size
+      Array.isArray(product?.colours) &&
+      product.colours.length > 0
     ) {
-      alert("Please choose a size.");
-      return;
+      return product.colours;
     }
 
     if (
-      product?.colours?.length > 0 &&
-      !colour
+      Array.isArray(product?.variants)
     ) {
-      alert("Please choose a colour.");
-      return;
+      return product.variants
+        .map((variant) => variant?.colour)
+        .filter(Boolean);
     }
 
-    const cartItem = {
-      product,
-      id: product.id,
-      name:
-        product.name ||
-        product.title ||
-        "Custom Product",
-      price: finalPrice,
-      size,
-      colour,
-      image,
-      quantity: 1,
-      options,
-      artworkUrl,
-    };
-
-    console.log(
-      "ADDING TO CART:",
-      cartItem
-    );
-
-    addToCart(cartItem);
-
-    if (setCartOpen) {
-      setCartOpen(true);
-    }
-  };
+    return [];
+  }, [product]);
 
   /*
-    Colour swatch helper.
+  ----------------------------------------
+  COLOUR SWATCH
+  ----------------------------------------
   */
 
   const colourCode = (name) => {
@@ -311,244 +209,524 @@ export default function ProductCard({ product }) {
 
     const colours = {
       black: "#000000",
+
       white: "#ffffff",
+
       navy: "#001f3f",
+
       "navy blue": "#001f3f",
+
       blue: "#0074d9",
+
       royal: "#4169e1",
+
       "royal blue": "#4169e1",
-      red: "#ff4136",
-      green: "#2ecc40",
-      grey: "#999999",
-      gray: "#999999",
+
+      red: "#dc2626",
+
+      green: "#16a34a",
+
+      grey: "#9ca3af",
+
+      gray: "#9ca3af",
+
       charcoal: "#36454f",
-      yellow: "#ffdc00",
-      orange: "#ff851b",
-      pink: "#ff69b4",
-      purple: "#b10dc9",
+
+      yellow: "#facc15",
+
+      orange: "#f97316",
+
+      pink: "#ec4899",
+
+      purple: "#9333ea",
+
       brown: "#795548",
+
       burgundy: "#800020",
+
       maroon: "#800000",
+
       khaki: "#c3b091",
+
       beige: "#f5f5dc",
+
       cream: "#fffdd0",
+
       stone: "#c2b280",
-      lime: "#32cd32",
-      turquoise: "#40e0d0",
+
+      lime: "#84cc16",
+
+      turquoise: "#14b8a6",
     };
 
     return (
       colours[normalisedName] ||
-      "#dddddd"
+      "#d1d5db"
     );
   };
 
+  /*
+  ----------------------------------------
+  SHOW LIMITED SWATCHES
+  ----------------------------------------
+  */
+
+  const visibleColours =
+    availableColours.slice(0, 6);
+
+  const extraColourCount =
+    Math.max(
+      0,
+      availableColours.length -
+        visibleColours.length
+    );
+
   return (
-    <div
+    <article
       style={{
         background: "#fff",
-        borderRadius: "18px",
-        padding: "20px",
+
+        border:
+          "1px solid #e5e7eb",
+
+        borderRadius:
+          "18px",
+
+        overflow:
+          "hidden",
+
+        display:
+          "flex",
+
+        flexDirection:
+          "column",
+
+        height:
+          "100%",
+
         boxShadow:
-          "0 8px 25px rgba(0,0,0,0.08)",
-        display: "flex",
-        flexDirection: "column",
-        gap: "14px",
-        height: "100%",
+          "0 8px 25px rgba(15,23,42,0.06)",
+
+        transition:
+          "transform 0.2s ease, box-shadow 0.2s ease",
       }}
     >
-      {/* PRODUCT IMAGE */}
+      {/* ======================================
+          PRODUCT IMAGE
+      ====================================== */}
+
       <Link
         to={`/product/${slug}`}
         style={{
-          display: "block",
-          textDecoration: "none",
+          display:
+            "block",
+
+          position:
+            "relative",
+
+          textDecoration:
+            "none",
+
+          color:
+            "inherit",
         }}
       >
         <div
           style={{
-            background: "#f7f7f7",
-            borderRadius: "14px",
-            overflow: "hidden",
+            width:
+              "100%",
+
+            height:
+              "300px",
+
+            background:
+              "#f8fafc",
+
+            overflow:
+              "hidden",
+
+            display:
+              "flex",
+
+            alignItems:
+              "center",
+
+            justifyContent:
+              "center",
+
+            padding:
+              "15px",
+
+            boxSizing:
+              "border-box",
           }}
         >
           <img
             src={image}
             key={image}
-            alt={
-              `${product?.name || "Custom garment"}${
-                colour
-                  ? ` in ${colour}`
-                  : ""
-              }`
-            }
+            alt={`${productName}${
+              colour
+                ? ` in ${colour}`
+                : ""
+            }`}
             loading="lazy"
+            onError={(event) => {
+              event.currentTarget.src =
+                "/images/placeholder.jpg";
+            }}
             style={{
-              width: "100%",
-              height: "280px",
-              objectFit: "contain",
-              display: "block",
+              width:
+                "100%",
+
+              height:
+                "100%",
+
+              objectFit:
+                "contain",
+
+              transition:
+                "transform 0.3s ease",
             }}
           />
         </div>
+
+        {/* BADGE */}
+
+        <div
+          style={{
+            position:
+              "absolute",
+
+            top:
+              "14px",
+
+            left:
+              "14px",
+
+            background:
+              "#111827",
+
+            color:
+              "#fff",
+
+            padding:
+              "7px 11px",
+
+            borderRadius:
+              "999px",
+
+            fontSize:
+              "11px",
+
+            fontWeight:
+              "800",
+
+            letterSpacing:
+              "0.5px",
+          }}
+        >
+          CUSTOM PRINTING
+        </div>
       </Link>
 
-      {/* PRODUCT INFORMATION */}
-      <div>
+      {/* ======================================
+          PRODUCT DETAILS
+      ====================================== */}
+
+      <div
+        style={{
+          padding:
+            "22px",
+
+          display:
+            "flex",
+
+          flexDirection:
+            "column",
+
+          flexGrow:
+            1,
+        }}
+      >
+        {/* CATEGORY */}
+
+        {product?.category && (
+          <div
+            style={{
+              color:
+                "#ea580c",
+
+              fontSize:
+                "11px",
+
+              fontWeight:
+                "900",
+
+              textTransform:
+                "uppercase",
+
+              letterSpacing:
+                "1px",
+
+              marginBottom:
+                "8px",
+            }}
+          >
+            {product.category}
+          </div>
+        )}
+
+        {/* TITLE */}
+
         <Link
           to={`/product/${slug}`}
           style={{
-            textDecoration: "none",
-            color: "#111",
+            textDecoration:
+              "none",
+
+            color:
+              "#111827",
           }}
         >
           <h3
             style={{
-              margin: "0 0 8px",
-              fontSize: "18px",
-              lineHeight: "1.4",
+              margin:
+                "0 0 10px",
+
+              fontSize:
+                "18px",
+
+              lineHeight:
+                "1.4",
+
+              fontWeight:
+                "800",
             }}
           >
-            {product?.name ||
-              product?.title}
+            {productName}
           </h3>
         </Link>
 
+        {/* DESCRIPTION */}
+
         <p
           style={{
-            color: "#666",
-            margin: 0,
-            minHeight: "44px",
-            lineHeight: "1.5",
+            color:
+              "#6b7280",
+
+            margin:
+              "0 0 16px",
+
+            fontSize:
+              "14px",
+
+            lineHeight:
+              "1.6",
+
+            minHeight:
+              "44px",
           }}
         >
           {product?.material ||
             product?.features ||
-            "Custom printed garment"}
+            "Customise with your logo, design or artwork."}
         </p>
-      </div>
 
-      {/* PRICE */}
-      <div
-        style={{
-          background: "#f8f8f8",
-          padding: "12px",
-          borderRadius: "12px",
-        }}
-      >
-        <span
+        {/* PRICE */}
+
+        <div
           style={{
-            fontSize: "13px",
-            color: "#666",
+            marginBottom:
+              "16px",
           }}
         >
-          From
-        </span>
+          <span
+            style={{
+              display:
+                "block",
 
-        <strong
-          style={{
-            display: "block",
-            fontSize: "24px",
-            color: "#111",
-          }}
-        >
-          £{Number(finalPrice).toFixed(2)}
-        </strong>
+              color:
+                "#6b7280",
 
-        <small
-          style={{
-            color: "#666",
-          }}
-        >
-          Includes standard front print
-        </small>
-      </div>
+              fontSize:
+                "12px",
 
-      {/* SIZE SELECTOR */}
-      {Array.isArray(product?.sizes) &&
-        product.sizes.length > 0 && (
-          <div>
-            <label
+              marginBottom:
+                "3px",
+            }}
+          >
+            From
+          </span>
+
+          <div
+            style={{
+              display:
+                "flex",
+
+              alignItems:
+                "baseline",
+
+              gap:
+                "8px",
+            }}
+          >
+            <strong
               style={{
-                fontWeight: "600",
-                fontSize: "14px",
+                fontSize:
+                  "26px",
+
+                color:
+                  "#111827",
+
+                lineHeight:
+                  "1",
               }}
             >
-              Size
-            </label>
-
-            <select
-              value={size}
-              onChange={(event) =>
-                setSize(event.target.value)
-              }
-              style={{
-                width: "100%",
-                marginTop: "6px",
-                padding: "11px",
-                borderRadius: "10px",
-                border: "1px solid #ddd",
-                background: "#fff",
-              }}
-            >
-              {product.sizes.map((item) => (
-                <option
-                  key={item}
-                  value={item}
-                >
-                  {item}
-                </option>
-              ))}
-            </select>
+              £
+              {Number(
+                finalPrice
+              ).toFixed(2)}
+            </strong>
           </div>
-        )}
 
-      {/* COLOUR SWATCHES */}
-      {Array.isArray(product?.colours) &&
-        product.colours.length > 0 && (
-          <div>
-            <label
+          <span
+            style={{
+              display:
+                "block",
+
+              color:
+                "#16a34a",
+
+              fontSize:
+                "12px",
+
+              fontWeight:
+                "700",
+
+              marginTop:
+                "6px",
+            }}
+          >
+            ✓ Standard front print included
+          </span>
+        </div>
+
+        {/* ======================================
+            COLOUR SWATCHES
+        ====================================== */}
+
+        {availableColours.length >
+          0 && (
+          <div
+            style={{
+              marginBottom:
+                "20px",
+            }}
+          >
+            <div
               style={{
-                fontWeight: "600",
-                fontSize: "14px",
+                display:
+                  "flex",
+
+                justifyContent:
+                  "space-between",
+
+                alignItems:
+                  "center",
+
+                marginBottom:
+                  "9px",
               }}
             >
-              Colour:{" "}
-              <strong>{colour}</strong>
-            </label>
+              <span
+                style={{
+                  color:
+                    "#374151",
+
+                  fontSize:
+                    "13px",
+
+                  fontWeight:
+                    "700",
+                }}
+              >
+                Available colours
+              </span>
+
+              {colour && (
+                <span
+                  style={{
+                    color:
+                      "#6b7280",
+
+                    fontSize:
+                      "11px",
+                  }}
+                >
+                  {colour}
+                </span>
+              )}
+            </div>
 
             <div
               style={{
-                display: "flex",
-                gap: "9px",
-                flexWrap: "wrap",
-                marginTop: "10px",
+                display:
+                  "flex",
+
+                alignItems:
+                  "center",
+
+                flexWrap:
+                  "wrap",
+
+                gap:
+                  "7px",
               }}
             >
-              {product.colours.map(
+              {visibleColours.map(
                 (item) => {
                   const active =
-                    item === colour;
+                    item ===
+                    colour;
 
                   return (
                     <button
-                      key={item}
+                      key={
+                        item
+                      }
                       type="button"
                       onClick={() =>
-                        setColour(item)
+                        setColour(
+                          item
+                        )
                       }
-                      title={item}
-                      aria-label={`Select ${item}`}
+                      title={
+                        item
+                      }
+                      aria-label={`View ${productName} in ${item}`}
                       style={{
-                        width: "32px",
-                        height: "32px",
-                        borderRadius: "50%",
-                        border: active
-                          ? "3px solid #111"
-                          : "1px solid #ccc",
+                        width:
+                          "27px",
+
+                        height:
+                          "27px",
+
+                        borderRadius:
+                          "50%",
+
                         background:
-                          colourCode(item),
-                        cursor: "pointer",
+                          colourCode(
+                            item
+                          ),
+
+                        cursor:
+                          "pointer",
+
+                        border:
+                          active
+                            ? "3px solid #f97316"
+                            : "1px solid #d1d5db",
+
                         boxShadow:
                           item
                             ?.toLowerCase()
@@ -556,190 +734,118 @@ export default function ProductCard({ product }) {
                           "white"
                             ? "inset 0 0 0 1px #ddd"
                             : "none",
+
+                        padding:
+                          0,
                       }}
                     />
                   );
                 }
               )}
+
+              {extraColourCount >
+                0 && (
+                <span
+                  style={{
+                    color:
+                      "#6b7280",
+
+                    fontSize:
+                      "12px",
+
+                    fontWeight:
+                      "700",
+
+                    marginLeft:
+                      "3px",
+                  }}
+                >
+                  +
+                  {
+                    extraColourCount
+                  }{" "}
+                  more
+                </span>
+              )}
             </div>
           </div>
         )}
 
-      {/* PRINTING OPTIONS */}
-      <div>
-        <label
+        {/* PRODUCT FEATURES */}
+
+        <div
           style={{
-            fontWeight: "700",
-            fontSize: "14px",
+            display:
+              "grid",
+
+            gap:
+              "7px",
+
+            marginBottom:
+              "20px",
+
+            fontSize:
+              "12px",
+
+            color:
+              "#4b5563",
           }}
         >
-          Printing Options
-        </label>
-
-        {[
-          [
-            "backPrint",
-            "Back Print",
-            "+£5",
-          ],
-          [
-            "sleevePrint",
-            "Sleeve Print",
-            "+£3",
-          ],
-          [
-            "oversizedPrint",
-            "Oversized Print",
-            "+£5",
-          ],
-          [
-            "artworkEdit",
-            "Artwork Edit",
-            "+£5",
-          ],
-          [
-            "newArtwork",
-            "New Artwork Design",
-            "+£20",
-          ],
-        ].map(
-          ([key, label, cost]) => (
-            <label
-              key={key}
-              style={{
-                display: "flex",
-                justifyContent:
-                  "space-between",
-                alignItems: "center",
-                marginTop: "9px",
-                padding: "9px 10px",
-                borderRadius: "10px",
-                background: options[key]
-                  ? "#f0f0f0"
-                  : "#fff",
-                border:
-                  "1px solid #e5e5e5",
-                cursor: "pointer",
-                gap: "10px",
-              }}
-            >
-              <span>
-                <input
-                  type="checkbox"
-                  checked={options[key]}
-                  onChange={() =>
-                    toggleOption(key)
-                  }
-                  style={{
-                    marginRight: "8px",
-                  }}
-                />
-
-                {label}
-              </span>
-
-              <strong>{cost}</strong>
-            </label>
-          )
-        )}
-      </div>
-
-      {/* ARTWORK UPLOAD */}
-      <div>
-        <label
-          style={{
-            fontWeight: "700",
-            fontSize: "14px",
-          }}
-        >
-          Upload Artwork{" "}
-          <span
-            style={{
-              fontWeight: "400",
-              color: "#777",
-            }}
-          >
-            (Optional)
+          <span>
+            ✓ Choose size and colour
           </span>
-        </label>
 
-        <input
-          type="file"
-          accept="image/*,.pdf,.svg,.ai"
-          onChange={(event) =>
-            setFile(
-              event.target.files?.[0] ||
-                null
-            )
-          }
-          style={{
-            display: "block",
-            marginTop: "8px",
-            width: "100%",
-          }}
-        />
+          <span>
+            ✓ Add extra print positions
+          </span>
 
-        <button
-          type="button"
-          onClick={handleUpload}
-          disabled={
-            uploading || !file
-          }
+          <span>
+            ✓ Upload artwork online
+          </span>
+        </div>
+
+        {/* CTA */}
+
+        <Link
+          to={`/product/${slug}`}
           style={{
-            marginTop: "10px",
-            padding: "11px",
-            width: "100%",
-            borderRadius: "10px",
-            border: "none",
+            display:
+              "block",
+
+            width:
+              "100%",
+
+            boxSizing:
+              "border-box",
+
             background:
-              uploading || !file
-                ? "#aaa"
-                : "#0074D9",
-            color: "#fff",
-            cursor:
-              uploading || !file
-                ? "not-allowed"
-                : "pointer",
-            fontWeight: "700",
+              "#111827",
+
+            color:
+              "#fff",
+
+            textDecoration:
+              "none",
+
+            padding:
+              "14px 18px",
+
+            borderRadius:
+              "9px",
+
+            textAlign:
+              "center",
+
+            fontWeight:
+              "800",
+
+            marginTop:
+              "auto",
           }}
         >
-          {uploading
-            ? "Uploading..."
-            : "Upload Artwork"}
-        </button>
-
-        {artworkUrl && (
-          <p
-            style={{
-              color: "green",
-              margin: "8px 0 0",
-              fontSize: "14px",
-              fontWeight: "600",
-            }}
-          >
-            ✓ Artwork uploaded
-          </p>
-        )}
+          Customise & Order
+        </Link>
       </div>
-
-      {/* ADD TO CART */}
-      <button
-        type="button"
-        onClick={handleAddToCart}
-        style={{
-          background: "#111",
-          color: "#fff",
-          border: "none",
-          padding: "15px",
-          borderRadius: "12px",
-          cursor: "pointer",
-          fontSize: "16px",
-          fontWeight: "700",
-          marginTop: "auto",
-        }}
-      >
-        Add To Cart
-      </button>
-    </div>
+    </article>
   );
 }
