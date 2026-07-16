@@ -7,10 +7,15 @@ export default function RelatedProducts({
   categories = [],
   limit = 4,
   title = "Popular Products",
+  excludeProductId = null,
 }) {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+
+  // Prevent useEffect from running again just because
+  // a new array reference is passed into categories.
+  const categoriesKey = categories.join(",");
 
   useEffect(() => {
     async function fetchProducts() {
@@ -18,10 +23,12 @@ export default function RelatedProducts({
         setLoading(true);
         setError("");
 
+        // Fetch one extra product when excluding the current product
+        // so we can still display the requested number.
         let query = supabase
           .from("products")
           .select("*")
-          .limit(limit);
+          .limit(excludeProductId ? limit + 1 : limit);
 
         if (categories.length > 0) {
           query = query.in("category", categories);
@@ -34,23 +41,40 @@ export default function RelatedProducts({
         if (error) {
           console.error("RELATED PRODUCTS ERROR:", error);
           setError("Unable to load products.");
+          setProducts([]);
           return;
         }
 
-        setProducts(data || []);
+        let filteredProducts = data || [];
+
+        // Remove the product currently being viewed
+        if (excludeProductId) {
+          filteredProducts = filteredProducts.filter(
+            (product) =>
+              String(product.id) !== String(excludeProductId)
+          );
+        }
+
+        setProducts(filteredProducts.slice(0, limit));
       } catch (err) {
         console.error("RELATED PRODUCTS ERROR:", err);
         setError("Unable to load products.");
+        setProducts([]);
       } finally {
         setLoading(false);
       }
     }
 
     fetchProducts();
-  }, [category, categories, limit]);
+  }, [
+    category,
+    categoriesKey,
+    limit,
+    excludeProductId,
+  ]);
 
   const getProductImage = (product) => {
-    // First try product variants
+    // Try product variants first
     if (
       Array.isArray(product?.variants) &&
       product.variants.length > 0
@@ -60,7 +84,9 @@ export default function RelatedProducts({
           item?.images?.front ||
           item?.images?.model ||
           item?.images?.side ||
-          item?.images?.back
+          item?.images?.back ||
+          item?.image ||
+          item?.image_url
       );
 
       if (variant?.images?.front) {
@@ -88,7 +114,7 @@ export default function RelatedProducts({
       }
     }
 
-    // Then try main product images object
+    // Then try main product images
     if (product?.images?.front) {
       return product.images.front;
     }
@@ -123,17 +149,30 @@ export default function RelatedProducts({
       product?.basePrice ??
       0;
 
-    return Number(price).toFixed(2);
+    const numericPrice = Number(price);
+
+    if (Number.isNaN(numericPrice)) {
+      return "0.00";
+    }
+
+    return numericPrice.toFixed(2);
   };
 
   const getProductSlug = (product) => {
-    return (
-      product?.slug ||
-      product?.name
-        ?.toLowerCase()
-        .replace(/[^a-z0-9]+/g, "-")
-        .replace(/^-|-$/g, "")
-    );
+    if (product?.slug) {
+      return product.slug;
+    }
+
+    const productName =
+      product?.name ||
+      product?.title ||
+      String(product?.id || "");
+
+    return productName
+      .toLowerCase()
+      .trim()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-|-$/g, "");
   };
 
   if (loading) {
@@ -167,6 +206,7 @@ export default function RelatedProducts({
           margin: "0 auto",
         }}
       >
+        {/* SECTION HEADER */}
         <div
           style={{
             textAlign: "center",
@@ -208,6 +248,7 @@ export default function RelatedProducts({
           </p>
         </div>
 
+        {/* PRODUCT GRID */}
         <div
           style={{
             display: "grid",
@@ -219,6 +260,10 @@ export default function RelatedProducts({
           {products.map((product) => {
             const image = getProductImage(product);
             const slug = getProductSlug(product);
+            const productName =
+              product.name ||
+              product.title ||
+              "Custom Printed Garment";
 
             return (
               <div
@@ -228,11 +273,13 @@ export default function RelatedProducts({
                   border: "1px solid #eee",
                   borderRadius: "16px",
                   overflow: "hidden",
-                  boxShadow: "0 6px 20px rgba(0,0,0,0.06)",
+                  boxShadow:
+                    "0 6px 20px rgba(0,0,0,0.06)",
                   display: "flex",
                   flexDirection: "column",
                 }}
               >
+                {/* PRODUCT IMAGE */}
                 <Link
                   to={`/product/${slug}`}
                   style={{
@@ -250,8 +297,12 @@ export default function RelatedProducts({
                   >
                     <img
                       src={image}
-                      alt={`${product.name || product.title} custom printing`}
+                      alt={`${productName} custom printing`}
                       loading="lazy"
+                      onError={(e) => {
+                        e.currentTarget.src =
+                          "/images/placeholder.jpg";
+                      }}
                       style={{
                         width: "100%",
                         height: "100%",
@@ -263,6 +314,7 @@ export default function RelatedProducts({
                   </div>
                 </Link>
 
+                {/* PRODUCT DETAILS */}
                 <div
                   style={{
                     padding: "22px",
@@ -279,7 +331,7 @@ export default function RelatedProducts({
                       color: "#111",
                     }}
                   >
-                    {product.name || product.title}
+                    {productName}
                   </h3>
 
                   <p
@@ -287,6 +339,7 @@ export default function RelatedProducts({
                       color: "#555",
                       marginBottom: "10px",
                       fontSize: "0.95rem",
+                      lineHeight: "1.6",
                     }}
                   >
                     Customise with your logo, design or artwork.
@@ -324,6 +377,7 @@ export default function RelatedProducts({
           })}
         </div>
 
+        {/* VIEW SHOP */}
         <div
           style={{
             textAlign: "center",
