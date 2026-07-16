@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
 
 import { supabase } from "../lib/supabase";
@@ -11,13 +11,17 @@ import RelatedProducts from "../components/RelatedProducts";
 
 export default function Product() {
   const { slug } = useParams();
+
   const { addToCart, setCartOpen } = useCart();
 
   const [product, setProduct] = useState(null);
+
   const [loading, setLoading] = useState(true);
 
   const [size, setSize] = useState("");
+
   const [colour, setColour] = useState("");
+
   const [quantity, setQuantity] = useState(1);
 
   const [artworkUrl, setArtworkUrl] = useState("");
@@ -34,166 +38,283 @@ export default function Product() {
     newArtwork: false,
   });
 
-  useEffect(() => {
-    fetchProduct();
-  }, [slug]);
+  /*
+  ----------------------------------------
+  CREATE PRODUCT SLUG
+  ----------------------------------------
+  */
 
   const makeSlug = (name = "") =>
-    name
+    String(name)
       .toLowerCase()
+      .trim()
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/^-|-$/g, "");
 
-  const fetchProduct = async () => {
-    try {
-      setLoading(true);
+  /*
+  ----------------------------------------
+  LOAD PRODUCT
+  ----------------------------------------
+  */
 
-      const { data, error } = await supabase
-        .from("products")
-        .select("*");
+  useEffect(() => {
+    let isMounted = true;
 
-      if (error) {
-        throw error;
-      }
+    async function fetchProduct() {
+      try {
+        setLoading(true);
 
-      const found = data.find(
-        (item) =>
-          String(item.id) === String(slug) ||
-          item.slug === slug ||
-          makeSlug(item.name || item.title) === slug
-      );
+        const { data, error } = await supabase
+          .from("products")
+          .select("*");
 
-      setProduct(found || null);
+        if (error) {
+          throw error;
+        }
 
-      if (found) {
+        if (!isMounted) {
+          return;
+        }
+
+        const found = (data || []).find((item) => {
+          const itemSlug =
+            item?.slug ||
+            makeSlug(item?.name || item?.title);
+
+          return (
+            String(item?.id) === String(slug) ||
+            itemSlug === slug
+          );
+        });
+
+        if (!found) {
+          setProduct(null);
+          return;
+        }
+
+        /*
+        Parse variants if Supabase returns JSON string
+        */
+
+        let parsedVariants = found.variants;
+
+        if (
+          typeof parsedVariants === "string" &&
+          parsedVariants.trim()
+        ) {
+          try {
+            parsedVariants = JSON.parse(parsedVariants);
+          } catch {
+            parsedVariants = [];
+          }
+        }
+
+        if (!Array.isArray(parsedVariants)) {
+          parsedVariants = [];
+        }
+
+        /*
+        Parse colours if required
+        */
+
+        let parsedColours = found.colours;
+
+        if (
+          typeof parsedColours === "string" &&
+          parsedColours.trim()
+        ) {
+          try {
+            parsedColours = JSON.parse(parsedColours);
+          } catch {
+            parsedColours = [];
+          }
+        }
+
+        if (!Array.isArray(parsedColours)) {
+          parsedColours = [];
+        }
+
+        /*
+        Parse sizes if required
+        */
+
+        let parsedSizes = found.sizes;
+
+        if (
+          typeof parsedSizes === "string" &&
+          parsedSizes.trim()
+        ) {
+          try {
+            parsedSizes = JSON.parse(parsedSizes);
+          } catch {
+            parsedSizes = [];
+          }
+        }
+
+        if (!Array.isArray(parsedSizes)) {
+          parsedSizes = [];
+        }
+
+        const preparedProduct = {
+          ...found,
+          variants: parsedVariants,
+          colours: parsedColours,
+          sizes: parsedSizes,
+        };
+
+        setProduct(preparedProduct);
+
         const firstColour =
-          found.variants?.[0]?.colour ||
-          found.colours?.[0] ||
+          parsedVariants?.[0]?.colour ||
+          parsedColours?.[0] ||
           "";
 
-        setSize(found.sizes?.[0] || "");
+        const firstSize =
+          parsedSizes?.[0] ||
+          "";
+
         setColour(firstColour);
+
+        setSize(firstSize);
+
+        setQuantity(1);
+
+        setArtworkUrl("");
+
+        setOptions({
+          backPrint: false,
+          sleevePrint: false,
+          oversizedPrint: false,
+          artworkEdit: false,
+          newArtwork: false,
+        });
+      } catch (error) {
+        console.error(
+          "PRODUCT LOAD ERROR:",
+          error
+        );
+
+        if (isMounted) {
+          setProduct(null);
+        }
+      } finally {
+        if (isMounted) {
+          setLoading(false);
+        }
       }
-    } catch (error) {
-      console.error("PRODUCT LOAD ERROR:", error);
-      setProduct(null);
-    } finally {
-      setLoading(false);
     }
-  };
+
+    fetchProduct();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [slug]);
 
   /*
   ----------------------------------------
-  LOADING
-  ----------------------------------------
-  */
-
-  if (loading) {
-    return (
-      <div
-        style={{
-          minHeight: "70vh",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          background: "#f8fafc",
-        }}
-      >
-        <div style={{ textAlign: "center" }}>
-          <div
-            style={{
-              width: "45px",
-              height: "45px",
-              border: "4px solid #e5e7eb",
-              borderTop: "4px solid #f97316",
-              borderRadius: "50%",
-              margin: "0 auto 20px",
-            }}
-          />
-
-          <h2
-            style={{
-              color: "#111827",
-            }}
-          >
-            Loading product...
-          </h2>
-        </div>
-      </div>
-    );
-  }
-
-  /*
-  ----------------------------------------
-  NOT FOUND
-  ----------------------------------------
-  */
-
-  if (!product) {
-    return (
-      <div
-        style={{
-          minHeight: "70vh",
-          padding: "100px 20px",
-          textAlign: "center",
-          background: "#f8fafc",
-        }}
-      >
-        <h1
-          style={{
-            fontSize: "42px",
-            color: "#111827",
-            marginBottom: "20px",
-          }}
-        >
-          Product Not Found
-        </h1>
-
-        <p
-          style={{
-            color: "#6b7280",
-            marginBottom: "30px",
-          }}
-        >
-          We couldn't find the product you're looking for.
-        </p>
-
-        <Link
-          to="/shop"
-          style={{
-            display: "inline-block",
-            background: "#f97316",
-            color: "#fff",
-            padding: "15px 28px",
-            borderRadius: "10px",
-            textDecoration: "none",
-            fontWeight: "800",
-          }}
-        >
-          Browse Our Shop
-        </Link>
-      </div>
-    );
-  }
-
-  /*
-  ----------------------------------------
-  PRODUCT DATA
+  PRODUCT NAME
   ----------------------------------------
   */
 
   const productName =
-    product.name ||
-    product.title ||
+    product?.name ||
+    product?.title ||
     "Custom Printed Product";
-
-  const selectedVariant = product.variants?.find(
-    (variant) => variant.colour === colour
-  );
 
   /*
   ----------------------------------------
-  IMAGE GALLERY
+  SELECTED VARIANT
+  ----------------------------------------
+  */
+
+  const selectedVariant = useMemo(() => {
+    if (
+      !product ||
+      !Array.isArray(product.variants)
+    ) {
+      return null;
+    }
+
+    return (
+      product.variants.find(
+        (variant) =>
+          String(variant?.colour || "")
+            .toLowerCase()
+            .trim() ===
+          String(colour || "")
+            .toLowerCase()
+            .trim()
+      ) ||
+      product.variants[0] ||
+      null
+    );
+  }, [product, colour]);
+
+  /*
+  ----------------------------------------
+  IMAGE HELPERS
+  ----------------------------------------
+  */
+
+  const getImagesFromValue = (images) => {
+    const result = [];
+
+    const addImage = (image) => {
+      if (
+        image &&
+        typeof image === "string" &&
+        !result.includes(image)
+      ) {
+        result.push(image);
+      }
+    };
+
+    if (!images) {
+      return result;
+    }
+
+    if (Array.isArray(images)) {
+      images.forEach(addImage);
+
+      return result;
+    }
+
+    if (
+      typeof images === "object"
+    ) {
+      addImage(images.front);
+
+      addImage(images.model);
+
+      addImage(images.side);
+
+      addImage(images.back);
+
+      addImage(images.detail);
+
+      return result;
+    }
+
+    if (
+      typeof images === "string" &&
+      images.trim()
+    ) {
+      try {
+        const parsed = JSON.parse(images);
+
+        return getImagesFromValue(parsed);
+      } catch {
+        addImage(images);
+      }
+    }
+
+    return result;
+  };
+
+  /*
+  ----------------------------------------
+  GALLERY IMAGES
   ----------------------------------------
   */
 
@@ -210,44 +331,98 @@ export default function Product() {
       }
     };
 
-    /*
-    Selected colour variant images first
-    */
+    if (selectedVariant) {
+      getImagesFromValue(
+        selectedVariant.images
+      ).forEach(addImage);
 
-    addImage(selectedVariant?.images?.front);
-    addImage(selectedVariant?.images?.model);
-    addImage(selectedVariant?.images?.side);
-    addImage(selectedVariant?.images?.back);
-    addImage(selectedVariant?.images?.detail);
+      addImage(selectedVariant.image);
 
-    addImage(selectedVariant?.image);
-    addImage(selectedVariant?.image_url);
+      addImage(selectedVariant.image_url);
+    }
 
-    /*
-    Main product images as fallback
-    */
+    if (product) {
+      getImagesFromValue(
+        product.images
+      ).forEach(addImage);
 
-    addImage(product?.images?.front);
-    addImage(product?.images?.model);
-    addImage(product?.images?.side);
-    addImage(product?.images?.back);
-    addImage(product?.images?.detail);
+      addImage(product.image);
 
-    addImage(product?.image);
-    addImage(product?.image_url);
+      addImage(product.image_url);
+
+      addImage(product.displayImage);
+    }
 
     if (images.length === 0) {
-      images.push("/images/placeholder.jpg");
+      images.push(
+        "/images/placeholder.jpg"
+      );
     }
 
     return images;
   }, [product, selectedVariant]);
 
+  /*
+  ----------------------------------------
+  CHANGE MAIN IMAGE WHEN COLOUR CHANGES
+  ----------------------------------------
+  */
+
   useEffect(() => {
-    if (galleryImages.length > 0) {
-      setSelectedImage(galleryImages[0]);
+    if (
+      galleryImages.length > 0
+    ) {
+      setSelectedImage(
+        galleryImages[0]
+      );
     }
-  }, [colour, galleryImages]);
+  }, [galleryImages]);
+
+  /*
+  ----------------------------------------
+  AVAILABLE COLOURS
+  ----------------------------------------
+  */
+
+  const availableColours = useMemo(() => {
+    if (!product) {
+      return [];
+    }
+
+    if (
+      Array.isArray(product.colours) &&
+      product.colours.length > 0
+    ) {
+      return [
+        ...new Set(
+          product.colours.filter(Boolean)
+        ),
+      ];
+    }
+
+    if (
+      Array.isArray(product.variants)
+    ) {
+      return [
+        ...new Set(
+          product.variants
+            .map(
+              (variant) =>
+                variant?.colour
+            )
+            .filter(Boolean)
+        ),
+      ];
+    }
+
+    return [];
+  }, [product]);
+
+  /*
+  ----------------------------------------
+  CURRENT IMAGE
+  ----------------------------------------
+  */
 
   const mainImage =
     selectedImage ||
@@ -260,41 +435,70 @@ export default function Product() {
   ----------------------------------------
   */
 
-  const finalPrice = calculatePrice(product, options);
+  const finalPrice = product
+    ? calculatePrice(
+        product,
+        options
+      )
+    : 0;
 
-  const quantityValue = Math.max(
-    1,
-    Number(quantity || 1)
-  );
+  const quantityValue =
+    Math.max(
+      1,
+      Number(quantity || 1)
+    );
 
   const totalPrice =
-    Number(finalPrice) * quantityValue;
+    Number(finalPrice || 0) *
+    quantityValue;
 
   /*
   ----------------------------------------
-  COLOURS
+  PRINT OPTIONS
   ----------------------------------------
   */
 
-  const availableColours = useMemo(() => {
-    if (
-      Array.isArray(product.colours) &&
-      product.colours.length > 0
-    ) {
-      return product.colours;
-    }
+  const printOptions = [
+    {
+      key: "backPrint",
+      label: "Add Back Print",
+      price: "+£5",
+      text:
+        "Add your logo, text or design to the back of the garment.",
+    },
 
-    if (
-      Array.isArray(product.variants) &&
-      product.variants.length > 0
-    ) {
-      return product.variants
-        .map((variant) => variant.colour)
-        .filter(Boolean);
-    }
+    {
+      key: "sleevePrint",
+      label: "Add Sleeve Print",
+      price: "+£3",
+      text:
+        "Add additional branding or artwork to a sleeve.",
+    },
 
-    return [];
-  }, [product]);
+    {
+      key: "oversizedPrint",
+      label: "Oversized Print",
+      price: "+£5",
+      text:
+        "Choose a larger statement print for your design.",
+    },
+
+    {
+      key: "artworkEdit",
+      label: "Artwork Edit",
+      price: "+£5",
+      text:
+        "Minor adjustments to help prepare your existing artwork for printing.",
+    },
+
+    {
+      key: "newArtwork",
+      label: "New Artwork Design",
+      price: "+£20",
+      text:
+        "Choose this if you need help creating new artwork for your order.",
+    },
+  ];
 
   /*
   ----------------------------------------
@@ -303,52 +507,194 @@ export default function Product() {
   */
 
   const handleAddToCart = () => {
+    if (!product) {
+      return;
+    }
+
+    if (
+      product.sizes?.length > 0 &&
+      !size
+    ) {
+      alert(
+        "Please choose a size."
+      );
+
+      return;
+    }
+
+    if (
+      availableColours.length > 0 &&
+      !colour
+    ) {
+      alert(
+        "Please choose a colour."
+      );
+
+      return;
+    }
+
     const item = {
       product,
 
-      id: product.id,
+      id:
+        product.id,
 
-      name: productName,
+      name:
+        productName,
 
-      price: finalPrice,
+      price:
+        Number(finalPrice),
 
-      basePrice: Number(
-        product.price ||
-          product.base_price ||
-          product.basePrice ||
-          0
-      ),
+      basePrice:
+        Number(
+          product.price ||
+            product.base_price ||
+            product.basePrice ||
+            0
+        ),
 
-      quantity: quantityValue,
+      quantity:
+        quantityValue,
 
       size,
 
       colour,
 
-      image: mainImage,
+      image:
+        mainImage,
 
       artworkUrl,
 
       options,
     };
 
-    console.log("ADDING TO CART:", item);
+    console.log(
+      "ADDING TO CART:",
+      item
+    );
 
     addToCart(item);
 
     setAddedMessage(true);
 
-    if (setCartOpen) {
+    if (
+      typeof setCartOpen ===
+      "function"
+    ) {
       setCartOpen(true);
     }
 
-    setTimeout(() => {
+    window.setTimeout(() => {
       setAddedMessage(false);
     }, 3000);
   };
 
+  /*
+  ----------------------------------------
+  LOADING
+  ----------------------------------------
+  */
+
+  if (loading) {
+    return (
+      <div
+        style={{
+          minHeight: "70vh",
+
+          display: "flex",
+
+          alignItems: "center",
+
+          justifyContent: "center",
+
+          background: "#f8fafc",
+
+          padding: "80px 20px",
+        }}
+      >
+        <div
+          style={{
+            textAlign: "center",
+          }}
+        >
+          <h2
+            style={{
+              color: "#111827",
+
+              marginBottom: "10px",
+            }}
+          >
+            Loading Product
+          </h2>
+
+          <p
+            style={{
+              color: "#6b7280",
+            }}
+          >
+            Preparing your customisation options...
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  /*
+  ----------------------------------------
+  PRODUCT NOT FOUND
+  ----------------------------------------
+  */
+
+  if (!product) {
+    return (
+      <div
+        style={{
+          minHeight: "70vh",
+
+          padding: "100px 20px",
+
+          textAlign: "center",
+
+          background: "#f8fafc",
+        }}
+      >
+        <h1
+          style={{
+            fontSize:
+              "clamp(32px, 5vw, 48px)",
+
+            color: "#111827",
+
+            marginBottom: "15px",
+          }}
+        >
+          Product Not Found
+        </h1>
+
+        <p
+          style={{
+            color: "#6b7280",
+
+            marginBottom: "30px",
+          }}
+        >
+          We couldn't find the product you're looking for.
+        </p>
+
+        <Link
+          to="/shop"
+          style={primaryButton}
+        >
+          Browse Our Shop
+        </Link>
+      </div>
+    );
+  }
+
   return (
     <>
+      {/* SEO */}
+
       <Helmet>
         <title>
           {productName} | Custom Printing | Kett Press Co
@@ -360,29 +706,34 @@ export default function Product() {
         />
       </Helmet>
 
-      {/* BREADCRUMB */}
+      {/* ======================================
+          BREADCRUMB
+      ====================================== */}
 
       <div
         style={{
           background: "#f8fafc",
-          borderBottom: "1px solid #e5e7eb",
+
+          borderBottom:
+            "1px solid #e5e7eb",
         }}
       >
         <div
           style={{
             maxWidth: "1250px",
+
             margin: "0 auto",
+
             padding: "16px 20px",
+
             fontSize: "14px",
+
             color: "#6b7280",
           }}
         >
           <Link
             to="/"
-            style={{
-              color: "#6b7280",
-              textDecoration: "none",
-            }}
+            style={breadcrumbLink}
           >
             Home
           </Link>
@@ -391,10 +742,7 @@ export default function Product() {
 
           <Link
             to="/shop"
-            style={{
-              color: "#6b7280",
-              textDecoration: "none",
-            }}
+            style={breadcrumbLink}
           >
             Shop
           </Link>
@@ -404,7 +752,8 @@ export default function Product() {
           <span
             style={{
               color: "#111827",
-              fontWeight: "600",
+
+              fontWeight: "700",
             }}
           >
             {productName}
@@ -412,51 +761,76 @@ export default function Product() {
         </div>
       </div>
 
-      {/* PRODUCT */}
+      {/* ======================================
+          PRODUCT SECTION
+      ====================================== */}
 
       <main
         style={{
           background: "#fff",
+
           padding: "50px 20px 90px",
         }}
       >
         <div
           style={{
             maxWidth: "1250px",
+
             margin: "0 auto",
+
             display: "grid",
+
             gridTemplateColumns:
               "repeat(auto-fit, minmax(340px, 1fr))",
+
             gap: "60px",
+
             alignItems: "start",
           }}
         >
-          {/* =========================================
-              LEFT SIDE - PRODUCT IMAGES
-          ========================================= */}
+          {/* ==================================
+              LEFT - IMAGE GALLERY
+          ================================== */}
 
           <div>
             <div
               style={{
-                background: "#f8fafc",
-                border: "1px solid #e5e7eb",
-                borderRadius: "20px",
-                padding: "25px",
-                minHeight: "500px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
                 position: "relative",
+
+                background: "#f8fafc",
+
+                border:
+                  "1px solid #e5e7eb",
+
+                borderRadius: "20px",
+
+                padding: "25px",
+
+                minHeight: "500px",
+
+                display: "flex",
+
+                alignItems: "center",
+
+                justifyContent: "center",
               }}
             >
               <img
                 src={mainImage}
-                alt={`${productName} ${
-                  colour ? `in ${colour}` : ""
+                alt={`${productName}${
+                  colour
+                    ? ` in ${colour}`
+                    : ""
                 }`}
+                onError={(event) => {
+                  event.currentTarget.src =
+                    "/images/placeholder.jpg";
+                }}
                 style={{
                   width: "100%",
+
                   height: "500px",
+
                   objectFit: "contain",
                 }}
               />
@@ -465,14 +839,27 @@ export default function Product() {
                 <div
                   style={{
                     position: "absolute",
+
                     bottom: "16px",
+
                     left: "16px",
-                    background: "rgba(17,24,39,0.9)",
+
+                    background:
+                      "rgba(17,24,39,0.92)",
+
                     color: "#fff",
-                    padding: "8px 13px",
-                    borderRadius: "999px",
-                    fontSize: "13px",
-                    fontWeight: "700",
+
+                    padding:
+                      "8px 14px",
+
+                    borderRadius:
+                      "999px",
+
+                    fontSize:
+                      "13px",
+
+                    fontWeight:
+                      "800",
                   }}
                 >
                   {colour}
@@ -482,38 +869,52 @@ export default function Product() {
 
             {/* THUMBNAILS */}
 
-            {galleryImages.length > 1 && (
+            {galleryImages.length >
+              1 && (
               <div
                 style={{
                   display: "grid",
+
                   gridTemplateColumns:
-                    "repeat(auto-fit, minmax(80px, 100px))",
+                    "repeat(auto-fit, minmax(75px, 95px))",
+
                   gap: "12px",
+
                   marginTop: "16px",
                 }}
               >
                 {galleryImages.map(
-                  (image, index) => (
+                  (
+                    image,
+                    index
+                  ) => (
                     <button
                       key={`${image}-${index}`}
                       type="button"
                       onClick={() =>
-                        setSelectedImage(image)
+                        setSelectedImage(
+                          image
+                        )
                       }
                       style={{
+                        height: "90px",
+
                         padding: "5px",
-                        background: "#f8fafc",
+
+                        background:
+                          "#f8fafc",
 
                         border:
-                          selectedImage === image
+                          mainImage ===
+                          image
                             ? "2px solid #f97316"
                             : "1px solid #e5e7eb",
 
-                        borderRadius: "10px",
+                        borderRadius:
+                          "10px",
 
-                        cursor: "pointer",
-
-                        height: "95px",
+                        cursor:
+                          "pointer",
                       }}
                     >
                       <img
@@ -524,8 +925,11 @@ export default function Product() {
                         loading="lazy"
                         style={{
                           width: "100%",
+
                           height: "100%",
-                          objectFit: "contain",
+
+                          objectFit:
+                            "contain",
                         }}
                       />
                     </button>
@@ -534,16 +938,22 @@ export default function Product() {
               </div>
             )}
 
-            {/* IMAGE TRUST MESSAGE */}
+            {/* IMAGE NOTE */}
 
             <div
               style={{
                 marginTop: "25px",
+
                 padding: "18px",
+
                 background: "#f8fafc",
+
                 borderRadius: "12px",
+
                 color: "#4b5563",
+
                 lineHeight: "1.6",
+
                 fontSize: "14px",
               }}
             >
@@ -552,29 +962,36 @@ export default function Product() {
                   color: "#111827",
                 }}
               >
-                Please note:
+                Product image:
               </strong>{" "}
-              Product images are for garment reference.
-              Your final product will be customised using
-              the artwork and printing options you select.
+              The garment images show the base product. Your final item will be
+              customised using the printing options and artwork selected for
+              your order.
             </div>
           </div>
 
-          {/* =========================================
-              RIGHT SIDE - BUYING PANEL
-          ========================================= */}
+          {/* ==================================
+              RIGHT - PRODUCT CONFIGURATION
+          ================================== */}
 
           <div>
-            {/* PRODUCT TYPE */}
+            {/* CATEGORY */}
 
             {product.category && (
               <div
                 style={{
                   color: "#ea580c",
-                  textTransform: "uppercase",
-                  fontWeight: "800",
-                  letterSpacing: "1.5px",
+
+                  textTransform:
+                    "uppercase",
+
+                  fontWeight: "900",
+
+                  letterSpacing:
+                    "1.5px",
+
                   fontSize: "13px",
+
                   marginBottom: "10px",
                 }}
               >
@@ -589,36 +1006,44 @@ export default function Product() {
                 fontSize:
                   "clamp(30px, 4vw, 48px)",
 
-                fontWeight: "800",
+                fontWeight: "850",
 
                 lineHeight: "1.15",
 
-                margin:
-                  "0 0 16px",
+                margin: "0 0 16px",
 
                 color: "#111827",
 
-                letterSpacing: "-1px",
+                letterSpacing:
+                  "-1px",
 
-                overflowWrap: "break-word",
+                overflowWrap:
+                  "break-word",
               }}
             >
               {productName}
             </h1>
 
-            {/* REVIEWS */}
+            {/* TRUST */}
 
             <div
               style={{
                 display: "flex",
-                alignItems: "center",
+
+                alignItems:
+                  "center",
+
+                flexWrap: "wrap",
+
                 gap: "10px",
+
                 marginBottom: "22px",
               }}
             >
               <span
                 style={{
                   color: "#f59e0b",
+
                   fontSize: "18px",
                 }}
               >
@@ -628,10 +1053,11 @@ export default function Product() {
               <span
                 style={{
                   color: "#6b7280",
+
                   fontSize: "14px",
                 }}
               >
-                Custom printed by Kett Press Co
+                Professionally customised by Kett Press Co
               </span>
             </div>
 
@@ -640,8 +1066,11 @@ export default function Product() {
             <p
               style={{
                 color: "#4b5563",
+
                 lineHeight: "1.8",
+
                 fontSize: "16px",
+
                 marginBottom: "25px",
               }}
             >
@@ -650,21 +1079,30 @@ export default function Product() {
                 "Premium garment ready to customise with your logo, design or artwork."}
             </p>
 
-            {/* PRICE */}
+            {/* ==================================
+                PRICE
+            ================================== */}
 
             <div
               style={{
                 padding: "22px",
+
                 background: "#f8fafc",
+
                 borderRadius: "14px",
-                border: "1px solid #e5e7eb",
+
+                border:
+                  "1px solid #e5e7eb",
+
                 marginBottom: "30px",
               }}
             >
               <div
                 style={{
-                  fontSize: "14px",
                   color: "#6b7280",
+
+                  fontSize: "14px",
+
                   marginBottom: "5px",
                 }}
               >
@@ -674,116 +1112,159 @@ export default function Product() {
               <div
                 style={{
                   fontSize: "36px",
+
                   fontWeight: "900",
+
                   color: "#111827",
                 }}
               >
-                £{Number(finalPrice).toFixed(2)}
+                £
+                {Number(
+                  finalPrice
+                ).toFixed(2)}
               </div>
 
               <div
                 style={{
                   marginTop: "8px",
+
                   color: "#16a34a",
-                  fontWeight: "700",
+
+                  fontWeight: "800",
+
                   fontSize: "14px",
                 }}
               >
                 ✓ Standard front print included
               </div>
 
-              {quantityValue > 1 && (
+              {quantityValue >
+                1 && (
                 <div
                   style={{
-                    marginTop: "8px",
+                    marginTop: "10px",
+
                     color: "#4b5563",
+
                     fontSize: "14px",
                   }}
                 >
-                  Order total:{" "}
+                  {quantityValue} items
+                  total:{" "}
                   <strong>
-                    £{totalPrice.toFixed(2)}
+                    £
+                    {totalPrice.toFixed(
+                      2
+                    )}
                   </strong>
                 </div>
               )}
             </div>
 
-            {/* SIZE */}
+            {/* ==================================
+                SIZE
+            ================================== */}
 
-            {product.sizes?.length > 0 && (
+            {product.sizes?.length >
+              0 && (
               <div
                 style={{
                   marginBottom: "30px",
                 }}
               >
-                <div style={sectionLabel}>
+                <div
+                  style={sectionLabel}
+                >
                   Select Size
                 </div>
 
                 <div
                   style={{
                     display: "flex",
+
                     flexWrap: "wrap",
+
                     gap: "9px",
                   }}
                 >
-                  {product.sizes.map((item) => (
-                    <button
-                      key={item}
-                      type="button"
-                      onClick={() =>
-                        setSize(item)
-                      }
-                      style={{
-                        minWidth: "50px",
-                        padding: "11px 14px",
+                  {product.sizes.map(
+                    (item) => (
+                      <button
+                        key={item}
+                        type="button"
+                        onClick={() =>
+                          setSize(
+                            item
+                          )
+                        }
+                        style={{
+                          minWidth:
+                            "50px",
 
-                        background:
-                          size === item
-                            ? "#111827"
-                            : "#fff",
+                          padding:
+                            "11px 14px",
 
-                        color:
-                          size === item
-                            ? "#fff"
-                            : "#111827",
+                          background:
+                            size ===
+                            item
+                              ? "#111827"
+                              : "#fff",
 
-                        border:
-                          size === item
-                            ? "2px solid #111827"
-                            : "1px solid #d1d5db",
+                          color:
+                            size ===
+                            item
+                              ? "#fff"
+                              : "#111827",
 
-                        borderRadius: "8px",
+                          border:
+                            size ===
+                            item
+                              ? "2px solid #111827"
+                              : "1px solid #d1d5db",
 
-                        cursor: "pointer",
+                          borderRadius:
+                            "8px",
 
-                        fontWeight: "700",
-                      }}
-                    >
-                      {item}
-                    </button>
-                  ))}
+                          cursor:
+                            "pointer",
+
+                          fontWeight:
+                            "800",
+                        }}
+                      >
+                        {item}
+                      </button>
+                    )
+                  )}
                 </div>
               </div>
             )}
 
-            {/* COLOUR */}
+            {/* ==================================
+                COLOUR
+            ================================== */}
 
-            {availableColours.length > 0 && (
+            {availableColours.length >
+              0 && (
               <div
                 style={{
                   marginBottom: "30px",
                 }}
               >
-                <div style={sectionLabel}>
+                <div
+                  style={sectionLabel}
+                >
                   Select Colour
                 </div>
 
                 <p
                   style={{
-                    fontSize: "14px",
                     color: "#6b7280",
+
+                    fontSize: "14px",
+
                     marginTop: "-5px",
+
                     marginBottom: "14px",
                   }}
                 >
@@ -800,7 +1281,9 @@ export default function Product() {
                 <div
                   style={{
                     display: "flex",
+
                     flexWrap: "wrap",
+
                     gap: "9px",
                   }}
                 >
@@ -808,14 +1291,29 @@ export default function Product() {
                     (item) => {
                       const variant =
                         product.variants?.find(
-                          (variant) =>
-                            variant.colour ===
-                            item
+                          (
+                            variant
+                          ) =>
+                            String(
+                              variant?.colour ||
+                                ""
+                            )
+                              .toLowerCase()
+                              .trim() ===
+                            String(
+                              item
+                            )
+                              .toLowerCase()
+                              .trim()
+                        );
+
+                      const variantImages =
+                        getImagesFromValue(
+                          variant?.images
                         );
 
                       const swatchImage =
-                        variant?.images?.front ||
-                        variant?.images?.model ||
+                        variantImages[0] ||
                         variant?.image ||
                         variant?.image_url;
 
@@ -824,27 +1322,35 @@ export default function Product() {
                           key={item}
                           type="button"
                           onClick={() =>
-                            setColour(item)
+                            setColour(
+                              item
+                            )
                           }
                           title={item}
                           style={{
-                            minWidth: "70px",
-                            padding: "8px",
+                            minWidth:
+                              "72px",
 
-                            background: "#fff",
+                            padding:
+                              "8px",
+
+                            background:
+                              "#fff",
 
                             border:
-                              colour === item
+                              colour ===
+                              item
                                 ? "2px solid #f97316"
                                 : "1px solid #d1d5db",
 
-                            borderRadius: "9px",
+                            borderRadius:
+                              "9px",
 
                             cursor:
                               "pointer",
 
                             fontWeight:
-                              "600",
+                              "700",
                           }}
                         >
                           {swatchImage && (
@@ -855,13 +1361,17 @@ export default function Product() {
                               alt={item}
                               style={{
                                 width:
-                                  "45px",
+                                  "48px",
+
                                 height:
-                                  "45px",
+                                  "48px",
+
                                 objectFit:
                                   "contain",
+
                                 display:
                                   "block",
+
                                 margin:
                                   "0 auto 5px",
                               }}
@@ -870,14 +1380,18 @@ export default function Product() {
 
                           <span
                             style={{
-                              fontSize:
-                                "11px",
                               display:
                                 "block",
+
+                              fontSize:
+                                "11px",
+
                               maxWidth:
-                                "80px",
+                                "85px",
+
                               overflow:
                                 "hidden",
+
                               textOverflow:
                                 "ellipsis",
                             }}
@@ -892,37 +1406,51 @@ export default function Product() {
               </div>
             )}
 
-            {/* QUANTITY */}
+            {/* ==================================
+                QUANTITY
+            ================================== */}
 
             <div
               style={{
                 marginBottom: "30px",
               }}
             >
-              <div style={sectionLabel}>
+              <div
+                style={sectionLabel}
+              >
                 Quantity
               </div>
 
               <div
                 style={{
                   display: "flex",
+
                   alignItems: "center",
-                  gap: "0",
-                  width: "fit-content",
+
+                  width:
+                    "fit-content",
+
                   border:
                     "1px solid #d1d5db",
-                  borderRadius: "9px",
-                  overflow: "hidden",
+
+                  borderRadius:
+                    "9px",
+
+                  overflow:
+                    "hidden",
                 }}
               >
                 <button
                   type="button"
                   onClick={() =>
-                    setQuantity((prev) =>
-                      Math.max(
-                        1,
-                        Number(prev) - 1
-                      )
+                    setQuantity(
+                      (previous) =>
+                        Math.max(
+                          1,
+                          Number(
+                            previous
+                          ) - 1
+                        )
                     )
                   }
                   style={quantityButton}
@@ -932,34 +1460,52 @@ export default function Product() {
 
                 <input
                   type="number"
-                  value={quantity}
                   min="1"
-                  onChange={(e) =>
+                  value={quantity}
+                  onChange={(event) =>
                     setQuantity(
                       Math.max(
                         1,
                         Number(
-                          e.target.value
+                          event
+                            .target
+                            .value ||
+                            1
                         )
                       )
                     )
                   }
                   style={{
-                    width: "65px",
-                    padding: "12px 5px",
-                    border: "none",
-                    textAlign: "center",
-                    fontSize: "16px",
-                    fontWeight: "700",
-                    outline: "none",
+                    width: "70px",
+
+                    padding:
+                      "12px 5px",
+
+                    border:
+                      "none",
+
+                    textAlign:
+                      "center",
+
+                    fontSize:
+                      "16px",
+
+                    fontWeight:
+                      "800",
+
+                    outline:
+                      "none",
                   }}
                 />
 
                 <button
                   type="button"
                   onClick={() =>
-                    setQuantity((prev) =>
-                      Number(prev) + 1
+                    setQuantity(
+                      (previous) =>
+                        Number(
+                          previous
+                        ) + 1
                     )
                   }
                   style={quantityButton}
@@ -971,188 +1517,203 @@ export default function Product() {
               <p
                 style={{
                   color: "#6b7280",
+
                   fontSize: "13px",
+
                   marginTop: "10px",
                 }}
               >
-                Ordering multiple items? Bulk
-                discounts may apply automatically.
+                Larger quantities may qualify for automatic bulk discounts.
               </p>
             </div>
 
-            {/* PRINT OPTIONS */}
+            {/* ==================================
+                PRINT OPTIONS
+            ================================== */}
 
             <div
               style={{
                 marginBottom: "30px",
               }}
             >
-              <div style={sectionLabel}>
+              <div
+                style={sectionLabel}
+              >
                 Customise Your Printing
               </div>
 
               <p
                 style={{
                   color: "#6b7280",
+
                   lineHeight: "1.6",
+
                   fontSize: "14px",
+
                   marginTop: "-5px",
+
                   marginBottom: "15px",
                 }}
               >
-                Your standard front print is already
-                included. Add extra printing or artwork
-                services below.
+                Standard front printing is already included. Add any extra
+                printing or artwork services you need.
               </p>
 
               <div
                 style={{
                   display: "grid",
+
                   gap: "10px",
                 }}
               >
-                {[
-                  {
-                    key: "backPrint",
-                    label: "Add Back Print",
-                    price: "+£5",
-                    text: "Print your design or logo on the back.",
-                  },
-
-                  {
-                    key: "sleevePrint",
-                    label: "Add Sleeve Print",
-                    price: "+£3",
-                    text: "Add additional branding to a sleeve.",
-                  },
-
-                  {
-                    key: "oversizedPrint",
-                    label: "Oversized Print",
-                    price: "+£5",
-                    text: "Choose a larger statement print.",
-                  },
-
-                  {
-                    key: "artworkEdit",
-                    label: "Artwork Edit",
-                    price: "+£5",
-                    text: "Minor adjustments to help prepare your artwork.",
-                  },
-
-                  {
-                    key: "newArtwork",
-                    label:
-                      "New Artwork Design",
-                    price: "+£20",
-                    text: "Get help creating new artwork for your order.",
-                  },
-                ].map((option) => (
-                  <label
-                    key={option.key}
-                    style={{
-                      display: "flex",
-                      alignItems:
-                        "flex-start",
-                      gap: "14px",
-
-                      padding: "16px",
-
-                      border:
+                {printOptions.map(
+                  (
+                    option
+                  ) => {
+                    const active =
+                      Boolean(
                         options[
                           option.key
                         ]
-                          ? "2px solid #f97316"
-                          : "1px solid #e5e7eb",
+                      );
 
-                      borderRadius: "11px",
-
-                      cursor: "pointer",
-
-                      background:
-                        options[
+                    return (
+                      <label
+                        key={
                           option.key
-                        ]
-                          ? "#fff7ed"
-                          : "#fff",
-                    }}
-                  >
-                    <input
-                      type="checkbox"
-                      checked={
-                        options[
-                          option.key
-                        ]
-                      }
-                      onChange={() =>
-                        setOptions(
-                          (prev) => ({
-                            ...prev,
-
-                            [option.key]:
-                              !prev[
-                                option.key
-                              ],
-                          })
-                        )
-                      }
-                      style={{
-                        marginTop: "4px",
-                        width: "18px",
-                        height: "18px",
-                      }}
-                    />
-
-                    <div
-                      style={{
-                        flex: 1,
-                      }}
-                    >
-                      <div
+                        }
                         style={{
-                          display: "flex",
-                          justifyContent:
-                            "space-between",
-                          gap: "15px",
-                          fontWeight:
-                            "800",
-                          color:
-                            "#111827",
+                          display:
+                            "flex",
+
+                          alignItems:
+                            "flex-start",
+
+                          gap: "14px",
+
+                          padding:
+                            "16px",
+
+                          border:
+                            active
+                              ? "2px solid #f97316"
+                              : "1px solid #e5e7eb",
+
+                          borderRadius:
+                            "11px",
+
+                          cursor:
+                            "pointer",
+
+                          background:
+                            active
+                              ? "#fff7ed"
+                              : "#fff",
                         }}
                       >
-                        <span>
-                          {option.label}
-                        </span>
+                        <input
+                          type="checkbox"
+                          checked={
+                            active
+                          }
+                          onChange={() =>
+                            setOptions(
+                              (
+                                previous
+                              ) => ({
+                                ...previous,
 
-                        <span
+                                [option.key]:
+                                  !previous[
+                                    option
+                                      .key
+                                  ],
+                              })
+                            )
+                          }
                           style={{
-                            color:
-                              "#ea580c",
+                            marginTop:
+                              "4px",
+
+                            width:
+                              "18px",
+
+                            height:
+                              "18px",
+                          }}
+                        />
+
+                        <div
+                          style={{
+                            flex: 1,
                           }}
                         >
-                          {option.price}
-                        </span>
-                      </div>
+                          <div
+                            style={{
+                              display:
+                                "flex",
 
-                      <div
-                        style={{
-                          marginTop: "4px",
-                          fontSize: "13px",
-                          color:
-                            "#6b7280",
-                          lineHeight:
-                            "1.5",
-                        }}
-                      >
-                        {option.text}
-                      </div>
-                    </div>
-                  </label>
-                ))}
+                              justifyContent:
+                                "space-between",
+
+                              gap:
+                                "15px",
+
+                              fontWeight:
+                                "800",
+
+                              color:
+                                "#111827",
+                            }}
+                          >
+                            <span>
+                              {
+                                option.label
+                              }
+                            </span>
+
+                            <span
+                              style={{
+                                color:
+                                  "#ea580c",
+                              }}
+                            >
+                              {
+                                option.price
+                              }
+                            </span>
+                          </div>
+
+                          <div
+                            style={{
+                              marginTop:
+                                "4px",
+
+                              fontSize:
+                                "13px",
+
+                              color:
+                                "#6b7280",
+
+                              lineHeight:
+                                "1.5",
+                            }}
+                          >
+                            {
+                              option.text
+                            }
+                          </div>
+                        </div>
+                      </label>
+                    );
+                  }
+                )}
               </div>
             </div>
 
-            {/* ARTWORK */}
+            {/* ==================================
+                ARTWORK UPLOAD
+            ================================== */}
 
             <div
               style={{
@@ -1168,20 +1729,26 @@ export default function Product() {
                 borderRadius: "14px",
               }}
             >
-              <div style={sectionLabel}>
+              <div
+                style={sectionLabel}
+              >
                 Upload Your Artwork
               </div>
 
               <p
                 style={{
                   color: "#6b7280",
+
                   fontSize: "14px",
+
                   lineHeight: "1.6",
+
+                  marginBottom: "18px",
                 }}
               >
-                Upload your logo, design or artwork for
-                this order. You can also contact us if
-                you're unsure about your file.
+                Upload your logo, design or artwork for this order. Choose
+                Artwork Edit or New Artwork Design above if you need design
+                assistance.
               </p>
 
               <ArtworkUpload
@@ -1215,7 +1782,7 @@ export default function Product() {
                       "8px",
 
                     fontWeight:
-                      "700",
+                      "800",
 
                     fontSize:
                       "14px",
@@ -1226,11 +1793,13 @@ export default function Product() {
               )}
             </div>
 
-            {/* ADD TO CART PANEL */}
+            {/* ==================================
+                ADD TO CART
+            ================================== */}
 
             <div
               style={{
-                padding: "22px",
+                padding: "24px",
 
                 background: "#111827",
 
@@ -1252,35 +1821,31 @@ export default function Product() {
                   alignItems:
                     "center",
 
-                  gap: "20px",
+                  flexWrap: "wrap",
 
-                  marginBottom:
-                    "18px",
+                  gap: "15px",
+
+                  marginBottom: "18px",
                 }}
               >
                 <div>
                   <div
                     style={{
-                      fontSize:
-                        "13px",
+                      color: "#9ca3af",
 
-                      color:
-                        "#9ca3af",
+                      fontSize: "13px",
 
-                      marginBottom:
-                        "4px",
+                      marginBottom: "4px",
                     }}
                   >
-                    Your order
+                    Your order total
                   </div>
 
                   <div
                     style={{
-                      fontSize:
-                        "26px",
+                      fontSize: "28px",
 
-                      fontWeight:
-                        "900",
+                      fontWeight: "900",
                     }}
                   >
                     £
@@ -1292,17 +1857,13 @@ export default function Product() {
 
                 <div
                   style={{
-                    textAlign:
-                      "right",
+                    color: "#d1d5db",
 
-                    color:
-                      "#d1d5db",
+                    fontSize: "13px",
 
-                    fontSize:
-                      "13px",
+                    lineHeight: "1.6",
 
-                    lineHeight:
-                      "1.5",
+                    textAlign: "right",
                   }}
                 >
                   {quantityValue}{" "}
@@ -1314,8 +1875,15 @@ export default function Product() {
                   {size && (
                     <>
                       <br />
-                      Size:{" "}
-                      {size}
+                      Size: {size}
+                    </>
+                  )}
+
+                  {colour && (
+                    <>
+                      <br />
+                      Colour:{" "}
+                      {colour}
                     </>
                   )}
                 </div>
@@ -1358,20 +1926,15 @@ export default function Product() {
               {addedMessage && (
                 <div
                   style={{
-                    marginTop:
-                      "12px",
+                    marginTop: "12px",
 
-                    textAlign:
-                      "center",
+                    textAlign: "center",
 
-                    color:
-                      "#86efac",
+                    color: "#86efac",
 
-                    fontWeight:
-                      "700",
+                    fontWeight: "800",
 
-                    fontSize:
-                      "14px",
+                    fontSize: "14px",
                   }}
                 >
                   ✓ Added to your cart
@@ -1380,19 +1943,15 @@ export default function Product() {
 
               <div
                 style={{
-                  marginTop:
-                    "18px",
+                  marginTop: "18px",
 
-                  display:
-                    "grid",
+                  display: "grid",
 
                   gap: "8px",
 
-                  color:
-                    "#d1d5db",
+                  color: "#d1d5db",
 
-                  fontSize:
-                    "13px",
+                  fontSize: "13px",
                 }}
               >
                 <span>
@@ -1400,7 +1959,11 @@ export default function Product() {
                 </span>
 
                 <span>
-                  ✓ Artwork attached to your order
+                  ✓ Standard front print included
+                </span>
+
+                <span>
+                  ✓ Artwork saved with your order
                 </span>
 
                 <span>
@@ -1413,11 +1976,12 @@ export default function Product() {
               </div>
             </div>
 
-            {/* NEED HELP */}
+            {/* HELP */}
 
             <div
               style={{
                 textAlign: "center",
+
                 paddingTop: "22px",
               }}
             >
@@ -1425,13 +1989,15 @@ export default function Product() {
                 style={{
                   margin:
                     "0 0 10px",
+
                   color:
                     "#6b7280",
+
                   fontSize:
                     "14px",
                 }}
               >
-                Need help before ordering?
+                Not sure which printing option you need?
               </p>
 
               <a
@@ -1439,14 +2005,12 @@ export default function Product() {
                 target="_blank"
                 rel="noreferrer"
                 style={{
-                  color:
-                    "#16a34a",
+                  color: "#16a34a",
 
                   textDecoration:
                     "none",
 
-                  fontWeight:
-                    "800",
+                  fontWeight: "800",
                 }}
               >
                 Chat with us on WhatsApp →
@@ -1456,9 +2020,9 @@ export default function Product() {
         </div>
       </main>
 
-      {/* =========================================
-          CONFIDENCE BAR
-      ========================================= */}
+      {/* ======================================
+          TRUST BAR
+      ====================================== */}
 
       <section
         style={{
@@ -1470,64 +2034,62 @@ export default function Product() {
           borderBottom:
             "1px solid #e5e7eb",
 
-          padding:
-            "35px 20px",
+          padding: "40px 20px",
         }}
       >
         <div
           style={{
-            maxWidth:
-              "1100px",
+            maxWidth: "1100px",
 
-            margin:
-              "0 auto",
+            margin: "0 auto",
 
-            display:
-              "grid",
+            display: "grid",
 
             gridTemplateColumns:
               "repeat(auto-fit, minmax(180px, 1fr))",
 
-            gap:
-              "25px",
+            gap: "25px",
 
-            textAlign:
-              "center",
+            textAlign: "center",
           }}
         >
           {[
-            [
-              "🎨",
-              "Upload Your Artwork",
-              "Send your logo or design with your order.",
-            ],
+            {
+              icon: "🎨",
+              title:
+                "Upload Your Artwork",
+              text:
+                "Send your logo or design with your order.",
+            },
 
-            [
-              "👕",
-              "Quality Garments",
-              "Choose from trusted clothing brands.",
-            ],
+            {
+              icon: "👕",
+              title:
+                "Quality Garments",
+              text:
+                "Customise garments from trusted clothing brands.",
+            },
 
-            [
-              "📍",
-              "Kettering Based",
-              "Local collection is available.",
-            ],
+            {
+              icon: "📍",
+              title:
+                "Kettering Based",
+              text:
+                "Local collection is available.",
+            },
 
-            [
-              "🇬🇧",
-              "UK Delivery",
-              "Order online from across the UK.",
-            ],
+            {
+              icon: "🇬🇧",
+              title:
+                "UK Delivery",
+              text:
+                "Order online from anywhere in the UK.",
+            },
           ].map(
-            ([
-              icon,
-              title,
-              text,
-            ]) => (
+            (item) => (
               <div
                 key={
-                  title
+                  item.title
                 }
               >
                 <div
@@ -1539,7 +2101,7 @@ export default function Product() {
                       "10px",
                   }}
                 >
-                  {icon}
+                  {item.icon}
                 </div>
 
                 <strong
@@ -1554,7 +2116,7 @@ export default function Product() {
                       "6px",
                   }}
                 >
-                  {title}
+                  {item.title}
                 </strong>
 
                 <span
@@ -1569,7 +2131,7 @@ export default function Product() {
                       "1.5",
                   }}
                 >
-                  {text}
+                  {item.text}
                 </span>
               </div>
             )
@@ -1577,9 +2139,9 @@ export default function Product() {
         </div>
       </section>
 
-      {/* =========================================
+      {/* ======================================
           RELATED PRODUCTS
-      ========================================= */}
+      ====================================== */}
 
       <RelatedProducts
         category={
@@ -1597,7 +2159,7 @@ export default function Product() {
 
 /*
 ----------------------------------------
-STYLES
+SHARED STYLES
 ----------------------------------------
 */
 
@@ -1626,5 +2188,27 @@ const quantityButton = {
 
   fontSize: "20px",
 
-  fontWeight: "700",
+  fontWeight: "800",
+};
+
+const breadcrumbLink = {
+  color: "#6b7280",
+
+  textDecoration: "none",
+};
+
+const primaryButton = {
+  display: "inline-block",
+
+  background: "#f97316",
+
+  color: "#fff",
+
+  padding: "15px 28px",
+
+  borderRadius: "10px",
+
+  textDecoration: "none",
+
+  fontWeight: "800",
 };
