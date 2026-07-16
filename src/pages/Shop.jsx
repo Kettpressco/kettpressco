@@ -1,12 +1,31 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, {
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
+
 import ProductCard from "../components/ProductCard";
 import { supabase } from "../lib/supabase";
 
 export default function Shop() {
   const [products, setProducts] = useState([]);
+
   const [loading, setLoading] = useState(true);
-  const [category, setCategory] = useState("All");
-  const [error, setError] = useState("");
+
+  const [category, setCategory] =
+    useState("All");
+
+  const [search, setSearch] =
+    useState("");
+
+  const [error, setError] =
+    useState("");
+
+  /*
+  ----------------------------------------
+  LOAD PRODUCTS
+  ----------------------------------------
+  */
 
   useEffect(() => {
     let isMounted = true;
@@ -14,9 +33,13 @@ export default function Shop() {
     async function loadProducts() {
       try {
         setLoading(true);
+
         setError("");
 
-        const { data, error } = await supabase
+        const {
+          data,
+          error,
+        } = await supabase
           .from("products")
           .select("*")
           .limit(100);
@@ -25,14 +48,23 @@ export default function Shop() {
           throw error;
         }
 
-        if (!isMounted) return;
+        if (!isMounted) {
+          return;
+        }
 
-        setProducts(data || []);
+        setProducts(
+          data || []
+        );
       } catch (err) {
-        console.error("SHOP PRODUCTS ERROR:", err);
+        console.error(
+          "SHOP PRODUCTS ERROR:",
+          err
+        );
 
         if (isMounted) {
-          setError("Unable to load products at the moment.");
+          setError(
+            "Unable to load products at the moment."
+          );
         }
       } finally {
         if (isMounted) {
@@ -48,6 +80,12 @@ export default function Shop() {
     };
   }, []);
 
+  /*
+  ----------------------------------------
+  SHOP CATEGORIES
+  ----------------------------------------
+  */
+
   const categories = [
     "All",
     "T-Shirts",
@@ -58,101 +96,195 @@ export default function Shop() {
     "Hi-Vis",
   ];
 
+  /*
+  Your Supabase product category values
+  appear to be more specific than the
+  customer-facing filters.
+
+  This maps friendly shop categories
+  to your database categories.
+  */
+
   const categoryMap = {
-    "T-Shirts": ["T-Shirt"],
-    Hoodies: ["Hood"],
-    Sweatshirts: ["Sweatshirt"],
-    Polos: ["Polo"],
+    "T-Shirts": [
+      "T-Shirt",
+      "T-Shirts",
+    ],
+
+    Hoodies: [
+      "Hood",
+      "Hoodie",
+      "Hoodies",
+    ],
+
+    Sweatshirts: [
+      "Sweatshirt",
+      "Sweatshirts",
+    ],
+
+    Polos: [
+      "Polo",
+      "Polos",
+      "Polo Shirt",
+    ],
+
     Workwear: [
       "Jacket",
       "Gilet",
       "Soft Shell Jacket",
+      "Softshell Jacket",
       "Trousers",
+      "Workwear",
+      "Polo",
     ],
+
     "Hi-Vis": [
+      "Hi-Vis",
+      "Hi Vis",
       "Gilet",
       "Jacket",
     ],
   };
 
-  const getVariantImage = (variant) => {
-    if (!variant) return null;
+  /*
+  ----------------------------------------
+  GET IMAGE FROM IMAGES FIELD
+  ----------------------------------------
+  */
 
-    if (variant.image) {
-      return variant.image;
+  const getImageFromImages = (
+    images
+  ) => {
+    if (!images) {
+      return null;
     }
 
-    if (variant.image_url) {
-      return variant.image_url;
+    /*
+    Images stored as object:
+    {
+      front,
+      model,
+      side,
+      back,
+      detail
     }
+    */
 
     if (
-      Array.isArray(variant.images) &&
-      variant.images.length > 0
+      typeof images ===
+        "object" &&
+      !Array.isArray(images)
     ) {
-      return variant.images[0];
+      return (
+        images.front ||
+        images.model ||
+        images.side ||
+        images.back ||
+        images.detail ||
+        null
+      );
     }
 
+    /*
+    Images stored as array
+    */
+
     if (
-      typeof variant.images === "string" &&
-      variant.images.trim()
+      Array.isArray(images) &&
+      images.length > 0
+    ) {
+      return images[0];
+    }
+
+    /*
+    Images stored as JSON string
+    */
+
+    if (
+      typeof images ===
+        "string" &&
+      images.trim()
     ) {
       try {
-        const parsedImages = JSON.parse(variant.images);
+        const parsed =
+          JSON.parse(images);
 
-        if (
-          Array.isArray(parsedImages) &&
-          parsedImages.length > 0
-        ) {
-          return parsedImages[0];
-        }
+        return getImageFromImages(
+          parsed
+        );
       } catch {
-        return variant.images;
+        /*
+        The value may simply
+        be a direct image URL.
+        */
+
+        return images;
       }
     }
 
     return null;
   };
 
-  const getProductFallbackImage = (product) => {
-    if (product.image) {
-      return product.image;
+  /*
+  ----------------------------------------
+  VARIANT IMAGE
+  ----------------------------------------
+  */
+
+  const getVariantImage = (
+    variant
+  ) => {
+    if (!variant) {
+      return null;
     }
 
-    if (product.image_url) {
-      return product.image_url;
-    }
-
-    if (
-      Array.isArray(product.images) &&
-      product.images.length > 0
-    ) {
-      return product.images[0];
-    }
-
-    if (
-      typeof product.images === "string" &&
-      product.images.trim()
-    ) {
-      try {
-        const parsedImages = JSON.parse(product.images);
-
-        if (
-          Array.isArray(parsedImages) &&
-          parsedImages.length > 0
-        ) {
-          return parsedImages[0];
-        }
-      } catch {
-        return product.images;
-      }
-    }
-
-    return "/images/logo.jpg";
+    return (
+      getImageFromImages(
+        variant.images
+      ) ||
+      variant.image ||
+      variant.image_url ||
+      null
+    );
   };
 
-  const getStableIndex = (product, length) => {
-    if (!length) return 0;
+  /*
+  ----------------------------------------
+  PRODUCT FALLBACK IMAGE
+  ----------------------------------------
+  */
+
+  const getProductFallbackImage = (
+    product
+  ) => {
+    return (
+      getImageFromImages(
+        product.images
+      ) ||
+      product.image ||
+      product.image_url ||
+      "/images/placeholder.jpg"
+    );
+  };
+
+  /*
+  ----------------------------------------
+  STABLE PRODUCT COLOUR IMAGE
+  ----------------------------------------
+
+  This gives different products
+  different colour variants instead
+  of every product always displaying
+  the first colour.
+  */
+
+  const getStableIndex = (
+    product,
+    length
+  ) => {
+    if (!length) {
+      return 0;
+    }
 
     const source =
       product.id ??
@@ -161,120 +293,377 @@ export default function Shop() {
       product.name ??
       "product";
 
-    const value = String(source)
+    const value = String(
+      source
+    )
       .split("")
       .reduce(
-        (total, character) =>
-          total + character.charCodeAt(0),
+        (
+          total,
+          character
+        ) =>
+          total +
+          character.charCodeAt(
+            0
+          ),
+
         0
       );
 
-    return value % length;
+    return (
+      value % length
+    );
   };
 
-  const prepareProductForDisplay = (product) => {
-    let variants = product.variants;
+  /*
+  ----------------------------------------
+  PREPARE PRODUCT
+  ----------------------------------------
+  */
+
+  const prepareProductForDisplay = (
+    product
+  ) => {
+    let variants =
+      product.variants;
+
+    /*
+    Parse Supabase JSON string
+    if required.
+    */
 
     if (
-      typeof variants === "string" &&
+      typeof variants ===
+        "string" &&
       variants.trim()
     ) {
       try {
-        variants = JSON.parse(variants);
+        variants =
+          JSON.parse(
+            variants
+          );
       } catch {
         variants = [];
       }
     }
 
-    if (!Array.isArray(variants)) {
+    if (
+      !Array.isArray(
+        variants
+      )
+    ) {
       variants = [];
     }
 
-    const variantsWithImages = variants.filter(
-      (variant) => Boolean(getVariantImage(variant))
-    );
+    /*
+    Only use variants that
+    actually have images.
+    */
 
-    let displayImage = null;
-    let displayVariant = null;
-
-    if (variantsWithImages.length > 0) {
-      const index = getStableIndex(
-        product,
-        variantsWithImages.length
+    const variantsWithImages =
+      variants.filter(
+        (variant) =>
+          Boolean(
+            getVariantImage(
+              variant
+            )
+          )
       );
 
-      displayVariant = variantsWithImages[index];
-      displayImage = getVariantImage(displayVariant);
+    let displayImage =
+      null;
+
+    let displayVariant =
+      null;
+
+    if (
+      variantsWithImages.length >
+      0
+    ) {
+      const index =
+        getStableIndex(
+          product,
+          variantsWithImages.length
+        );
+
+      displayVariant =
+        variantsWithImages[
+          index
+        ];
+
+      displayImage =
+        getVariantImage(
+          displayVariant
+        );
     }
 
+    /*
+    Fall back to main product image
+    */
+
     if (!displayImage) {
-      displayImage = getProductFallbackImage(product);
+      displayImage =
+        getProductFallbackImage(
+          product
+        );
     }
 
     return {
       ...product,
 
-      // These extra fields can be used by ProductCard.
+      variants,
+
       displayImage,
+
       displayVariant,
 
-      // This allows ProductCard code that already checks
-      // image or image_url to also use the colourful image.
-      image: displayImage,
-      image_url: displayImage,
+      /*
+      ProductCard may already look
+      for these fields.
+      */
+
+      image:
+        displayImage,
+
+      image_url:
+        displayImage,
     };
   };
 
-  const preparedProducts = useMemo(() => {
-    return products.map(prepareProductForDisplay);
-  }, [products]);
+  /*
+  ----------------------------------------
+  PREPARED PRODUCTS
+  ----------------------------------------
+  */
 
-  const filteredProducts = useMemo(() => {
-    if (category === "All") {
-      return preparedProducts;
-    }
+  const preparedProducts =
+    useMemo(() => {
+      return products.map(
+        prepareProductForDisplay
+      );
+    }, [products]);
 
-    const allowedCategories = categoryMap[category] || [];
+  /*
+  ----------------------------------------
+  FILTER PRODUCTS
+  ----------------------------------------
+  */
 
-    return preparedProducts.filter((product) =>
-      allowedCategories.includes(product.category)
-    );
-  }, [category, preparedProducts]);
+  const filteredProducts =
+    useMemo(() => {
+      let result =
+        preparedProducts;
+
+      /*
+      CATEGORY FILTER
+      */
+
+      if (
+        category !== "All"
+      ) {
+        const allowedCategories =
+          categoryMap[
+            category
+          ] || [];
+
+        result =
+          result.filter(
+            (product) => {
+              const productCategory =
+                String(
+                  product.category ||
+                    ""
+                );
+
+              return allowedCategories.some(
+                (
+                  allowed
+                ) =>
+                  productCategory
+                    .toLowerCase()
+                    .includes(
+                      allowed.toLowerCase()
+                    )
+              );
+            }
+          );
+      }
+
+      /*
+      SEARCH FILTER
+      */
+
+      const searchValue =
+        search
+          .trim()
+          .toLowerCase();
+
+      if (searchValue) {
+        result =
+          result.filter(
+            (product) => {
+              const searchable =
+                [
+                  product.name,
+                  product.title,
+                  product.category,
+                  product.brand,
+                  product.sku,
+                  product.material,
+                ]
+                  .filter(
+                    Boolean
+                  )
+                  .join(" ")
+                  .toLowerCase();
+
+              return searchable.includes(
+                searchValue
+              );
+            }
+          );
+      }
+
+      return result;
+    }, [
+      category,
+      search,
+      preparedProducts,
+    ]);
+
+  /*
+  ----------------------------------------
+  RESET FILTERS
+  ----------------------------------------
+  */
+
+  const clearFilters = () => {
+    setCategory("All");
+
+    setSearch("");
+  };
+
+  /*
+  ----------------------------------------
+  LOADING
+  ----------------------------------------
+  */
 
   if (loading) {
     return (
       <div
         style={{
-          minHeight: "60vh",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          padding: "80px 20px",
-          fontSize: "20px",
-          textAlign: "center",
+          minHeight:
+            "70vh",
+
+          display:
+            "flex",
+
+          flexDirection:
+            "column",
+
+          alignItems:
+            "center",
+
+          justifyContent:
+            "center",
+
+          padding:
+            "80px 20px",
+
+          background:
+            "#f8fafc",
         }}
       >
-        Loading products...
+        <div
+          style={{
+            width: "45px",
+            height: "45px",
+
+            border:
+              "4px solid #e5e7eb",
+
+            borderTop:
+              "4px solid #f97316",
+
+            borderRadius:
+              "50%",
+
+            marginBottom:
+              "20px",
+          }}
+        />
+
+        <h2
+          style={{
+            color:
+              "#111827",
+
+            marginBottom:
+              "8px",
+          }}
+        >
+          Loading Products
+        </h2>
+
+        <p
+          style={{
+            color:
+              "#6b7280",
+          }}
+        >
+          Preparing our custom
+          clothing range...
+        </p>
       </div>
     );
   }
+
+  /*
+  ----------------------------------------
+  ERROR
+  ----------------------------------------
+  */
 
   if (error) {
     return (
       <div
         style={{
-          minHeight: "60vh",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          padding: "80px 20px",
-          textAlign: "center",
+          minHeight:
+            "70vh",
+
+          display:
+            "flex",
+
+          flexDirection:
+            "column",
+
+          alignItems:
+            "center",
+
+          justifyContent:
+            "center",
+
+          padding:
+            "80px 20px",
+
+          textAlign:
+            "center",
+
+          background:
+            "#f8fafc",
         }}
       >
         <h2
           style={{
-            marginBottom: "15px",
+            fontSize:
+              "32px",
+
+            marginBottom:
+              "15px",
+
+            color:
+              "#111827",
           }}
         >
           Something went wrong
@@ -282,240 +671,899 @@ export default function Shop() {
 
         <p
           style={{
-            color: "#555",
-            maxWidth: "500px",
+            color:
+              "#6b7280",
+
+            maxWidth:
+              "500px",
+
+            lineHeight:
+              "1.7",
           }}
         >
           {error}
         </p>
+
+        <button
+          type="button"
+          onClick={() =>
+            window.location.reload()
+          }
+          style={{
+            marginTop:
+              "20px",
+
+            background:
+              "#f97316",
+
+            color:
+              "#fff",
+
+            border:
+              "none",
+
+            padding:
+              "14px 24px",
+
+            borderRadius:
+              "9px",
+
+            fontWeight:
+              "800",
+
+            cursor:
+              "pointer",
+          }}
+        >
+          Try Again
+        </button>
       </div>
     );
   }
 
+  /*
+  ----------------------------------------
+  SHOP
+  ----------------------------------------
+  */
+
   return (
     <div
       style={{
-        background: "#f8f9fa",
-        minHeight: "100vh",
-        paddingBottom: "80px",
+        background:
+          "#f8fafc",
+
+        minHeight:
+          "100vh",
       }}
     >
-      {/* HERO */}
+      {/* ======================================
+          HERO
+      ====================================== */}
+
       <section
         style={{
-          background: "#111",
+          background:
+            "linear-gradient(115deg, #030712 0%, #111827 65%, #1f2937 100%)",
+
           color: "#fff",
-          textAlign: "center",
-          padding: "80px 20px",
+
+          padding:
+            "75px 20px",
         }}
       >
         <div
           style={{
-            maxWidth: "850px",
-            margin: "0 auto",
+            maxWidth:
+              "1000px",
+
+            margin:
+              "0 auto",
+
+            textAlign:
+              "center",
           }}
         >
-          <p
+          <div
             style={{
-              textTransform: "uppercase",
-              letterSpacing: "2px",
-              fontWeight: "700",
-              fontSize: "0.85rem",
-              marginBottom: "15px",
+              display:
+                "inline-block",
+
+              background:
+                "rgba(249,115,22,0.15)",
+
+              border:
+                "1px solid rgba(249,115,22,0.4)",
+
+              color:
+                "#fed7aa",
+
+              padding:
+                "8px 15px",
+
+              borderRadius:
+                "999px",
+
+              fontWeight:
+                "800",
+
+              fontSize:
+                "13px",
+
+              letterSpacing:
+                "1.5px",
+
+              marginBottom:
+                "22px",
             }}
           >
-            Customise & Order Online
-          </p>
+            CUSTOMISE & ORDER
+            ONLINE
+          </div>
 
           <h1
             style={{
-              fontSize: "clamp(2.2rem, 6vw, 4rem)",
-              lineHeight: "1.15",
-              marginBottom: "20px",
+              fontSize:
+                "clamp(40px, 7vw, 68px)",
+
+              lineHeight:
+                "1.08",
+
+              letterSpacing:
+                "-2px",
+
+              margin:
+                "0 0 22px",
             }}
           >
-            Custom Clothing Shop
+            Find Your Garment.
+            <span
+              style={{
+                color:
+                  "#fb923c",
+              }}
+            >
+              {" "}
+              Make It Yours.
+            </span>
           </h1>
 
           <p
             style={{
-              fontSize: "1.1rem",
-              lineHeight: "1.8",
-              color: "#e5e5e5",
-              maxWidth: "720px",
-              margin: "0 auto",
+              fontSize:
+                "clamp(17px, 2vw, 20px)",
+
+              lineHeight:
+                "1.8",
+
+              color:
+                "#d1d5db",
+
+              maxWidth:
+                "750px",
+
+              margin:
+                "0 auto 30px",
             }}
           >
-            Shop personalised t-shirts, hoodies,
-            polos, workwear and branded clothing from
-            Kett Press Co. Choose your garment, select
-            your colour and size, upload your artwork
-            and order online.
+            Choose your T-shirt,
+            hoodie, polo or
+            workwear. Select your
+            size and colour, add
+            your printing options,
+            upload your artwork
+            and order securely
+            online.
           </p>
+
+          {/* SEARCH */}
+
+          <div
+            style={{
+              maxWidth:
+                "650px",
+
+              margin:
+                "0 auto",
+
+              position:
+                "relative",
+            }}
+          >
+            <input
+              type="search"
+              value={search}
+              onChange={(e) =>
+                setSearch(
+                  e.target.value
+                )
+              }
+              placeholder="Search T-shirts, hoodies, polos, workwear..."
+              aria-label="Search products"
+              style={{
+                width:
+                  "100%",
+
+                boxSizing:
+                  "border-box",
+
+                padding:
+                  "17px 20px",
+
+                paddingRight:
+                  "50px",
+
+                borderRadius:
+                  "12px",
+
+                border:
+                  "1px solid #374151",
+
+                outline:
+                  "none",
+
+                fontSize:
+                  "16px",
+
+                background:
+                  "#fff",
+
+                color:
+                  "#111827",
+              }}
+            />
+
+            <span
+              style={{
+                position:
+                  "absolute",
+
+                right:
+                  "18px",
+
+                top:
+                  "50%",
+
+                transform:
+                  "translateY(-50%)",
+
+                fontSize:
+                  "20px",
+
+                pointerEvents:
+                  "none",
+              }}
+            >
+              🔎
+            </span>
+          </div>
         </div>
       </section>
 
-      {/* TRUST BAR */}
+      {/* ======================================
+          TRUST BAR
+      ====================================== */}
+
       <section
         style={{
-          background: "#fff",
-          borderBottom: "1px solid #eee",
+          background:
+            "#fff",
+
+          borderBottom:
+            "1px solid #e5e7eb",
         }}
       >
         <div
           style={{
-            maxWidth: "1200px",
-            margin: "0 auto",
-            padding: "22px 20px",
-            display: "grid",
+            maxWidth:
+              "1200px",
+
+            margin:
+              "0 auto",
+
+            padding:
+              "22px 20px",
+
+            display:
+              "grid",
+
             gridTemplateColumns:
               "repeat(auto-fit, minmax(180px, 1fr))",
-            gap: "16px",
-            textAlign: "center",
-            fontWeight: "700",
+
+            gap:
+              "18px",
+
+            textAlign:
+              "center",
+
+            color:
+              "#374151",
+
+            fontWeight:
+              "700",
+
+            fontSize:
+              "14px",
           }}
         >
-          <div>✓ Custom Printing</div>
-          <div>✓ Multiple Colours</div>
-          <div>✓ Artwork Upload</div>
-          <div>✓ Secure Card Payment</div>
+          <div>
+            ✓ Front Print
+            Included
+          </div>
+
+          <div>
+            🎨 Upload Your
+            Artwork
+          </div>
+
+          <div>
+            🔒 Secure Card
+            Payment
+          </div>
+
+          <div>
+            🇬🇧 UK Delivery
+          </div>
         </div>
       </section>
 
-      {/* SHOP CONTENT */}
+      {/* ======================================
+          SHOP CONTENT
+      ====================================== */}
+
       <main
         style={{
-          maxWidth: "1200px",
-          margin: "0 auto",
-          padding: "60px 20px",
+          maxWidth:
+            "1250px",
+
+          margin:
+            "0 auto",
+
+          padding:
+            "60px 20px 90px",
         }}
       >
+        {/* HEADER */}
+
         <div
           style={{
-            textAlign: "center",
-            marginBottom: "40px",
+            textAlign:
+              "center",
+
+            maxWidth:
+              "750px",
+
+            margin:
+              "0 auto 35px",
           }}
         >
-          <h2
+          <span
             style={{
-              fontSize: "clamp(1.8rem, 4vw, 2.6rem)",
-              marginBottom: "15px",
+              color:
+                "#ea580c",
+
+              fontSize:
+                "13px",
+
+              fontWeight:
+                "900",
+
+              letterSpacing:
+                "1.5px",
             }}
           >
-            Browse Our Products
+            SHOP CUSTOM CLOTHING
+          </span>
+
+          <h2
+            style={{
+              fontSize:
+                "clamp(30px, 5vw, 46px)",
+
+              color:
+                "#111827",
+
+              margin:
+                "12px 0 15px",
+
+              letterSpacing:
+                "-1px",
+            }}
+          >
+            Choose Your Product
           </h2>
 
           <p
             style={{
-              fontSize: "1rem",
-              lineHeight: "1.8",
-              color: "#555",
-              maxWidth: "680px",
-              margin: "0 auto",
+              color:
+                "#6b7280",
+
+              fontSize:
+                "17px",
+
+              lineHeight:
+                "1.8",
+
+              margin:
+                "0 auto",
             }}
           >
-            Explore our garment range and find the
-            right product for your business, team,
-            event or personal design.
+            Browse the range below
+            and select a product to
+            customise with your
+            colours, printing and
+            artwork.
           </p>
         </div>
 
-        {/* CATEGORY FILTERS */}
+        {/* ======================================
+            CATEGORY FILTERS
+        ====================================== */}
+
         <div
           style={{
-            display: "flex",
-            justifyContent: "center",
-            gap: "10px",
-            flexWrap: "wrap",
-            marginBottom: "50px",
+            display:
+              "flex",
+
+            justifyContent:
+              "center",
+
+            gap:
+              "10px",
+
+            flexWrap:
+              "wrap",
+
+            marginBottom:
+              "35px",
           }}
         >
-          {categories.map((item) => {
-            const active = category === item;
+          {categories.map(
+            (item) => {
+              const active =
+                category ===
+                item;
 
-            return (
-              <button
-                key={item}
-                type="button"
-                onClick={() => setCategory(item)}
-                style={{
-                  padding: "12px 22px",
-                  borderRadius: "30px",
-                  border: active
-                    ? "1px solid #111"
-                    : "1px solid #ddd",
-                  cursor: "pointer",
-                  background: active
-                    ? "#111"
-                    : "#fff",
-                  color: active
-                    ? "#fff"
-                    : "#111",
-                  fontWeight: "700",
-                  transition: "all 0.2s ease",
-                }}
-              >
-                {item}
-              </button>
-            );
-          })}
+              return (
+                <button
+                  key={item}
+                  type="button"
+                  onClick={() =>
+                    setCategory(
+                      item
+                    )
+                  }
+                  style={{
+                    padding:
+                      "12px 20px",
+
+                    borderRadius:
+                      "999px",
+
+                    border:
+                      active
+                        ? "2px solid #111827"
+                        : "1px solid #d1d5db",
+
+                    cursor:
+                      "pointer",
+
+                    background:
+                      active
+                        ? "#111827"
+                        : "#fff",
+
+                    color:
+                      active
+                        ? "#fff"
+                        : "#374151",
+
+                    fontWeight:
+                      "800",
+
+                    fontSize:
+                      "14px",
+                  }}
+                >
+                  {item}
+                </button>
+              );
+            }
+          )}
         </div>
 
-        {/* PRODUCT COUNT */}
+        {/* ======================================
+            RESULTS BAR
+        ====================================== */}
+
         <div
           style={{
-            marginBottom: "25px",
-            color: "#555",
-            fontSize: "0.95rem",
+            display:
+              "flex",
+
+            justifyContent:
+              "space-between",
+
+            alignItems:
+              "center",
+
+            flexWrap:
+              "wrap",
+
+            gap:
+              "15px",
+
+            marginBottom:
+              "28px",
+
+            paddingBottom:
+              "18px",
+
+            borderBottom:
+              "1px solid #e5e7eb",
           }}
         >
-          Showing {filteredProducts.length}{" "}
-          {filteredProducts.length === 1
-            ? "product"
-            : "products"}
-        </div>
-
-        {/* PRODUCT GRID */}
-        {filteredProducts.length > 0 ? (
           <div
             style={{
-              display: "grid",
-              gridTemplateColumns:
-                "repeat(auto-fit, minmax(260px, 1fr))",
-              gap: "30px",
-              alignItems: "stretch",
+              color:
+                "#4b5563",
+
+              fontSize:
+                "14px",
             }}
           >
-            {filteredProducts.map((product) => (
-              <ProductCard
-                key={product.id}
-                product={product}
-              />
-            ))}
+            Showing{" "}
+            <strong
+              style={{
+                color:
+                  "#111827",
+              }}
+            >
+              {
+                filteredProducts.length
+              }
+            </strong>{" "}
+            {filteredProducts.length ===
+            1
+              ? "product"
+              : "products"}
+
+            {category !==
+              "All" && (
+              <>
+                {" "}
+                in{" "}
+                <strong>
+                  {category}
+                </strong>
+              </>
+            )}
+          </div>
+
+          {(search ||
+            category !==
+              "All") && (
+            <button
+              type="button"
+              onClick={
+                clearFilters
+              }
+              style={{
+                background:
+                  "transparent",
+
+                border:
+                  "none",
+
+                color:
+                  "#ea580c",
+
+                fontWeight:
+                  "800",
+
+                cursor:
+                  "pointer",
+
+                fontSize:
+                  "14px",
+              }}
+            >
+              Clear filters
+            </button>
+          )}
+        </div>
+
+        {/* ======================================
+            PRODUCT GRID
+        ====================================== */}
+
+        {filteredProducts.length >
+        0 ? (
+          <div
+            style={{
+              display:
+                "grid",
+
+              gridTemplateColumns:
+                "repeat(auto-fill, minmax(260px, 1fr))",
+
+              gap:
+                "28px",
+
+              alignItems:
+                "stretch",
+            }}
+          >
+            {filteredProducts.map(
+              (
+                product
+              ) => (
+                <ProductCard
+                  key={
+                    product.id
+                  }
+                  product={
+                    product
+                  }
+                />
+              )
+            )}
           </div>
         ) : (
+          /*
+          ----------------------------------------
+          NO RESULTS
+          ----------------------------------------
+          */
+
           <div
             style={{
-              background: "#fff",
-              padding: "50px 20px",
-              borderRadius: "16px",
-              textAlign: "center",
+              background:
+                "#fff",
+
+              padding:
+                "60px 25px",
+
+              borderRadius:
+                "18px",
+
+              textAlign:
+                "center",
+
+              border:
+                "1px solid #e5e7eb",
+
               boxShadow:
-                "0 5px 20px rgba(0,0,0,0.05)",
+                "0 8px 30px rgba(15,23,42,0.05)",
             }}
           >
-            <h3>No products found</h3>
+            <div
+              style={{
+                fontSize:
+                  "45px",
+
+                marginBottom:
+                  "15px",
+              }}
+            >
+              👕
+            </div>
+
+            <h3
+              style={{
+                fontSize:
+                  "25px",
+
+                color:
+                  "#111827",
+
+                marginBottom:
+                  "10px",
+              }}
+            >
+              No Products Found
+            </h3>
 
             <p
               style={{
-                color: "#555",
+                color:
+                  "#6b7280",
+
+                lineHeight:
+                  "1.7",
+
+                maxWidth:
+                  "500px",
+
+                margin:
+                  "0 auto 22px",
               }}
             >
-              There are currently no products available
-              in this category.
+              We couldn't find a
+              product matching your
+              current search or
+              category.
             </p>
+
+            <button
+              type="button"
+              onClick={
+                clearFilters
+              }
+              style={{
+                background:
+                  "#f97316",
+
+                color:
+                  "#fff",
+
+                border:
+                  "none",
+
+                padding:
+                  "14px 25px",
+
+                borderRadius:
+                  "9px",
+
+                cursor:
+                  "pointer",
+
+                fontWeight:
+                  "800",
+              }}
+            >
+              View All Products
+            </button>
           </div>
         )}
+
+        {/* ======================================
+            HELP CTA
+        ====================================== */}
+
+        <section
+          style={{
+            marginTop:
+              "80px",
+
+            background:
+              "#111827",
+
+            color:
+              "#fff",
+
+            borderRadius:
+              "22px",
+
+            padding:
+              "50px 25px",
+
+            textAlign:
+              "center",
+          }}
+        >
+          <div
+            style={{
+              maxWidth:
+                "700px",
+
+              margin:
+                "0 auto",
+            }}
+          >
+            <h2
+              style={{
+                fontSize:
+                  "clamp(28px, 4vw, 40px)",
+
+                margin:
+                  "0 0 15px",
+              }}
+            >
+              Can't Find What
+              You're Looking For?
+            </h2>
+
+            <p
+              style={{
+                color:
+                  "#d1d5db",
+
+                lineHeight:
+                  "1.8",
+
+                fontSize:
+                  "16px",
+
+                marginBottom:
+                  "28px",
+              }}
+            >
+              Tell us what garment
+              or printing you need.
+              We can help with custom
+              T-shirts, workwear,
+              hoodies, polos and
+              larger business or
+              event orders.
+            </p>
+
+            <div
+              style={{
+                display:
+                  "flex",
+
+                justifyContent:
+                  "center",
+
+                flexWrap:
+                  "wrap",
+
+                gap:
+                  "12px",
+              }}
+            >
+              <a
+                href="/#quote"
+                style={{
+                  display:
+                    "inline-block",
+
+                  background:
+                    "#f97316",
+
+                  color:
+                    "#fff",
+
+                  padding:
+                    "14px 24px",
+
+                  borderRadius:
+                    "9px",
+
+                  textDecoration:
+                    "none",
+
+                  fontWeight:
+                    "800",
+                }}
+              >
+                Request A Quote
+              </a>
+
+              <a
+                href="https://wa.me/447770118148"
+                target="_blank"
+                rel="noreferrer"
+                style={{
+                  display:
+                    "inline-block",
+
+                  background:
+                    "#16a34a",
+
+                  color:
+                    "#fff",
+
+                  padding:
+                    "14px 24px",
+
+                  borderRadius:
+                    "9px",
+
+                  textDecoration:
+                    "none",
+
+                  fontWeight:
+                    "800",
+                }}
+              >
+                WhatsApp Us
+              </a>
+            </div>
+          </div>
+        </section>
       </main>
     </div>
   );
