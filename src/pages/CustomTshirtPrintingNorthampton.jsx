@@ -12,22 +12,54 @@ export default function CustomTshirtPrintingNorthampton() {
     "/images/event3.jpg",
   ];
 
+  const sectionStyle = {
+    marginTop: "90px",
+  };
+
+  const cardStyle = {
+    background: "#fff",
+    padding: "28px",
+    borderRadius: "16px",
+    boxShadow: "0 5px 20px rgba(0,0,0,0.08)",
+  };
+
+  const buttonStyle = {
+    display: "inline-block",
+    background: "#D62828",
+    color: "#fff",
+    padding: "15px 30px",
+    borderRadius: "10px",
+    textDecoration: "none",
+    fontWeight: "bold",
+  };
+
+  const darkButtonStyle = {
+    ...buttonStyle,
+    background: "#111",
+  };
+
+  const linkStyle = {
+    color: "#D62828",
+    fontWeight: "600",
+    textDecoration: "underline",
+  };
+
   return (
     <>
       <Helmet>
         <title>
-          Custom T-Shirt Printing Northampton | Branded Clothing & Workwear |
-          Kett Press Co
+          Custom T-Shirt Printing Northampton | Personalised T-Shirts | Kett
+          Press Co
         </title>
 
         <meta
           name="description"
-          content="Custom T-shirt printing in Northampton for businesses, events, schools, gyms and organisations. Premium branded workwear, hoodies and logo printing from Kett Press Co."
+          content="Custom T-shirt printing in Northampton for businesses, events, schools, gyms, clubs and organisations. Shop personalised T-shirts or request a custom clothing quote from Kett Press Co."
         />
 
         <link
           rel="canonical"
-          href="https://kettpressco.com/custom-t-shirt-printing-northampton"
+          href="https://www.kettpressco.com/custom-t-shirt-printing-northampton"
         />
       </Helmet>
 
@@ -40,7 +72,6 @@ export default function CustomTshirtPrintingNorthampton() {
         }}
       >
         {/* HERO */}
-
         <section
           style={{
             display: "grid",
@@ -60,13 +91,14 @@ export default function CustomTshirtPrintingNorthampton() {
                 fontSize: "14px",
               }}
             >
-              Northampton Printing Specialists
+              Custom Clothing In Northampton
             </span>
 
             <h1
               style={{
                 fontSize: "clamp(40px,6vw,68px)",
                 marginTop: "20px",
+                marginBottom: "20px",
                 lineHeight: "1.1",
               }}
             >
@@ -80,9 +112,9 @@ export default function CustomTshirtPrintingNorthampton() {
                 maxWidth: "700px",
               }}
             >
-              Professional custom T-shirt printing, branded workwear,
-              promotional clothing, uniforms and custom hoodies for
-              businesses, schools, gyms, charities and events across
+              Create personalised T-shirts with your own logo, artwork or
+              design. Kett Press Co provides custom printed clothing for
+              businesses, events, schools, gyms, clubs and organisations across
               Northampton and Northamptonshire.
             </p>
 
@@ -94,17 +126,11 @@ export default function CustomTshirtPrintingNorthampton() {
                 flexWrap: "wrap",
               }}
             >
-              <a
-                href="/#quote"
-                style={{
-                  background: "#D62828",
-                  color: "#fff",
-                  padding: "15px 30px",
-                  borderRadius: "10px",
-                  textDecoration: "none",
-                  fontWeight: "bold",
-                }}
-              >
+              <a href="#shop-custom-tshirts" style={buttonStyle}>
+                Shop Custom T-Shirts
+              </a>
+
+              <a href="/#quote" style={darkButtonStyle}>
                 Request A Quote
               </a>
 
@@ -113,7 +139,7 @@ export default function CustomTshirtPrintingNorthampton() {
                 style={{
                   border: "2px solid #D62828",
                   color: "#D62828",
-                  padding: "15px 30px",
+                  padding: "13px 28px",
                   borderRadius: "10px",
                   textDecoration: "none",
                   fontWeight: "bold",
@@ -126,7 +152,7 @@ export default function CustomTshirtPrintingNorthampton() {
 
           <img
             src="/images/work1.jpg"
-            alt="Custom T-Shirt Printing Northampton"
+            alt="Custom T-shirt printing in Northampton by Kett Press Co"
             style={{
               width: "100%",
               borderRadius: "20px",
@@ -136,7 +162,6 @@ export default function CustomTshirtPrintingNorthampton() {
         </section>
 
         {/* TRUST BAR */}
-
         <section
           style={{
             marginTop: "80px",
@@ -146,10 +171,10 @@ export default function CustomTshirtPrintingNorthampton() {
           }}
         >
           {[
-            "Premium Print Quality",
+            "Custom Artwork Printing",
+            "Small & Large Orders",
             "Fast Turnaround",
-            "Business Workwear",
-            "Northamptonshire Coverage",
+            "Northamptonshire Based",
           ].map((item) => (
             <div
               key={item}
@@ -167,29 +192,239 @@ export default function CustomTshirtPrintingNorthampton() {
         </section>
 
         {/* ABOUT */}
+        <section style={sectionStyle}>
+          <div style={cardStyle}>
+            <h2>Personalised T-Shirts & Custom Clothing In Northampton</h2>
 
-        <section style={{ marginTop: "90px" }}>
-          <h2>Professional Custom Clothing Printing In Northampton</h2>
+            <p style={{ color: "#444" }}>
+              Kett Press Co helps customers create personalised T-shirts using
+              their own logos, artwork, graphics and designs. Our custom
+              clothing service is suitable for businesses, teams, schools,
+              events and individuals throughout Northampton.
+            </p>
 
-          <p>
-            Kett Press Co supplies custom printed clothing for organisations
-            throughout Northampton. We help businesses create a professional
-            image through branded uniforms, custom workwear, promotional
-            clothing and high-quality printed apparel.
-          </p>
+            <p style={{ color: "#444" }}>
+              Whether you need branded T-shirts for your staff, matching shirts
+              for an event, promotional clothing for your business or
+              personalised garments for a group, we can help you create
+              clothing that matches your requirements.
+            </p>
 
-          <p>
-            Whether you need staff uniforms, branded T-shirts for events,
-            custom hoodies for teams or promotional clothing for marketing,
-            our printing solutions help your organisation stand out.
-          </p>
+            <p style={{ color: "#444" }}>
+              For our broader local printing service, including general T-shirt
+              printing options for businesses and organisations, visit our{" "}
+              <a href="/t-shirt-printing-northampton" style={linkStyle}>
+                T-shirt printing Northampton
+              </a>{" "}
+              page.
+            </p>
+          </div>
+        </section>
+
+        {/* CUSTOM PRINTING OPTIONS */}
+        <section style={sectionStyle}>
+          <h2
+            style={{
+              textAlign: "center",
+              marginBottom: "40px",
+            }}
+          >
+            What Can You Create?
+          </h2>
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit,minmax(250px,1fr))",
+              gap: "25px",
+            }}
+          >
+            <div style={cardStyle}>
+              <h3>Logo T-Shirts</h3>
+
+              <p style={{ color: "#555" }}>
+                Add your business logo to T-shirts for staff uniforms,
+                promotions and customer-facing teams.
+              </p>
+            </div>
+
+            <div style={cardStyle}>
+              <h3>Event T-Shirts</h3>
+
+              <p style={{ color: "#555" }}>
+                Create personalised clothing for birthdays, charity events,
+                celebrations, festivals and group activities.
+              </p>
+            </div>
+
+            <div style={cardStyle}>
+              <h3>Team Clothing</h3>
+
+              <p style={{ color: "#555" }}>
+                Produce matching custom clothing for clubs, sports teams,
+                schools and community organisations.
+              </p>
+            </div>
+
+            <div style={cardStyle}>
+              <h3>Promotional Clothing</h3>
+
+              <p style={{ color: "#555" }}>
+                Print your company branding or campaign message onto clothing
+                for promotions and marketing activities.
+              </p>
+            </div>
+
+            <div style={cardStyle}>
+              <h3>Gym & Fitness T-Shirts</h3>
+
+              <p style={{ color: "#555" }}>
+                Create personalised shirts for gyms, personal trainers, fitness
+                teams and active lifestyle brands.
+              </p>
+            </div>
+
+            <div style={cardStyle}>
+              <h3>Custom Artwork</h3>
+
+              <p style={{ color: "#555" }}>
+                Upload your own artwork or design and personalise selected
+                garments through our online ordering process.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* SHOP */}
+        <section
+          id="shop-custom-tshirts"
+          style={{
+            marginTop: "90px",
+            background: "#f8fafc",
+            padding: "70px 30px",
+            borderRadius: "20px",
+          }}
+        >
+          <div
+            style={{
+              maxWidth: "850px",
+              margin: "0 auto 40px",
+              textAlign: "center",
+            }}
+          >
+            <h2
+              style={{
+                fontSize: "clamp(2rem,4vw,2.8rem)",
+                marginBottom: "15px",
+              }}
+            >
+              Shop Custom T-Shirts
+            </h2>
+
+            <p
+              style={{
+                color: "#555",
+                fontSize: "1.05rem",
+              }}
+            >
+              Browse popular T-shirts available for personalisation. Choose
+              your garment, colour and size, then add your artwork or branding
+              when placing your order.
+            </p>
+          </div>
+
+          <RelatedProducts
+            categories={["T-Shirt", "Tshirt", "T Shirt"]}
+            limit={8}
+            title="Popular T-Shirts For Personalisation"
+          />
+        </section>
+
+        {/* HOW IT WORKS */}
+        <section style={sectionStyle}>
+          <h2
+            style={{
+              textAlign: "center",
+              marginBottom: "40px",
+            }}
+          >
+            How Custom T-Shirt Printing Works
+          </h2>
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit,minmax(250px,1fr))",
+              gap: "25px",
+            }}
+          >
+            <div style={cardStyle}>
+              <h3>1. Choose Your T-Shirt</h3>
+
+              <p style={{ color: "#555" }}>
+                Browse available garments and select your preferred style,
+                colour and size.
+              </p>
+            </div>
+
+            <div style={cardStyle}>
+              <h3>2. Add Your Design</h3>
+
+              <p style={{ color: "#555" }}>
+                Upload your business logo, artwork or custom design when
+                personalising your garment.
+              </p>
+            </div>
+
+            <div style={cardStyle}>
+              <h3>3. Place Your Order</h3>
+
+              <p style={{ color: "#555" }}>
+                Complete your order online or contact us for help with larger
+                quantities and more complex requirements.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* SERVICES */}
+        <section style={sectionStyle}>
+          <div style={cardStyle}>
+            <h2>Custom Clothing Services Available In Northampton</h2>
+
+            <ul>
+              <li>Personalised T-Shirt Printing</li>
+              <li>Custom Logo T-Shirts</li>
+              <li>Business Branded Clothing</li>
+              <li>Custom Hoodie Printing</li>
+              <li>Event T-Shirts</li>
+              <li>Gym & Fitness Apparel</li>
+              <li>School & College Clothing</li>
+              <li>Charity Event Merchandise</li>
+              <li>Team Clothing</li>
+              <li>Promotional Apparel</li>
+            </ul>
+
+            <p style={{ color: "#444" }}>
+              Customers looking for our complete range of local T-shirt
+              printing services can also visit our{" "}
+              <a href="/t-shirt-printing-northampton" style={linkStyle}>
+                Northampton T-shirt printing service
+              </a>
+              .
+            </p>
+          </div>
         </section>
 
         {/* GALLERY */}
-
-        <section style={{ marginTop: "90px" }}>
-          <h2 style={{ textAlign: "center", marginBottom: "30px" }}>
-            Recent Printing Projects
+        <section style={sectionStyle}>
+          <h2
+            style={{
+              textAlign: "center",
+              marginBottom: "30px",
+            }}
+          >
+            Recent Custom Clothing Projects
           </h2>
 
           <div
@@ -203,7 +438,7 @@ export default function CustomTshirtPrintingNorthampton() {
               <img
                 key={index}
                 src={image}
-                alt="Kett Press Co Printing Project"
+                alt={`Custom clothing printing project ${index + 1}`}
                 style={{
                   width: "100%",
                   height: "280px",
@@ -215,135 +450,218 @@ export default function CustomTshirtPrintingNorthampton() {
           </div>
         </section>
 
-        {/* SERVICES */}
+        {/* INDUSTRIES */}
+        <section style={sectionStyle}>
+          <div style={cardStyle}>
+            <h2>Custom T-Shirts For Businesses & Organisations</h2>
 
-        <section style={{ marginTop: "90px" }}>
-          <h2>Services Available In Northampton</h2>
+            <p style={{ color: "#444" }}>
+              Personalised clothing can be used by many different types of
+              businesses, groups and organisations throughout Northampton.
+            </p>
 
-          <ul>
-            <li>Custom T-Shirt Printing</li>
-            <li>Branded Workwear Printing</li>
-            <li>Company Logo Printing</li>
-            <li>Custom Hoodie Printing</li>
-            <li>Event Clothing</li>
-            <li>Gym & Fitness Apparel</li>
-            <li>School & College Clothing</li>
-            <li>Charity Event Merchandise</li>
-          </ul>
+            <ul
+              style={{
+                columns: 2,
+              }}
+            >
+              <li>Construction Companies</li>
+              <li>Electricians & Tradespeople</li>
+              <li>Restaurants & Hospitality</li>
+              <li>Schools & Colleges</li>
+              <li>Churches & Ministries</li>
+              <li>Gyms & Fitness Brands</li>
+              <li>Sports Clubs</li>
+              <li>Corporate Businesses</li>
+              <li>Local Startups</li>
+              <li>Event Organisers</li>
+              <li>Charities</li>
+              <li>Community Groups</li>
+            </ul>
+          </div>
         </section>
 
-        {/* INDUSTRIES */}
+        {/* PRINTING METHOD */}
+        <section style={sectionStyle}>
+          <div style={cardStyle}>
+            <h2>Custom DTF T-Shirt Printing</h2>
 
-        <section style={{ marginTop: "90px" }}>
-          <h2>Industries We Serve</h2>
+            <p style={{ color: "#444" }}>
+              We use DTF printing for many custom clothing orders. This method
+              is suitable for colourful artwork, detailed graphics and business
+              branding across many popular garment types.
+            </p>
 
-          <ul>
-            <li>Construction Companies</li>
-            <li>Electricians & Tradespeople</li>
-            <li>Restaurants & Hospitality</li>
-            <li>Schools & Colleges</li>
-            <li>Churches & Ministries</li>
-            <li>Gyms & Fitness Brands</li>
-            <li>Sports Clubs</li>
-            <li>Corporate Businesses</li>
-            <li>Local Startups</li>
-            <li>Event Organisers</li>
-          </ul>
+            <p style={{ color: "#444" }}>
+              The best printing option can depend on your design, garment and
+              intended use. Contact us if you need help deciding how to produce
+              your personalised clothing.
+            </p>
+          </div>
         </section>
 
         {/* LOCAL AREAS */}
+        <section style={sectionStyle}>
+          <div style={cardStyle}>
+            <h2>Custom T-Shirt Printing Across Northampton</h2>
 
-        <section style={{ marginTop: "90px" }}>
-          <h2>Areas We Cover Around Northampton</h2>
+            <p style={{ color: "#444" }}>
+              We provide custom clothing services for customers across
+              Northampton, including Brackmills, Sixfields, Moulton Park,
+              Kingsthorpe, Duston, Abington, Weston Favell, Upton, St James,
+              Delapre and surrounding areas.
+            </p>
 
-          <p>
-            We provide custom printing services throughout Northampton
-            including Brackmills, Sixfields, Moulton Park, Kingsthorpe,
-            Duston, Abington, Weston Favell, Upton, St James,
-            Delapre and surrounding areas.
-          </p>
+            <p style={{ color: "#444" }}>
+              Kett Press Co is based in Kettering, Northamptonshire, serving
+              customers across Northampton and the wider county.
+            </p>
+
+            <p style={{ color: "#444" }}>
+              Visit our main{" "}
+              <a href="/t-shirt-printing-northampton" style={linkStyle}>
+                T-shirt printing Northampton page
+              </a>{" "}
+              for information about our broader local printing service.
+            </p>
+          </div>
         </section>
 
-{/* RELATED T-SHIRT PRODUCTS */}
-<RelatedProducts
-  categories={[
-    "T-Shirt"
-  ]}
-  limit={4}
-  title="Popular Custom T-Shirts"
-/>
-
         {/* FAQ */}
+        <section style={sectionStyle}>
+          <h2
+            style={{
+              textAlign: "center",
+              marginBottom: "40px",
+            }}
+          >
+            Frequently Asked Questions
+          </h2>
 
-        <section style={{ marginTop: "90px" }}>
-          <h2>Frequently Asked Questions</h2>
+          <div
+            style={{
+              display: "grid",
+              gap: "20px",
+            }}
+          >
+            <div style={cardStyle}>
+              <h3>Can I create my own personalised T-shirt?</h3>
 
-          <h3>Where can I get custom T-shirt printing in Northampton?</h3>
-          <p>
-            Kett Press Co provides professional custom T-shirt printing,
-            workwear printing and branded clothing for businesses and
-            organisations throughout Northamptonshire.
-          </p>
+              <p style={{ color: "#555" }}>
+                Yes. You can choose an available garment and provide your own
+                logo, artwork or custom design for printing.
+              </p>
+            </div>
 
-          <h3>Can you print company logos onto clothing?</h3>
-          <p>
-            Yes. We print logos, branding, artwork and custom designs onto
-            T-shirts, hoodies, uniforms and workwear.
-          </p>
+            <div style={cardStyle}>
+              <h3>Can you print company logos onto T-shirts?</h3>
 
-          <h3>Do you provide branded workwear in Northampton?</h3>
-          <p>
-            Yes. We supply printed workwear and uniforms for trades,
-            construction companies, hospitality businesses and offices.
-          </p>
+              <p style={{ color: "#555" }}>
+                Yes. We can print business logos and custom branding onto
+                suitable T-shirts and other clothing.
+              </p>
+            </div>
 
-          <h3>Do you print hoodies?</h3>
-          <p>
-            Yes. Custom hoodies are popular for businesses, sports teams,
-            schools, churches and events.
-          </p>
+            <div style={cardStyle}>
+              <h3>Do you offer small custom T-shirt orders?</h3>
 
-          <h3>Why choose Kett Press Co?</h3>
-          <p>
-            We focus on quality printing, reliable turnaround times,
-            professional branding and excellent customer service for
-            organisations across Northamptonshire.
-          </p>
+              <p style={{ color: "#555" }}>
+                Yes. We can help with smaller personalised orders as well as
+                larger business and organisation requirements.
+              </p>
+            </div>
+
+            <div style={cardStyle}>
+              <h3>Can I order custom T-shirts online?</h3>
+
+              <p style={{ color: "#555" }}>
+                Yes. You can browse selected products on this page and continue
+                through the online customisation and ordering process.
+              </p>
+            </div>
+
+            <div style={cardStyle}>
+              <h3>Do you provide general T-shirt printing in Northampton?</h3>
+
+              <p style={{ color: "#555" }}>
+                Yes. You can find more information about our wider local service
+                on our{" "}
+                <a href="/t-shirt-printing-northampton" style={linkStyle}>
+                  T-shirt printing Northampton
+                </a>{" "}
+                page.
+              </p>
+            </div>
+          </div>
         </section>
 
         {/* CTA */}
-
         <section
           style={{
             marginTop: "100px",
-            background: "#f5f5f5",
-            padding: "60px",
+            background: "#111",
+            color: "#fff",
+            padding: "60px 30px",
             borderRadius: "20px",
             textAlign: "center",
           }}
         >
-          <h2>Need Custom T-Shirt Printing In Northampton?</h2>
+          <h2>Create Your Custom T-Shirts</h2>
 
-          <p>
-            Get professional branded clothing, workwear and custom printing
-            from Kett Press Co.
-          </p>
-
-          <a
-            href="/#quote"
+          <p
             style={{
-              display: "inline-block",
-              marginTop: "20px",
-              background: "#D62828",
-              color: "#fff",
-              padding: "15px 30px",
-              borderRadius: "10px",
-              textDecoration: "none",
-              fontWeight: "bold",
+              maxWidth: "750px",
+              margin: "20px auto",
             }}
           >
-            Request Your Quote
-          </a>
+            Shop personalised T-shirts online or contact Kett Press Co for help
+            creating custom clothing for your business, event, team or
+            organisation.
+          </p>
+
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              gap: "15px",
+              flexWrap: "wrap",
+              marginTop: "25px",
+            }}
+          >
+            <a href="#shop-custom-tshirts" style={buttonStyle}>
+              Shop Custom T-Shirts
+            </a>
+
+            <a
+              href="/#quote"
+              style={{
+                ...buttonStyle,
+                background: "#fff",
+                color: "#111",
+              }}
+            >
+              Request Your Quote
+            </a>
+          </div>
+
+          <p
+            style={{
+              marginTop: "30px",
+            }}
+          >
+            Looking for our complete Northampton service? Visit{" "}
+            <a
+              href="/t-shirt-printing-northampton"
+              style={{
+                color: "#fff",
+                fontWeight: "bold",
+                textDecoration: "underline",
+              }}
+            >
+              T-Shirt Printing Northampton
+            </a>
+            .
+          </p>
         </section>
       </main>
     </>
