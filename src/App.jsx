@@ -711,6 +711,84 @@ export default function App() {
         </div>
       </section>
 
+
+{/* T-SHIRT PRINTING NORTHAMPTON */}
+
+<section
+  style={{
+    padding: "80px 20px",
+    background: "#fff",
+  }}
+>
+  <div
+    style={{
+      maxWidth: "1000px",
+      margin: "0 auto",
+      background: "#f8fafc",
+      border: `1px solid ${BRAND.border}`,
+      borderRadius: "20px",
+      padding: "50px 30px",
+      textAlign: "center",
+      boxShadow: "0 10px 30px rgba(15,23,42,0.06)",
+    }}
+  >
+    <span style={eyebrow}>
+      CUSTOM PRINTING IN NORTHAMPTON
+    </span>
+
+    <h2
+      style={{
+        ...sectionTitle,
+        marginBottom: "20px",
+      }}
+    >
+      T-Shirt Printing Northampton
+    </h2>
+
+    <p
+      style={{
+        maxWidth: "750px",
+        margin: "0 auto 25px",
+        color: BRAND.text,
+        fontSize: "17px",
+        lineHeight: "1.8",
+      }}
+    >
+      Looking for professional T-shirt printing in Northampton?
+      Kett Press Co provides custom printed T-shirts for businesses,
+      events, gyms, schools, clubs and organisations across Northampton
+      and Northamptonshire. Browse personalised clothing online or learn
+      more about our local T-shirt printing service.
+    </p>
+
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        gap: "14px",
+        flexWrap: "wrap",
+      }}
+    >
+      <Link
+        to="/t-shirt-printing-northampton"
+        style={primaryButton}
+      >
+        T-Shirt Printing Northampton
+      </Link>
+
+      <Link
+        to="/shop"
+        style={{
+          ...primaryButton,
+          background: BRAND.dark,
+        }}
+      >
+        Shop T-Shirts
+      </Link>
+    </div>
+  </div>
+</section>
+
       {/* HOW IT WORKS */}
 
       <section
