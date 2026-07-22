@@ -14,6 +14,7 @@ import ContactPage from "./pages/ContactPage";
 import PrintingMethodsForCustomClothingKettering from "./pages/printingmethodsforcustomclothingkettering";
 import AreasWeCover from "./pages/AreasWeCover.jsx";
 import ThankYou from "./ThankYou";
+import ReturnsPolicy from "./pages/ReturnsPolicy.jsx";
 
 import Shop from "./pages/Shop.jsx";
 import Cart from "./pages/Cart.jsx";
@@ -79,6 +80,8 @@ function Layout() {
         <Route path="/thank-you" element={<ThankYou />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/admin" element={<AdminLogin />} />
+
+        <Route path="/returns-policy" element={<ReturnsPolicy />} />
         <Route
   path="/admin/orders/:id"
   element={<OrderDetails />}

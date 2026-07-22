@@ -1664,10 +1664,19 @@ export default function App() {
                 Recent Work
               </a>
 
+
               <a href="#contact" style={footerLink}>
                 Contact
               </a>
-
+<a
+  href="/returns-policy"
+  style={{
+    color: "#fff",
+    textDecoration: "none",
+  }}
+>
+  Returns & Refund Policy
+</a>
               <a
                 href="https://www.youtube.com/@Kettpressco"
                 target="_blank"
