@@ -231,7 +231,7 @@ export default function WorkwearPrintingKetteringPage() {
       name: "Kett Press Co",
       url: "https://www.kettpressco.com",
       telephone: "+447442514098",
-      email: "kettpressco@gmail.com",
+      email: "info@kettpressco.com",
       areaServed: [
         "Kettering",
         "Northamptonshire",
