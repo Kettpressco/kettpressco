@@ -1269,14 +1269,14 @@ export default function WorkwearPrintingKetteringPage() {
               </strong>
 
               <a
-                href="mailto:kettpressco@gmail.com"
+                href="mailto:info@kettpressco.com"
                 style={{
                   color: colours.red,
                   textDecoration: "none",
                   fontWeight: "750",
                 }}
               >
-                kettpressco@gmail.com
+                info@kettpressco.com
               </a>
             </div>
 
