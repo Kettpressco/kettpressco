@@ -265,7 +265,7 @@ export default function TshirtPrintingWellingborough() {
     Looking for professional T-shirt printing in Wellingborough?
     Contact Kett Press Co today for a fast, no-obligation quote.
   </p>
-  <a href="tel:07770118148">
+  <a href="tel:07485444681">
     <button
       style={{
         background: "#f97316",
@@ -276,7 +276,7 @@ export default function TshirtPrintingWellingborough() {
         cursor: "pointer",
       }}
     >
-      Call 07770 118148
+      Call 07485444681
     </button>
   </a>
 </div>

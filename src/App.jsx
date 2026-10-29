@@ -1533,7 +1533,7 @@ export default function App() {
                 margin: "2px 0 0",
               }}
             >
-              Prefer a faster conversation? WhatsApp us on 07770 118148.
+              Prefer a faster conversation? WhatsApp us on 07485444681.
             </p>
           </form>
         </div>
@@ -1569,13 +1569,13 @@ export default function App() {
           <br />
           Kettering, NN16 0AH
           <br />
-          07770 118148
+          07485444681
           <br />
           info@kettpressco.com
         </p>
 
         <a
-          href="https://wa.me/447770118148"
+          href="https://wa.me/447485444681"
           target="_blank"
           rel="noreferrer"
           style={{
@@ -1642,7 +1642,7 @@ export default function App() {
             </p>
 
             <p style={footerText}>
-              07770 118148
+              07485444681
               <br />
               info@kettpressco.com
             </p>

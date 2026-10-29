@@ -68,7 +68,7 @@ export default function ChurchEventHoodiePrinting() {
       {/* Image */}
       <section style={sectionStyle}>
         <img
-          src="/images/hoodie1.jpg"
+          src="/images/hoodie.jpg"
           alt="Church Hoodie Printing"
           style={{
             width: "100%",
@@ -156,13 +156,13 @@ export default function ChurchEventHoodiePrinting() {
           />
 
           <img
-            src="/images/hoodie1.jpg"
+            src="/images/event1.jpg"
             alt="Church Hoodie"
             style={{ width: "100%", borderRadius: "12px" }}
           />
 
           <img
-            src="/images/hoodie2.jpg"
+            src="/images/event2.jpg"
             alt="Church Hoodie"
             style={{ width: "100%", borderRadius: "12px" }}
           />
@@ -202,9 +202,9 @@ export default function ChurchEventHoodiePrinting() {
             <br />
             Kettering, Northamptonshire
             <br />
-            Email: kettpressco@gmail.com
+            Email: info@kettpressco.com
             <br />
-            Phone: 07547 947457
+            Phone: 075442 514098
           </p>
 
           <a

@@ -132,7 +132,7 @@ const localBusinessSchema = {
             </a>
 
             <a
-              href="tel:07770118148"
+              href="tel:07485444681"
               style={{
                 ...buttonStyle,
                 background: "#fff",
@@ -310,12 +310,12 @@ const localBusinessSchema = {
           </p>
 
           <p>
-            📞 07770 118148 <br />
+            📞 07485444681<br />
             ✉️ info@kettpressco.com
           </p>
 
           <a
-            href="https://wa.me/447770118148"
+            href="https://wa.me/447485444681"
             target="_blank"
             rel="noreferrer"
             style={{

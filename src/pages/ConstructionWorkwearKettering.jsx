@@ -225,7 +225,7 @@ We proudly serve businesses across Kettering, Weldon, Great Oakley, Stanion, Roc
     Looking for professional Workwear printing in Kettering?
     Contact Kett Press Co today for a fast, no-obligation quote.
   </p>
-  <a href="tel:07770118148">
+  <a href="tel:07485444681">
     <button
       style={{
         background: "#f97316",
@@ -236,7 +236,7 @@ We proudly serve businesses across Kettering, Weldon, Great Oakley, Stanion, Roc
         cursor: "pointer",
       }}
     >
-      Call 07770 118148
+      Call 07485444681
     </button>
   </a>
 </div>
