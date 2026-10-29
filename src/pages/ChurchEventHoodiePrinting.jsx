@@ -204,7 +204,7 @@ export default function ChurchEventHoodiePrinting() {
             <br />
             Email: info@kettpressco.com
             <br />
-            Phone: 075442 514098
+            Phone: 07485444681
           </p>
 
           <a
